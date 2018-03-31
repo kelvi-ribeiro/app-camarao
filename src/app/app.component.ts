@@ -1,8 +1,10 @@
+import { AuthService } from './../services/auth.service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { LoginPage } from '../pages/login/login';
+
+
 
 @Component({
   templateUrl: 'app.html'
@@ -10,17 +12,22 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: string = 'LoginPage';
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: string }>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+              public platform: Platform,
+              public statusBar: StatusBar,
+              public splashScreen: SplashScreen,
+              public authService:AuthService) {
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Login', component: LoginPage },
-
+      { title: 'Profile', component: 'ProfilePage' },
+      {title:'Logout',component:''}
     ];
 
   }
@@ -34,9 +41,15 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+  openPage(page:{title:string,component:string}) {
+    switch(page.title){
+      case'Logout':
+      this.authService.logout();
+      this.nav.setRoot('LoginPage');
+      break;
+      default:
+      this.nav.setRoot(page.component);
+
+    }
   }
 }
