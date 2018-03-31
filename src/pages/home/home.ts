@@ -26,7 +26,7 @@ export class HomePage {
               public usuarioService:UsuarioService) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     this.email = this.storageService.getLocalUser().email;
     this.usuarioService.findByEmail(this.email)
     .subscribe((response=>{

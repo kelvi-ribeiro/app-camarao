@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LoginPage } from '../pages/login/login';
 
 
 
@@ -12,7 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: string = 'LoginPage';
+  rootPage = LoginPage;
 
   pages: Array<{ title: string, component: string }>;
 
@@ -26,7 +27,9 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Profile', component: 'ProfilePage' },
+      {title:'Home',component:'HomePage'},
+      { title: 'Meu Perfil', component: 'ProfilePage' },
+      {title:'Meus Funcionarios',component:'FuncionariosPage'},
       {title:'Logout',component:''}
     ];
 
@@ -45,7 +48,7 @@ export class MyApp {
     switch(page.title){
       case'Logout':
       this.authService.logout();
-      this.nav.setRoot('LoginPage');
+      this.nav.setRoot(LoginPage);
       break;
       default:
       this.nav.setRoot(page.component);
