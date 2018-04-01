@@ -25,6 +25,7 @@ export class HomePage {
   perfis = [];
   temperatura = 0;
   ph = 0;
+  loopRecursivas:boolean;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -57,6 +58,7 @@ export class HomePage {
 
       this.usuario = response['nome']
     }))
+    this.loopRecursivas = true;
     this.exibirTemperaturaEmCincoSegundos();
     this.exibirPhEmCincoSegundos();
   }
@@ -65,12 +67,18 @@ export class HomePage {
 
   }
 
+  ionViewWillLeave(){
+    this.loopRecursivas=false;
+
+  }
+
   exibirTemperaturaEmCincoSegundos(){
     setTimeout(() => {
       this.temperaturaService.findTemperatura().subscribe(response=>{
         this.temperatura = response;
-
-        this.exibirTemperaturaEmCincoSegundos();
+        if(this.loopRecursivas){
+          this.exibirTemperaturaEmCincoSegundos();
+        }
       })
     }, 5000);
   }
@@ -79,8 +87,10 @@ export class HomePage {
     setTimeout(() => {
       this.phService.findPhs().subscribe(response=>{
         this.ph = response;
+        if(this.loopRecursivas){
 
-        this.exibirPhEmCincoSegundos();
+          this.exibirPhEmCincoSegundos();
+        }
       })
     }, 5000);
   }
