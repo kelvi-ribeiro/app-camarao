@@ -1,3 +1,5 @@
+import { EstadoService } from './../services/domain/estado.service';
+import { CidadeService } from './../services/domain/cidade.service';
 import { Globals } from './../globals.array';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -45,7 +47,9 @@ import { HttpClientModule } from '@angular/common/http';
     StorageService,
     UsuarioService,
     ImageUtilService,
-    Globals
+    Globals,
+    CidadeService,
+    EstadoService
   ]
 })
 export class AppModule {}

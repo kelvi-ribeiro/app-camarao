@@ -21,7 +21,7 @@ import { LoginPage } from '../login/login';
 export class FuncionariosPage {
   funcionarios;
   emailUsuarioLogado;
-  pages: Array<{ title: string, component: string }>;
+  perfis = []
   constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
@@ -30,17 +30,30 @@ export class FuncionariosPage {
               public authService:AuthService
               ) {
 
-                this.pages = [
-                  {title:'Home',component:'HomePage'},
-                  { title: 'Meu Perfil', component: 'ProfilePage' },
-                  {title:'Meus Funcionarios',component:'FuncionariosPage'},
-                  {title:'Logout',component:''}
-                ];
   }
+
+  ionViewCanEnter(){
+    this.perfis = this.storageService.getUserPerfil();
+    for(let i = 0;i<this.perfis.length;i++){
+
+      let perfil = this.perfis[i];
+      if(perfil==='ADMIN'){
+        return true;
+        break;
+      }else{
+        this.navCtrl.setRoot('HomePage');
+        return false;
+
+      }
+    }
+
+    }
+
 
   ionViewDidLoad() {
     this.emailUsuarioLogado = this.storageService.getLocalUser().email
     this.usuarioService.findAll().subscribe((response=>{
+
       this.funcionarios = response;
       let position = this.funcionarios.findIndex(funcionario=> funcionario.email === this.emailUsuarioLogado );
       if(position!=-1){
@@ -67,19 +80,6 @@ export class FuncionariosPage {
       return funcionario;
     },
     error => {});
-  }
-
-
-  openPage(page:{title:string,component:string}) {
-    switch(page.title){
-      case'Logout':
-      this.authService.logout();
-      this.navCtrl.setRoot(LoginPage);
-      break;
-      default:
-      this.navCtrl.setRoot(page.component);
-
-    }
   }
 
 }

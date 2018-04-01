@@ -21,4 +21,22 @@ export class StorageService {
     }
 
   }
+
+  getUserPerfil() {
+    let perfil = localStorage.getItem(STORAGE_KEYS.perfil);
+    if (perfil == null) {
+      return null;
+    } else {
+      return JSON.parse(perfil);
+    }
+  }
+
+  setUserPerfil(perfil) {
+    if(perfil == null){
+      localStorage.removeItem(STORAGE_KEYS.perfil);
+    }else{
+      localStorage.setItem(STORAGE_KEYS.perfil,JSON.stringify(perfil))
+    }
+
+  }
 }

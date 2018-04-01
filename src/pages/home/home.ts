@@ -31,6 +31,7 @@ export class HomePage {
     this.usuarioService.findByEmail(this.email)
     .subscribe((response=>{
       this.perfis = response['perfis'];
+      this.storageService.setUserPerfil(this.perfis)
       this.perfis.forEach((perfil=>{
 
 
@@ -42,6 +43,7 @@ export class HomePage {
             {title:'Home',component:'HomePage'},
             { title: 'Meu Perfil', component: 'ProfilePage' },
             {title:'Meus Funcionarios',component:'FuncionariosPage'},
+            {title:'Cadastrar Novo Funcionário',component:'SignupPage'},
             {title:'Logout',component:''}
           ];
 
