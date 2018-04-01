@@ -19,6 +19,8 @@ import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { ImageUtilService } from '../services/image-util.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TemperaturaService } from '../services/domain/temperaturaService';
+import { PhService } from '../services/domain/phService';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { HttpClientModule } from '@angular/common/http';
     ImageUtilService,
     Globals,
     CidadeService,
-    EstadoService
+    EstadoService,
+    TemperaturaService,
+    PhService
   ]
 })
 export class AppModule {}

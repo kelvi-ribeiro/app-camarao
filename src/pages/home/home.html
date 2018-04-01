@@ -11,5 +11,10 @@
 
 
 <ion-content padding>
-  <p>Você se logou, {{usuario}}</p>
+  <ion-card>
+    <ion-item>Você se logou, {{usuario}}</ion-item>
+    <ion-item>Temperatura:{{temperatura}} <ion-icon color="danger" name="flame"></ion-icon></ion-item>
+    <ion-item>Nível de PH:{{ph}} <ion-icon color="secondary" name="flask"></ion-icon> </ion-item>
+  </ion-card>
+
 </ion-content>

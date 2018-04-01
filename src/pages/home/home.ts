@@ -1,8 +1,10 @@
+import { PhService } from './../../services/domain/phService';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { Globals } from '../../globals.array';
+import { TemperaturaService } from '../../services/domain/temperaturaService';
 
 /**
  * Generated class for the HomePage page.
@@ -21,12 +23,17 @@ export class HomePage {
   email;
   usuario;
   perfis = [];
+  temperatura;
+  ph;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public storageService:StorageService,
               public usuarioService:UsuarioService,
-              public global:Globals) {
+              public global:Globals,
+              public temperaturaService:TemperaturaService,
+              public phService:PhService
+            ) {
                 this.email = this.storageService.getLocalUser().email;
     this.usuarioService.findByEmail(this.email)
     .subscribe((response=>{
@@ -52,10 +59,35 @@ export class HomePage {
 
       this.usuario = response['nome']
     }))
+    this.exibirTemperaturaEmCincoSegundos();
+    this.exibirPhEmCincoSegundos();
   }
 
   ionViewDidEnter() {
 
+
+
+  }
+
+  exibirTemperaturaEmCincoSegundos(){
+    setTimeout(() => {
+      this.temperaturaService.findTemperatura().subscribe(response=>{
+        this.temperatura = response;
+        console.log(this.temperatura);
+
+        this.exibirTemperaturaEmCincoSegundos();
+      })
+    }, 5000);
+  }
+
+  exibirPhEmCincoSegundos(){
+    setTimeout(() => {
+      this.phService.findPhs().subscribe(response=>{
+        this.ph = response;
+
+        this.exibirPhEmCincoSegundos();
+      })
+    }, 5000);
   }
 
 }
