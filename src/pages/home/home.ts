@@ -23,8 +23,8 @@ export class HomePage {
   email;
   usuario;
   perfis = [];
-  temperatura;
-  ph;
+  temperatura = 0;
+  ph = 0;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -42,9 +42,7 @@ export class HomePage {
       this.perfis.forEach((perfil=>{
 
 
-        console.log('see',perfil)
         if(perfil==='ADMIN'){
-          console.log('chegou aqui');
 
           this.global.pages  = [
             {title:'Home',component:'HomePage'},
@@ -65,15 +63,12 @@ export class HomePage {
 
   ionViewDidEnter() {
 
-
-
   }
 
   exibirTemperaturaEmCincoSegundos(){
     setTimeout(() => {
       this.temperaturaService.findTemperatura().subscribe(response=>{
         this.temperatura = response;
-        console.log(this.temperatura);
 
         this.exibirTemperaturaEmCincoSegundos();
       })
