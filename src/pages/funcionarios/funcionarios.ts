@@ -1,8 +1,10 @@
+import { AuthService } from './../../services/auth.service';
 import { StorageService } from './../../services/storage.service';
 import { UsuarioService } from './../../services/domain/usuario.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the FuncionariosPage page.
@@ -19,12 +21,21 @@ import { API_CONFIG } from '../../config/api.config';
 export class FuncionariosPage {
   funcionarios;
   emailUsuarioLogado;
+  pages: Array<{ title: string, component: string }>;
   constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
               public usuarioService:UsuarioService,
-              public storageService:StorageService
+              public storageService:StorageService,
+              public authService:AuthService
               ) {
+
+                this.pages = [
+                  {title:'Home',component:'HomePage'},
+                  { title: 'Meu Perfil', component: 'ProfilePage' },
+                  {title:'Meus Funcionarios',component:'FuncionariosPage'},
+                  {title:'Logout',component:''}
+                ];
   }
 
   ionViewDidLoad() {
@@ -35,6 +46,8 @@ export class FuncionariosPage {
       if(position!=-1){
         this.funcionarios.splice(position,1)
       }
+      console.log(this.funcionarios);
+
       this.funcionarios.forEach(funcionario => {
 
           funcionario = this.getImageIfExists(funcionario);
@@ -54,6 +67,19 @@ export class FuncionariosPage {
       return funcionario;
     },
     error => {});
+  }
+
+
+  openPage(page:{title:string,component:string}) {
+    switch(page.title){
+      case'Logout':
+      this.authService.logout();
+      this.navCtrl.setRoot(LoginPage);
+      break;
+      default:
+      this.navCtrl.setRoot(page.component);
+
+    }
   }
 
 }

@@ -1,3 +1,4 @@
+import { Globals } from './../globals.array';
 import { AuthService } from './../services/auth.service';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
@@ -14,22 +15,19 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage = LoginPage;
-
-  pages: Array<{ title: string, component: string }>;
-
   constructor(
               public platform: Platform,
               public statusBar: StatusBar,
               public splashScreen: SplashScreen,
-              public authService:AuthService) {
+              public authService:AuthService,
+              public global:Globals) {
 
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
+   global.pages  = [
       {title:'Home',component:'HomePage'},
       { title: 'Meu Perfil', component: 'ProfilePage' },
-      {title:'Meus Funcionarios',component:'FuncionariosPage'},
       {title:'Logout',component:''}
     ];
 
@@ -47,7 +45,14 @@ export class MyApp {
   openPage(page:{title:string,component:string}) {
     switch(page.title){
       case'Logout':
+
       this.authService.logout();
+      this.global.pages  = [
+        {title:'Home',component:'HomePage'},
+        { title: 'Meu Perfil', component: 'ProfilePage' },
+        {title:'Logout',component:''}
+      ];
+
       this.nav.setRoot(LoginPage);
       break;
       default:
