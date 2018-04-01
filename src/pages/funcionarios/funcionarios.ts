@@ -38,14 +38,15 @@ export class FuncionariosPage {
 
       let perfil = this.perfis[i];
       if(perfil==='ADMIN'){
-        return true;
         break;
-      }else{
+      }
+        else{
         this.navCtrl.setRoot('HomePage');
         return false;
 
       }
     }
+    return true;
 
     }
 
