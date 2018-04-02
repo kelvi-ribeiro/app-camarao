@@ -13,7 +13,8 @@
 <ion-content padding>
   <ion-card>
     <ion-item>Você se logou, {{usuario}}</ion-item>
-    <ion-item>Temperatura:{{temperatura.temperatura | number : '1.2-2'}} <ion-icon color="danger" name="flame"></ion-icon></ion-item>
+    <ion-item>Temperatura:{{temperatura?.temperatura | number : '1.2-2'}} <ion-icon color="danger" name="flame"></ion-icon></ion-item>
+    <!-- <ion-item>Temperatura:{{temperatura.horaMarcada | date:"y-MM-dd HH:mm:ss"}} <ion-icon color="danger" name="flame"></ion-icon></ion-item> -->
     <ion-item>Nível de PH:{{ph}} <ion-icon color="secondary" name="flask"></ion-icon> </ion-item>
   </ion-card>
 

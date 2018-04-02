@@ -23,7 +23,7 @@ export class HomePage {
   email;
   usuario;
   perfis = [];
-  temperatura = 0;
+  temperatura:any;
   ph = 0;
   loopRecursivas:boolean;
 
