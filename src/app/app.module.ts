@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TemperaturaService } from '../services/domain/temperatura.service';
 import { PhService } from '../services/domain/ph.service';
 import { TransparenciaService } from '../services/domain/transparencia.service';
+import { NitritoService } from '../services/domain/nitrito.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { TransparenciaService } from '../services/domain/transparencia.service';
     PhService,
     AmoniaTotalService,
     NitratoService,
-    NitratoService,
+    NitritoService,
     OxigenioDissolvidoService,
     SalinidadeService,
     TransparenciaService
