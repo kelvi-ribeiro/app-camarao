@@ -13,13 +13,13 @@
 <ion-content padding>
   <ion-card>
     <ion-item>Você se logou, {{usuario}}</ion-item>
-    <ion-item>Temperatura:{{temperatura?.temperatura | number : '1.2-2'}} <ion-icon color="danger" name="flame"></ion-icon></ion-item>
-    <ion-item>Nível de PH:{{ph?.ph}} <ion-icon color="secondary" name="flask"></ion-icon> </ion-item>
-    <ion-item>Nível de Amonia Total:{{amoniaTotal?.amoniaTotal}} <ion-icon color="secondary" name="flask"></ion-icon> </ion-item>
-    <ion-item>Nível de Nitrato:{{nitrato?.nitrato}} <ion-icon color="secondary" name="flask"></ion-icon> </ion-item>
-    <ion-item>Nível de Nitrito:{{nitrito?.nitrito}} <ion-icon color="secondary" name="flask"></ion-icon> </ion-item>
-    <ion-item>Nível de Salinidade:{{salinidade?.salinidade}} <ion-icon color="secondary" name="flask"></ion-icon> </ion-item>
-    <ion-item>Nível de Transparencia:{{transparencia?.transparencia}} <ion-icon color="secondary" name="flask"></ion-icon> </ion-item>
+    <ion-item>Temperatura:{{temperatura?.temperatura | number : '1.2-2'}} <ion-icon ></ion-icon></ion-item>
+    <ion-item>Nível de PH:{{ph?.ph | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
+    <ion-item>Nível de Amonia Total:{{amoniaTotal?.amoniaTotal | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
+    <ion-item>Nível de Nitrato:{{nitrato?.nitrato | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
+    <ion-item>Nível de Nitrito:{{nitrito?.nitrito | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
+    <ion-item>Nível de Salinidade:{{salinidade?.salinidade | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
+    <ion-item>Nível de Transparencia:{{transparencia?.transparencia | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
     <!-- <ion-item>Temperatura:{{temperatura.horaMarcada | date:"y-MM-dd HH:mm:ss"}} <ion-icon color="danger" name="flame"></ion-icon></ion-item> -->
   </ion-card>
 
