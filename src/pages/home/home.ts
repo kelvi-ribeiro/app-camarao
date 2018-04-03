@@ -1,10 +1,12 @@
-import { PhService } from './../../services/domain/phService';
+
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { Globals } from '../../globals.array';
-import { TemperaturaService } from '../../services/domain/temperaturaService';
+import { TemperaturaService } from '../../services/domain/temperatura.service';
+import { PhService } from '../../services/domain/ph.service';
+
 
 /**
  * Generated class for the HomePage page.

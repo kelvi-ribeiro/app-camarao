@@ -1,3 +1,7 @@
+import { SalinidadeService } from './../services/domain/salinidade.service';
+import { OxigenioDissolvidoService } from './../services/domain/oxigenioDissolvido.service';
+import { NitratoService } from './../services/domain/nitrato.service';
+import { AmoniaTotalService } from './../services/domain/amoniaTotal.service';
 import { EstadoService } from './../services/domain/estado.service';
 import { CidadeService } from './../services/domain/cidade.service';
 import { Globals } from './../globals.array';
@@ -19,8 +23,9 @@ import { AuthService } from '../services/auth.service';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { ImageUtilService } from '../services/image-util.service';
 import { HttpClientModule } from '@angular/common/http';
-import { TemperaturaService } from '../services/domain/temperaturaService';
-import { PhService } from '../services/domain/phService';
+import { TemperaturaService } from '../services/domain/temperatura.service';
+import { PhService } from '../services/domain/ph.service';
+import { TransparenciaService } from '../services/domain/transparencia.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +58,13 @@ import { PhService } from '../services/domain/phService';
     CidadeService,
     EstadoService,
     TemperaturaService,
-    PhService
+    PhService,
+    AmoniaTotalService,
+    NitratoService,
+    NitratoService,
+    OxigenioDissolvidoService,
+    SalinidadeService,
+    TransparenciaService
   ]
 })
 export class AppModule {}
