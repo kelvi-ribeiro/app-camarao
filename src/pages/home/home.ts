@@ -7,7 +7,7 @@ import { AmoniaTotalService } from './../../services/domain/amoniaTotal.service'
 
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { Globals } from '../../globals.array';
 import { TemperaturaService } from '../../services/domain/temperatura.service';
@@ -43,6 +43,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public loadingCtrl:LoadingController,
               public storageService:StorageService,
               public usuarioService:UsuarioService,
               public global:Globals,
@@ -89,6 +90,10 @@ export class HomePage {
     this.exibirAmoniaTotalEmDezSegundos();
   }
 
+  ionViewDidLoad() {
+    this.presentLoadingDefault();
+  }
+
   ionViewDidEnter() {
 
   }
@@ -96,6 +101,18 @@ export class HomePage {
   ionViewWillLeave(){
     this.loopRecursivas=false;
 
+  }
+
+  presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando dados...'
+    });
+
+    loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+    },10000);
   }
 
   exibirTemperaturaEmDezSegundos(){
