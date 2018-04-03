@@ -12,6 +12,7 @@ import { UsuarioService } from '../../services/domain/usuario.service';
 import { Globals } from '../../globals.array';
 import { TemperaturaService } from '../../services/domain/temperatura.service';
 import { PhService } from '../../services/domain/ph.service';
+import { API_CONFIG } from '../../config/api.config';
 
 
 /**
@@ -40,6 +41,7 @@ export class HomePage {
   salinidade;
   transparencia;
   loopRecursivas:boolean;
+  tempo:number = 2000;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -77,17 +79,19 @@ export class HomePage {
         }
       }));
 
-      this.usuario = response['nome']
+      this.usuario = response;
+      this.getImageIfExists();
+
     }))
     this.loopRecursivas = true;
-    this.exibirTemperaturaEmDezSegundos();
-    this.exibirPhEmDezSegundos();
-    this.exibirNitratoEmDezSegundos();
-    this.exibirNitritoEmDezSegundos();
-    this.exibirOxigenioDissolvidoEmDezSegundos();
-    this.exibirSalinidadeEmDezSegundos();
-    this.exibirTransparenciaEmDezSegundos();
-    this.exibirAmoniaTotalEmDezSegundos();
+    this.exibirTemperaturaEmCincoSegundos();
+    this.exibirPhEmCincoSegundos();
+    this.exibirNitratoEmCincoSegundos();
+    this.exibirNitritoEmCincoSegundos();
+    this.exibirOxigenioDissolvidoEmCincoSegundos();
+    this.exibirSalinidadeEmCincoSegundos();
+    this.exibirTransparenciaEmCincoSegundos();
+    this.exibirAmoniaTotalEmCincoSegundos();
   }
 
   ionViewDidLoad() {
@@ -105,111 +109,119 @@ export class HomePage {
 
   presentLoadingDefault() {
     let loading = this.loadingCtrl.create({
-      content: 'Carregando dados...'
+      content: 'Carregando...'
     });
 
     loading.present();
 
     setTimeout(() => {
       loading.dismiss();
-    },10000);
+    },this.tempo);
   }
 
-  exibirTemperaturaEmDezSegundos(){
+  getImageIfExists() {
+    this.usuarioService.getImageFromBucket(this.usuario.id)
+    .subscribe(response => {
+      this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+    },
+    error => {});
+  }
+
+  exibirTemperaturaEmCincoSegundos(){
     setTimeout(() => {
       this.temperaturaService.findTemperatura().subscribe(response=>{
         this.temperatura = response;
         if(this.loopRecursivas){
-          this.exibirTemperaturaEmDezSegundos();
+          this.exibirTemperaturaEmCincoSegundos();
         }
       })
-    }, 10000);
+    }, this.tempo);
   }
 
-  exibirPhEmDezSegundos(){
+  exibirPhEmCincoSegundos(){
     setTimeout(() => {
       this.phService.findPhs().subscribe(response=>{
         this.ph = response;
         if(this.loopRecursivas){
 
-          this.exibirPhEmDezSegundos();
+          this.exibirPhEmCincoSegundos();
         }
       })
-    }, 10000);
+    }, this.tempo);
   }
-  exibirNitratoEmDezSegundos(){
+  exibirNitratoEmCincoSegundos(){
     setTimeout(() => {
       this.nitratoService.findNitratos().subscribe(response=>{
         this.nitrato = response;
         if(this.loopRecursivas){
 
-          this.exibirNitratoEmDezSegundos();
+          this.exibirNitratoEmCincoSegundos();
         }
       })
-    }, 10000);
+    }, this.tempo);
   }
-  exibirNitritoEmDezSegundos(){
+  exibirNitritoEmCincoSegundos(){
     setTimeout(() => {
       this.nitritoService.findNitrito().subscribe(response=>{
         this.nitrito = response;
         if(this.loopRecursivas){
 
-          this.exibirNitritoEmDezSegundos();
+          this.exibirNitritoEmCincoSegundos();
         }
       })
-    }, 10000);
+    }, this.tempo);
 
   }
 
-  exibirOxigenioDissolvidoEmDezSegundos(){
+  exibirOxigenioDissolvidoEmCincoSegundos(){
     setTimeout(() => {
       this.oxigenioDissolvidoService.findOxigenioDissolvido().subscribe(response=>{
         this.oxigenioDissolvido = response;
         if(this.loopRecursivas){
 
-          this.exibirOxigenioDissolvidoEmDezSegundos();
+          this.exibirOxigenioDissolvidoEmCincoSegundos();
         }
       })
-    }, 10000);
+    }, this.tempo);
 
   }
 
-  exibirSalinidadeEmDezSegundos(){
+  exibirSalinidadeEmCincoSegundos(){
     setTimeout(() => {
       this.salinidadeService.findSalinidade().subscribe(response=>{
         this.salinidade = response;
         if(this.loopRecursivas){
 
-          this.exibirSalinidadeEmDezSegundos();
+          this.exibirSalinidadeEmCincoSegundos();
         }
       })
-    }, 10000);
+    }, this.tempo);
 
   }
 
-  exibirTransparenciaEmDezSegundos(){
+  exibirTransparenciaEmCincoSegundos(){
     setTimeout(() => {
       this.transparenciaService.findTransparencia().subscribe(response=>{
         this.transparencia = response;
         if(this.loopRecursivas){
 
-          this.exibirTransparenciaEmDezSegundos();
+          this.exibirTransparenciaEmCincoSegundos();
         }
       })
-    }, 10000);
+    }, this.tempo);
 
   }
 
-  exibirAmoniaTotalEmDezSegundos(){
+  exibirAmoniaTotalEmCincoSegundos(){
     setTimeout(() => {
       this.amoniaTotalService.findAmonias().subscribe(response=>{
         this.amoniaTotal = response;
         if(this.loopRecursivas){
 
-          this.exibirAmoniaTotalEmDezSegundos();
+          this.exibirAmoniaTotalEmCincoSegundos();
         }
       })
-    }, 10000);
+    }, this.tempo);
 
   }
 
