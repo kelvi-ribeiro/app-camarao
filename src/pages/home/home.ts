@@ -6,13 +6,14 @@ import { NitratoService } from './../../services/domain/nitrato.service';
 import { AmoniaTotalService } from './../../services/domain/amoniaTotal.service';
 
 import { StorageService } from './../../services/storage.service';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { Globals } from '../../globals.array';
 import { TemperaturaService } from '../../services/domain/temperatura.service';
 import { PhService } from '../../services/domain/ph.service';
 import { API_CONFIG } from '../../config/api.config';
+import { Chart } from 'chart.js';
 
 
 /**
@@ -29,6 +30,14 @@ import { API_CONFIG } from '../../config/api.config';
 })
 export class HomePage {
 
+  @ViewChild('barCanvas') barCanvas;
+    @ViewChild('doughnutCanvas') doughnutCanvas;
+    @ViewChild('lineCanvas') lineCanvas;
+
+    barChart: any;
+    doughnutChart: any;
+    lineChart: any;
+
   email;
   usuario;
   perfis = [];
@@ -42,6 +51,8 @@ export class HomePage {
   transparencia;
   loopRecursivas:boolean;
   tempo:number = 2000;
+
+
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -92,11 +103,17 @@ export class HomePage {
     this.exibirSalinidadeEmCincoSegundos();
     this.exibirTransparenciaEmCincoSegundos();
     this.exibirAmoniaTotalEmCincoSegundos();
+    this.createChart();
   }
 
-  ionViewDidLoad() {
-    this.presentLoadingDefault();
-  }
+
+    ionViewDidLoad() {
+
+}
+
+
+
+
 
   ionViewDidEnter() {
 
@@ -222,6 +239,52 @@ export class HomePage {
         }
       })
     }, this.tempo);
+
+  }
+
+  createChart(){
+    setTimeout(() => {
+      this.barChart = new Chart(this.barCanvas.nativeElement, {
+
+        type: 'bar',
+        data: {
+            labels: ["Temperatura","Ph","Oxigenio"],
+            label: '',
+            datasets: [{
+                data: [this.temperatura.temperatura,this.ph.ph,this.oxigenioDissolvido.oxigenioDissolvido],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+
+    });
+    this.createChart();
+
+    }, 5000);
 
   }
 
