@@ -6,14 +6,13 @@ import { NitratoService } from './../../services/domain/nitrato.service';
 import { AmoniaTotalService } from './../../services/domain/amoniaTotal.service';
 
 import { StorageService } from './../../services/storage.service';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { Globals } from '../../globals.array';
 import { TemperaturaService } from '../../services/domain/temperatura.service';
 import { PhService } from '../../services/domain/ph.service';
 import { API_CONFIG } from '../../config/api.config';
-import { Chart } from 'chart.js';
 
 
 /**
@@ -30,21 +29,10 @@ import { Chart } from 'chart.js';
 })
 export class HomePage {
 
-  @ViewChild('barCanvas') barCanvas;
-  @ViewChild('doughnutCanvas') doughnutCanvas;
-  @ViewChild('lineCanvas') lineCanvas;
-
-  barChart: any;
-  doughnutChart: any;
-  lineChart: any;
-
   email;
   usuario;
   perfis = [];
-
-  temperatura: any;
-  temperaturaOld;
-
+  temperatura:any;
   ph;
   amoniaTotal;
   nitrato;
@@ -52,52 +40,50 @@ export class HomePage {
   oxigenioDissolvido;
   salinidade;
   transparencia;
-  loopRecursivas: boolean;
-  tempo: number = 2000;
-
-
+  loopRecursivas:boolean;
+  tempo:number = 2000;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public loadingCtrl: LoadingController,
-    public storageService: StorageService,
-    public usuarioService: UsuarioService,
-    public global: Globals,
-    public temperaturaService: TemperaturaService,
-    public phService: PhService,
-    public amoniaTotalService: AmoniaTotalService,
-    public nitratoService: NitratoService,
-    public nitritoService: NitritoService,
-    public oxigenioDissolvidoService: OxigenioDissolvidoService,
-    public salinidadeService: SalinidadeService,
-    public transparenciaService: TransparenciaService
-  ) {
-    this.email = this.storageService.getLocalUser().email;
+              public navParams: NavParams,
+              public loadingCtrl:LoadingController,
+              public storageService:StorageService,
+              public usuarioService:UsuarioService,
+              public global:Globals,
+              public temperaturaService:TemperaturaService,
+              public phService:PhService,
+              public amoniaTotalService:AmoniaTotalService,
+              public nitratoService:NitratoService,
+              public nitritoService:NitritoService,
+              public oxigenioDissolvidoService:OxigenioDissolvidoService,
+              public salinidadeService:SalinidadeService,
+              public transparenciaService:TransparenciaService
+            ) {
+                this.email = this.storageService.getLocalUser().email;
     this.usuarioService.findByEmail(this.email)
-      .subscribe((response => {
-        this.perfis = response['perfis'];
-        this.storageService.setUserPerfil(this.perfis)
-        this.perfis.forEach((perfil => {
+    .subscribe((response=>{
+      this.perfis = response['perfis'];
+      this.storageService.setUserPerfil(this.perfis)
+      this.perfis.forEach((perfil=>{
 
 
-          if (perfil === 'ADMIN') {
+        if(perfil==='ADMIN'){
 
-            this.global.pages = [
-              { title: 'Home', component: 'HomePage' },
-              { title: 'Meu Perfil', component: 'ProfilePage' },
-              { title: 'Meus Funcionarios', component: 'FuncionariosPage' },
-              { title: 'Gráfico', component: 'GraficosPage' },
-              { title: 'Cadastrar Novo Funcionário', component: 'SignupPage' },
-              { title: 'Logout', component: '' }
-            ];
+          this.global.pages  = [
+            {title:'Home',component:'HomePage'},
+            { title: 'Meu Perfil', component: 'ProfilePage' },
+            {title:'Meus Funcionarios',component:'FuncionariosPage'},
+            {title:'Gráficos',component:'GraficosPage'},
+            {title:'Cadastrar Novo Funcionário',component:'SignupPage'},
+            {title:'Logout',component:''}
+          ];
 
-          }
-        }));
+        }
+      }));
 
-        this.usuario = response;
+      this.usuario = response;
+      this.getImageIfExists();
 
-
-      }))
+    }))
     this.loopRecursivas = true;
     this.exibirTemperaturaEmCincoSegundos();
     this.exibirPhEmCincoSegundos();
@@ -107,16 +93,18 @@ export class HomePage {
     this.exibirSalinidadeEmCincoSegundos();
     this.exibirTransparenciaEmCincoSegundos();
     this.exibirAmoniaTotalEmCincoSegundos();
-    setTimeout(() => {
-      this.createChart();
-    }, 4000);
   }
-    ionViewDidEnter() {
+
+  ionViewDidLoad() {
+    this.presentLoadingDefault();
+  }
+
+  ionViewDidEnter() {
 
   }
 
-  ionViewWillLeave() {
-    this.loopRecursivas = false;
+  ionViewWillLeave(){
+    this.loopRecursivas=false;
 
   }
 
@@ -129,47 +117,55 @@ export class HomePage {
 
     setTimeout(() => {
       loading.dismiss();
-    }, this.tempo);
+    },this.tempo);
   }
 
-  exibirTemperaturaEmCincoSegundos() {
+  getImageIfExists() {
+    this.usuarioService.getImageFromBucket(this.usuario.id)
+    .subscribe(response => {
+      this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+    },
+    error => {});
+  }
+
+  exibirTemperaturaEmCincoSegundos(){
     setTimeout(() => {
-      this.temperaturaService.findTemperatura().subscribe(response => {
+      this.temperaturaService.findTemperatura().subscribe(response=>{
         this.temperatura = response;
-        if (this.loopRecursivas) {
+        if(this.loopRecursivas){
           this.exibirTemperaturaEmCincoSegundos();
         }
       })
     }, this.tempo);
   }
 
-  exibirPhEmCincoSegundos() {
+  exibirPhEmCincoSegundos(){
     setTimeout(() => {
-      this.phService.findPhs().subscribe(response => {
+      this.phService.findPhs().subscribe(response=>{
         this.ph = response;
-        if (this.loopRecursivas) {
+        if(this.loopRecursivas){
 
           this.exibirPhEmCincoSegundos();
         }
       })
     }, this.tempo);
   }
-  exibirNitratoEmCincoSegundos() {
+  exibirNitratoEmCincoSegundos(){
     setTimeout(() => {
-      this.nitratoService.findNitratos().subscribe(response => {
+      this.nitratoService.findNitratos().subscribe(response=>{
         this.nitrato = response;
-        if (this.loopRecursivas) {
+        if(this.loopRecursivas){
 
           this.exibirNitratoEmCincoSegundos();
         }
       })
     }, this.tempo);
   }
-  exibirNitritoEmCincoSegundos() {
+  exibirNitritoEmCincoSegundos(){
     setTimeout(() => {
-      this.nitritoService.findNitrito().subscribe(response => {
+      this.nitritoService.findNitrito().subscribe(response=>{
         this.nitrito = response;
-        if (this.loopRecursivas) {
+        if(this.loopRecursivas){
 
           this.exibirNitritoEmCincoSegundos();
         }
@@ -178,11 +174,11 @@ export class HomePage {
 
   }
 
-  exibirOxigenioDissolvidoEmCincoSegundos() {
+  exibirOxigenioDissolvidoEmCincoSegundos(){
     setTimeout(() => {
-      this.oxigenioDissolvidoService.findOxigenioDissolvido().subscribe(response => {
+      this.oxigenioDissolvidoService.findOxigenioDissolvido().subscribe(response=>{
         this.oxigenioDissolvido = response;
-        if (this.loopRecursivas) {
+        if(this.loopRecursivas){
 
           this.exibirOxigenioDissolvidoEmCincoSegundos();
         }
@@ -191,11 +187,11 @@ export class HomePage {
 
   }
 
-  exibirSalinidadeEmCincoSegundos() {
+  exibirSalinidadeEmCincoSegundos(){
     setTimeout(() => {
-      this.salinidadeService.findSalinidade().subscribe(response => {
+      this.salinidadeService.findSalinidade().subscribe(response=>{
         this.salinidade = response;
-        if (this.loopRecursivas) {
+        if(this.loopRecursivas){
 
           this.exibirSalinidadeEmCincoSegundos();
         }
@@ -204,11 +200,11 @@ export class HomePage {
 
   }
 
-  exibirTransparenciaEmCincoSegundos() {
+  exibirTransparenciaEmCincoSegundos(){
     setTimeout(() => {
-      this.transparenciaService.findTransparencia().subscribe(response => {
+      this.transparenciaService.findTransparencia().subscribe(response=>{
         this.transparencia = response;
-        if (this.loopRecursivas) {
+        if(this.loopRecursivas){
 
           this.exibirTransparenciaEmCincoSegundos();
         }
@@ -217,11 +213,11 @@ export class HomePage {
 
   }
 
-  exibirAmoniaTotalEmCincoSegundos() {
+  exibirAmoniaTotalEmCincoSegundos(){
     setTimeout(() => {
-      this.amoniaTotalService.findAmonias().subscribe(response => {
+      this.amoniaTotalService.findAmonias().subscribe(response=>{
         this.amoniaTotal = response;
-        if (this.loopRecursivas) {
+        if(this.loopRecursivas){
 
           this.exibirAmoniaTotalEmCincoSegundos();
         }
@@ -230,34 +226,4 @@ export class HomePage {
 
   }
 
-  createChart() {
-      this.lineChart = new Chart(this.lineCanvas.nativeElement, {
-        type: 'line',
-        data: {
-          datasets: [{
-            label: 'Temperatura',
-            data: [this.temperatura.temperatura],
-
-          }],
-
-        },
-      });
-      this.updateChart();
-  }
-
-  updateChart() {
-    setTimeout(() => {
-      if(this.temperaturaOld!=undefined){
-        this.lineChart.data.datasets[0].data[0] = this.temperaturaOld;
-      }
-      this.lineChart.data.datasets[0].data[1] = this.temperatura.temperatura;
-      this.lineChart.update();
-      this.temperaturaOld = this.temperatura.temperatura
-      this.updateChart();
-
-
-    }, 10000);
-  }
 }
-
-
