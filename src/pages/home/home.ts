@@ -94,7 +94,7 @@ export class HomePage {
         }));
 
         this.usuario = response;
-        this.getImageIfExists();
+
 
       }))
     this.loopRecursivas = true;
@@ -131,20 +131,9 @@ export class HomePage {
     }, this.tempo);
   }
 
-  getImageIfExists() {
-    this.usuarioService.getImageFromBucket(this.usuario.id)
-      .subscribe(response => {
-        this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
-      },
-        error => { });
-  }
-
   exibirTemperaturaEmCincoSegundos() {
     setTimeout(() => {
       this.temperaturaService.findTemperatura().subscribe(response => {
-        if(this.temperatura!=undefined){
-          this.temperaturaOld = this.temperatura.temperatura;
-        }
         this.temperatura = response;
         if (this.loopRecursivas) {
           this.exibirTemperaturaEmCincoSegundos();
@@ -256,12 +245,15 @@ export class HomePage {
 
   updateChart() {
     setTimeout(() => {
-      this.lineChart.data.datasets[0].data[0] = this.temperaturaOld;
+      if(this.temperaturaOld!=undefined){
+        this.lineChart.data.datasets[0].data[0] = this.temperaturaOld;
+      }
       this.lineChart.data.datasets[0].data[1] = this.temperatura.temperatura;
       this.lineChart.data.labels[1] = 'Nova Temperatura';
       this.lineChart.update();
+      this.temperaturaOld = this.temperatura.temperatura
       this.updateChart();
-      let temperaturaOld = this.temperatura.temperatura;
+
 
     }, 10000);
   }
