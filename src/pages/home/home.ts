@@ -48,7 +48,6 @@ export class HomePage {
               public loadingCtrl:LoadingController,
               public storageService:StorageService,
               public usuarioService:UsuarioService,
-              public global:Globals,
               public temperaturaService:TemperaturaService,
               public phService:PhService,
               public amoniaTotalService:AmoniaTotalService,
@@ -58,32 +57,6 @@ export class HomePage {
               public salinidadeService:SalinidadeService,
               public transparenciaService:TransparenciaService
             ) {
-                this.email = this.storageService.getLocalUser().email;
-    this.usuarioService.findByEmail(this.email)
-    .subscribe((response=>{
-      this.perfis = response['perfis'];
-      this.storageService.setUserPerfil(this.perfis)
-      this.perfis.forEach((perfil=>{
-
-
-        if(perfil==='ADMIN'){
-
-          this.global.pages  = [
-            {title:'Home',component:'HomePage'},
-            { title: 'Meu Perfil', component: 'ProfilePage' },
-            {title:'Meus Funcionarios',component:'FuncionariosPage'},
-            {title:'Gráficos',component:'GraficosPage'},
-            {title:'Cadastrar Novo Funcionário',component:'SignupPage'},
-            {title:'Logout',component:''}
-          ];
-
-        }
-      }));
-
-      this.usuario = response;
-      this.getImageIfExists();
-
-    }))
     this.loopRecursivas = true;
     this.exibirTemperaturaEmCincoSegundos();
     this.exibirPhEmCincoSegundos();

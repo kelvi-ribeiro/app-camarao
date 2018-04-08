@@ -1,3 +1,4 @@
+import { UsuarioService } from './../services/domain/usuario.service';
 import { Globals } from './../globals.array';
 import { AuthService } from './../services/auth.service';
 import { Component, ViewChild } from '@angular/core';
@@ -5,6 +6,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
+import { StorageService } from '../services/storage.service';
 
 
 
@@ -12,6 +14,8 @@ import { LoginPage } from '../pages/login/login';
   templateUrl: 'app.html'
 })
 export class MyApp {
+  email;
+  perfis = []
   @ViewChild(Nav) nav: Nav;
 
   rootPage = LoginPage;
@@ -20,16 +24,12 @@ export class MyApp {
               public statusBar: StatusBar,
               public splashScreen: SplashScreen,
               public authService:AuthService,
-              public global:Globals) {
+              public globals:Globals
+              ) {
 
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-   global.pages  = [
-      {title:'Home',component:'HomePage'},
-      { title: 'Meu Perfil', component: 'ProfilePage' },
-      {title:'Logout',component:''}
-    ];
 
   }
 
@@ -42,16 +42,13 @@ export class MyApp {
     });
   }
 
+
+
   openPage(page:{title:string,component:string}) {
     switch(page.title){
       case'Logout':
 
       this.authService.logout();
-      this.global.pages  = [
-        {title:'Home',component:'HomePage'},
-        { title: 'Meu Perfil', component: 'ProfilePage' },
-        {title:'Logout',component:''}
-      ];
 
       this.nav.setRoot(LoginPage);
       break;

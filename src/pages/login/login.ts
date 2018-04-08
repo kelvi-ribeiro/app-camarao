@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { CreadenciaisDTO } from '../../models/credenciais.dto';
+import { Globals } from '../../globals.array';
+import { UsuarioService } from '../../services/domain/usuario.service';
+import { StorageService } from '../../services/storage.service';
 
 /**
  * Generated class for the LoginPage page.
@@ -16,7 +19,8 @@ import { CreadenciaisDTO } from '../../models/credenciais.dto';
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
+  email;
+  perfis = [];
   creds : CreadenciaisDTO = {
     email: "",
     senha: ""
@@ -25,7 +29,10 @@ export class LoginPage {
   constructor(
     public navCtrl: NavController,
     public menu: MenuController,
-    public auth: AuthService) {
+    public auth: AuthService,
+    public global:Globals,
+    public usuarioService:UsuarioService,
+    public storageService:StorageService) {
 
   }
 
@@ -36,6 +43,46 @@ export class LoginPage {
   ionViewDidLeave() {
     this.menu.swipeEnable(true);
   }
+
+  ionViewWillLeave(){
+    console.log('Chegou aqui');
+
+    this.email = this.storageService.getLocalUser().email;
+    this.usuarioService.findByEmail(this.email)
+    .subscribe((response=>{
+      console.log(response);
+
+      this.perfis = response['perfis'];
+      this.storageService.setUserPerfil(this.perfis)
+      for(let i = 0; i<this.perfis.length;i++){
+        let perfil = this.perfis[i];
+        if(perfil==='ADMIN'){
+          this.global.pages  = [
+            {title:'Home',component:'HomePage'},
+            { title: 'Meu Perfil', component: 'ProfilePage' },
+            {title:'Meus Funcionarios',component:'FuncionariosPage'},
+            {title:'Gráficos',component:'GraficosPage'},
+            {title:'Cadastrar Novo Funcionário',component:'SignupPage'},
+            {title:'Logout',component:''}
+          ];
+          break;
+        }else{
+          this.global.pages  = [
+            {title:'Home',component:'HomePage'},
+            { title: 'Meu Perfil', component: 'ProfilePage' },
+            {title:'Gráficos',component:'GraficosPage'},
+            {title:'Logout',component:''}
+          ];
+        }
+      }
+
+
+
+
+    }))
+
+  }
+
 
   ionViewDidEnter() {
     this.auth.refreshToken()

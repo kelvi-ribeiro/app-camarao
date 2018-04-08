@@ -5,9 +5,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content *ngIf="globals.pages">
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of global.pages" (click)="openPage(p)">
+      <button menuClose ion-item *ngFor="let p of globals.pages" (click)="openPage(p)">
         {{p.title}}
       </button>
     </ion-list>
