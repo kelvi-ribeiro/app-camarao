@@ -23,4 +23,8 @@ export class GraficosPage {
     this.navCtrl.push('TemperaturaPage');
   }
 
+  goToGraficoPh(){
+    this.navCtrl.push('PhPage');
+  }
+
 }

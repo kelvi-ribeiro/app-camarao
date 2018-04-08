@@ -37,9 +37,6 @@ export class TemperaturaPage {
     this.exibirTemperaturaEmCincoSegundos();
 
   }
-  ionViewDidEnter(){
-
-  }
 
   ionViewWillLeave() {
     this.loopRecursivas = false;
