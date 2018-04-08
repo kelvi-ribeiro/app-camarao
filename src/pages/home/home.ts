@@ -31,17 +31,20 @@ import { Chart } from 'chart.js';
 export class HomePage {
 
   @ViewChild('barCanvas') barCanvas;
-    @ViewChild('doughnutCanvas') doughnutCanvas;
-    @ViewChild('lineCanvas') lineCanvas;
+  @ViewChild('doughnutCanvas') doughnutCanvas;
+  @ViewChild('lineCanvas') lineCanvas;
 
-    barChart: any;
-    doughnutChart: any;
-    lineChart: any;
+  barChart: any;
+  doughnutChart: any;
+  lineChart: any;
 
   email;
   usuario;
   perfis = [];
-  temperatura:any;
+
+  temperatura: any;
+  temperaturaOld;
+
   ph;
   amoniaTotal;
   nitrato;
@@ -49,51 +52,51 @@ export class HomePage {
   oxigenioDissolvido;
   salinidade;
   transparencia;
-  loopRecursivas:boolean;
-  tempo:number = 2000;
+  loopRecursivas: boolean;
+  tempo: number = 2000;
 
 
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public loadingCtrl:LoadingController,
-              public storageService:StorageService,
-              public usuarioService:UsuarioService,
-              public global:Globals,
-              public temperaturaService:TemperaturaService,
-              public phService:PhService,
-              public amoniaTotalService:AmoniaTotalService,
-              public nitratoService:NitratoService,
-              public nitritoService:NitritoService,
-              public oxigenioDissolvidoService:OxigenioDissolvidoService,
-              public salinidadeService:SalinidadeService,
-              public transparenciaService:TransparenciaService
-            ) {
-                this.email = this.storageService.getLocalUser().email;
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public storageService: StorageService,
+    public usuarioService: UsuarioService,
+    public global: Globals,
+    public temperaturaService: TemperaturaService,
+    public phService: PhService,
+    public amoniaTotalService: AmoniaTotalService,
+    public nitratoService: NitratoService,
+    public nitritoService: NitritoService,
+    public oxigenioDissolvidoService: OxigenioDissolvidoService,
+    public salinidadeService: SalinidadeService,
+    public transparenciaService: TransparenciaService
+  ) {
+    this.email = this.storageService.getLocalUser().email;
     this.usuarioService.findByEmail(this.email)
-    .subscribe((response=>{
-      this.perfis = response['perfis'];
-      this.storageService.setUserPerfil(this.perfis)
-      this.perfis.forEach((perfil=>{
+      .subscribe((response => {
+        this.perfis = response['perfis'];
+        this.storageService.setUserPerfil(this.perfis)
+        this.perfis.forEach((perfil => {
 
 
-        if(perfil==='ADMIN'){
+          if (perfil === 'ADMIN') {
 
-          this.global.pages  = [
-            {title:'Home',component:'HomePage'},
-            { title: 'Meu Perfil', component: 'ProfilePage' },
-            {title:'Meus Funcionarios',component:'FuncionariosPage'},
-            {title:'Cadastrar Novo Funcionário',component:'SignupPage'},
-            {title:'Logout',component:''}
-          ];
+            this.global.pages = [
+              { title: 'Home', component: 'HomePage' },
+              { title: 'Meu Perfil', component: 'ProfilePage' },
+              { title: 'Meus Funcionarios', component: 'FuncionariosPage' },
+              { title: 'Cadastrar Novo Funcionário', component: 'SignupPage' },
+              { title: 'Logout', component: '' }
+            ];
 
-        }
-      }));
+          }
+        }));
 
-      this.usuario = response;
-      this.getImageIfExists();
+        this.usuario = response;
+        this.getImageIfExists();
 
-    }))
+      }))
     this.loopRecursivas = true;
     this.exibirTemperaturaEmCincoSegundos();
     this.exibirPhEmCincoSegundos();
@@ -103,24 +106,16 @@ export class HomePage {
     this.exibirSalinidadeEmCincoSegundos();
     this.exibirTransparenciaEmCincoSegundos();
     this.exibirAmoniaTotalEmCincoSegundos();
-    this.createChart();
+    setTimeout(() => {
+      this.createChart();
+    }, 4000);
   }
-
-
-    ionViewDidLoad() {
-
-}
-
-
-
-
-
-  ionViewDidEnter() {
+    ionViewDidEnter() {
 
   }
 
-  ionViewWillLeave(){
-    this.loopRecursivas=false;
+  ionViewWillLeave() {
+    this.loopRecursivas = false;
 
   }
 
@@ -133,55 +128,58 @@ export class HomePage {
 
     setTimeout(() => {
       loading.dismiss();
-    },this.tempo);
+    }, this.tempo);
   }
 
   getImageIfExists() {
     this.usuarioService.getImageFromBucket(this.usuario.id)
-    .subscribe(response => {
-      this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
-    },
-    error => {});
+      .subscribe(response => {
+        this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+      },
+        error => { });
   }
 
-  exibirTemperaturaEmCincoSegundos(){
+  exibirTemperaturaEmCincoSegundos() {
     setTimeout(() => {
-      this.temperaturaService.findTemperatura().subscribe(response=>{
+      this.temperaturaService.findTemperatura().subscribe(response => {
+        if(this.temperatura!=undefined){
+          this.temperaturaOld = this.temperatura.temperatura;
+        }
         this.temperatura = response;
-        if(this.loopRecursivas){
+        if (this.loopRecursivas) {
           this.exibirTemperaturaEmCincoSegundos();
         }
       })
     }, this.tempo);
   }
 
-  exibirPhEmCincoSegundos(){
+  exibirPhEmCincoSegundos() {
     setTimeout(() => {
-      this.phService.findPhs().subscribe(response=>{
+      this.phService.findPhs().subscribe(response => {
         this.ph = response;
-        if(this.loopRecursivas){
+        if (this.loopRecursivas) {
 
           this.exibirPhEmCincoSegundos();
         }
       })
     }, this.tempo);
   }
-  exibirNitratoEmCincoSegundos(){
+  exibirNitratoEmCincoSegundos() {
     setTimeout(() => {
-      this.nitratoService.findNitratos().subscribe(response=>{
+      this.nitratoService.findNitratos().subscribe(response => {
         this.nitrato = response;
-        if(this.loopRecursivas){
+        if (this.loopRecursivas) {
 
           this.exibirNitratoEmCincoSegundos();
         }
       })
     }, this.tempo);
   }
-  exibirNitritoEmCincoSegundos(){
+  exibirNitritoEmCincoSegundos() {
     setTimeout(() => {
-      this.nitritoService.findNitrito().subscribe(response=>{
+      this.nitritoService.findNitrito().subscribe(response => {
         this.nitrito = response;
-        if(this.loopRecursivas){
+        if (this.loopRecursivas) {
 
           this.exibirNitritoEmCincoSegundos();
         }
@@ -190,11 +188,11 @@ export class HomePage {
 
   }
 
-  exibirOxigenioDissolvidoEmCincoSegundos(){
+  exibirOxigenioDissolvidoEmCincoSegundos() {
     setTimeout(() => {
-      this.oxigenioDissolvidoService.findOxigenioDissolvido().subscribe(response=>{
+      this.oxigenioDissolvidoService.findOxigenioDissolvido().subscribe(response => {
         this.oxigenioDissolvido = response;
-        if(this.loopRecursivas){
+        if (this.loopRecursivas) {
 
           this.exibirOxigenioDissolvidoEmCincoSegundos();
         }
@@ -203,11 +201,11 @@ export class HomePage {
 
   }
 
-  exibirSalinidadeEmCincoSegundos(){
+  exibirSalinidadeEmCincoSegundos() {
     setTimeout(() => {
-      this.salinidadeService.findSalinidade().subscribe(response=>{
+      this.salinidadeService.findSalinidade().subscribe(response => {
         this.salinidade = response;
-        if(this.loopRecursivas){
+        if (this.loopRecursivas) {
 
           this.exibirSalinidadeEmCincoSegundos();
         }
@@ -216,11 +214,11 @@ export class HomePage {
 
   }
 
-  exibirTransparenciaEmCincoSegundos(){
+  exibirTransparenciaEmCincoSegundos() {
     setTimeout(() => {
-      this.transparenciaService.findTransparencia().subscribe(response=>{
+      this.transparenciaService.findTransparencia().subscribe(response => {
         this.transparencia = response;
-        if(this.loopRecursivas){
+        if (this.loopRecursivas) {
 
           this.exibirTransparenciaEmCincoSegundos();
         }
@@ -229,11 +227,11 @@ export class HomePage {
 
   }
 
-  exibirAmoniaTotalEmCincoSegundos(){
+  exibirAmoniaTotalEmCincoSegundos() {
     setTimeout(() => {
-      this.amoniaTotalService.findAmonias().subscribe(response=>{
+      this.amoniaTotalService.findAmonias().subscribe(response => {
         this.amoniaTotal = response;
-        if(this.loopRecursivas){
+        if (this.loopRecursivas) {
 
           this.exibirAmoniaTotalEmCincoSegundos();
         }
@@ -242,52 +240,31 @@ export class HomePage {
 
   }
 
-  createChart(){
-    setTimeout(() => {
-      this.barChart = new Chart(this.barCanvas.nativeElement, {
-
-        type: 'bar',
+  createChart() {
+      this.lineChart = new Chart(this.lineCanvas.nativeElement, {
+        type: 'line',
         data: {
-            labels: ["Temperatura","Ph","Oxigenio"],
-            label: '',
-            datasets: [{
-                data: [this.temperatura.temperatura,this.ph.ph,this.oxigenioDissolvido.oxigenioDissolvido],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
+          datasets: [{
+            label: 'Temperatura',
+            data: [this.temperatura.temperatura],
+
+          }]
         },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero:true
-                    }
-                }]
-            }
-        }
-
-    });
-    this.createChart();
-
-    }, 5000);
-
+      });
+      this.updateChart();
   }
 
+  updateChart() {
+    setTimeout(() => {
+      this.lineChart.data.datasets[0].data[0] = this.temperaturaOld;
+      this.lineChart.data.datasets[0].data[1] = this.temperatura.temperatura;
+      this.lineChart.data.labels[1] = 'Nova Temperatura';
+      this.lineChart.update();
+      this.updateChart();
+      let temperaturaOld = this.temperatura.temperatura;
+
+    }, 10000);
+  }
 }
 
 
