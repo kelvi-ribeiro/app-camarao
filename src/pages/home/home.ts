@@ -86,6 +86,7 @@ export class HomePage {
               { title: 'Home', component: 'HomePage' },
               { title: 'Meu Perfil', component: 'ProfilePage' },
               { title: 'Meus Funcionarios', component: 'FuncionariosPage' },
+              {title:'Medições diárias',component:'MedicoesDiariasPage'},
               { title: 'Cadastrar Novo Funcionário', component: 'SignupPage' },
               { title: 'Logout', component: '' }
             ];
@@ -237,7 +238,8 @@ export class HomePage {
             label: 'Temperatura',
             data: [this.temperatura.temperatura],
 
-          }]
+          }],
+
         },
       });
       this.updateChart();
@@ -249,7 +251,6 @@ export class HomePage {
         this.lineChart.data.datasets[0].data[0] = this.temperaturaOld;
       }
       this.lineChart.data.datasets[0].data[1] = this.temperatura.temperatura;
-      this.lineChart.data.labels[1] = 'Nova Temperatura';
       this.lineChart.update();
       this.temperaturaOld = this.temperatura.temperatura
       this.updateChart();
