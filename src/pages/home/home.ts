@@ -86,7 +86,7 @@ export class HomePage {
               { title: 'Home', component: 'HomePage' },
               { title: 'Meu Perfil', component: 'ProfilePage' },
               { title: 'Meus Funcionarios', component: 'FuncionariosPage' },
-              {title:'Medições diárias',component:'MedicoesDiariasPage'},
+              { title: 'Gráfico', component: 'GraficosPage' },
               { title: 'Cadastrar Novo Funcionário', component: 'SignupPage' },
               { title: 'Logout', component: '' }
             ];

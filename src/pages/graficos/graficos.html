@@ -1,18 +1,119 @@
-<!--
-  Generated template for the GraficosPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Graficos</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-left>Gráficos</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-grid>
+    <ion-row (click)="goToGraficoTemperatura()">
+      <ion-col col-6>
+        <img src="/assets/imgs/amonia-icone.png">
+      </ion-col>
+      <ion-col col-6>
+        <p>Amônia Total</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row (click)="goToGraficoTemperatura()">
+      <ion-col col-6>
+        <img src="/assets/imgs/nitrato-icone.png">
+
+      </ion-col>
+      <ion-col col-6>
+        <p>Nitrato</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row (click)="goToGraficoTemperatura()">
+      <ion-col col-6>
+        <img src="/assets/imgs/nitrito-icone.png">
+
+      </ion-col>
+      <ion-col col-6>
+        <p>Nitrito</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid>
+      <ion-row (click)="goToGraficoTemperatura()">
+        <ion-col col-6>
+          <img src="/assets/imgs/oxigenio-icone.png">
+        </ion-col>
+        <ion-col col-6>
+          <p>Oxigênio Dissolvido</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  <ion-grid>
+      <ion-row (click)="goToGraficoTemperatura()">
+        <ion-col col-6>
+          <img src="/assets/imgs/ph-icone.png">
+
+        </ion-col>
+        <ion-col col-6>
+          <p>Ph</p>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+        <ion-row (click)="goToGraficoTemperatura()">
+
+          <ion-col col-6>
+            <img src="/assets/imgs/salinidade-icone.png">
+
+          </ion-col>
+          <ion-col col-6>
+            <p>Salinidade</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+  <ion-grid>
+    <ion-row (click)="goToGraficoTemperatura()">
+      <ion-col col-6>
+        <img src="/assets/imgs/temperatura-icone.png">
+
+      </ion-col>
+      <ion-col col-6>
+        <p>Temperatura</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid>
+      <ion-row (click)="goToGraficoTemperatura()">
+        <ion-col col-6>
+          <img src="/assets/imgs/transparencia-icone.png">
+
+        </ion-col>
+        <ion-col col-6>
+          <p>Transparência</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
+
+
+
 
 </ion-content>

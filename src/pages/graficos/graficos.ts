@@ -18,8 +18,9 @@ export class GraficosPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad GraficosPage');
+
+  goToGraficoTemperatura(){
+    this.navCtrl.push('TemperaturaPage');
   }
 
 }
