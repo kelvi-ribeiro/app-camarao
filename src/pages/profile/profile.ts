@@ -6,6 +6,7 @@ import { API_CONFIG } from '../../config/api.config';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { UsuarioService } from '../../services/domain/usuario.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @IonicPage()
 @Component({
@@ -17,13 +18,16 @@ export class ProfilePage {
   usuario: UsuarioDTO;
   picture: string;
   cameraOn: boolean = false;
+  profileImage;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public storage: StorageService,
     public usuarioService: UsuarioService,
-    public camera: Camera) {
+    public camera: Camera,
+    public sanitazer:DomSanitizer) {
+      this.profileImage = 'assets/imgs/avatar-blank.png';
   }
 
   ionViewDidLoad() {
@@ -50,17 +54,32 @@ export class ProfilePage {
   }
 
   getImageIfExists() {
+
     this.usuarioService.getImageFromBucket(this.usuario.id)
     .subscribe(response => {
       this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+      this.blobToDataURL(response).then(dataUrl => {
+        let str:string = dataUrl as string;
+        this.profileImage =this.sanitazer.bypassSecurityTrustUrl(str);
+      })
     },
-    error => {});
+    error => {
+      this.profileImage = 'assets/imgs/avatar-blank.png';
+    });
+  }
+
+  // https://gist.github.com/frumbert/3bf7a68ffa2ba59061bdcfc016add9ee
+  blobToDataURL(blob) {
+    return new Promise((fulfill, reject) => {
+        let reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = (e) => fulfill(reader.result);
+        reader.readAsDataURL(blob);
+    })
   }
 
   getCameraPicture() {
-
     this.cameraOn = true;
-
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -101,7 +120,7 @@ export class ProfilePage {
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(response => {
         this.picture = null;
-        this.loadData();
+        this.getImageIfExists();
       },
       error => {
       });
