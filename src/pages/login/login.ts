@@ -38,6 +38,7 @@ export class LoginPage {
 
   ionViewWillEnter() {
     this.menu.swipeEnable(false);
+    this.usuarioService.preencherMenuDeAcordoComUsuario();
   }
 
   ionViewDidLeave() {
@@ -45,7 +46,7 @@ export class LoginPage {
   }
 
   ionViewWillLeave(){
-    this.preencherMenuDeAcordoComUsuario();
+
   }
 
 
@@ -70,42 +71,4 @@ export class LoginPage {
     this.navCtrl.push('SignupPage')
   }
 
-  preencherMenuDeAcordoComUsuario(){
-    console.log('Chegou aqui');
-
-    this.email = this.storageService.getLocalUser().email;
-    this.usuarioService.findByEmail(this.email)
-    .subscribe((response=>{
-      console.log(response);
-
-      this.perfis = response['perfis'];
-      this.storageService.setUserPerfil(this.perfis)
-      for(let i = 0; i<this.perfis.length;i++){
-        let perfil = this.perfis[i];
-        if(perfil==='ADMIN'){
-          this.global.pages  = [
-            {title:'Home',component:'HomePage'},
-            { title: 'Meu Perfil', component: 'ProfilePage' },
-            {title:'Meus Funcionarios',component:'FuncionariosPage'},
-            {title:'Gráficos',component:'GraficosPage'},
-            {title:'Cadastrar Novo Funcionário',component:'SignupPage'},
-            {title:'Logout',component:''}
-          ];
-          break;
-        }else{
-          this.global.pages  = [
-            {title:'Home',component:'HomePage'},
-            { title: 'Meu Perfil', component: 'ProfilePage' },
-            {title:'Gráficos',component:'GraficosPage'},
-            {title:'Logout',component:''}
-          ];
-        }
-      }
-
-
-
-
-    }))
-
-  }
 }
