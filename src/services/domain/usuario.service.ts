@@ -62,13 +62,9 @@ export class UsuarioService {
     }
 
     preencherMenuDeAcordoComUsuario(){
-      console.log('Chegou aqui');
-
       this.email = this.storageService.getLocalUser().email;
       this.findByEmail(this.email)
       .subscribe((response=>{
-        console.log(response);
-
         this.perfis = response['perfis'];
         this.storageService.setUserPerfil(this.perfis)
         for(let i = 0; i<this.perfis.length;i++){
