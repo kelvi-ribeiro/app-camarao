@@ -1,3 +1,4 @@
+import { Globals } from './../../globals.array';
 import { TransparenciaService } from './../../services/domain/transparencia.service';
 import { SalinidadeService } from './../../services/domain/salinidade.service';
 import { OxigenioDissolvidoService } from './../../services/domain/oxigenioDissolvido.service';
@@ -9,7 +10,6 @@ import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { UsuarioService } from '../../services/domain/usuario.service';
-import { Globals } from '../../globals.array';
 import { TemperaturaService } from '../../services/domain/temperatura.service';
 import { PhService } from '../../services/domain/ph.service';
 import { API_CONFIG } from '../../config/api.config';
@@ -55,7 +55,8 @@ export class HomePage {
               public nitritoService:NitritoService,
               public oxigenioDissolvidoService:OxigenioDissolvidoService,
               public salinidadeService:SalinidadeService,
-              public transparenciaService:TransparenciaService
+              public transparenciaService:TransparenciaService,
+              public global:Globals
             ) {
     this.loopRecursivas = true;
     this.exibirTemperaturaEmCincoSegundos();
@@ -70,6 +71,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.presentLoadingDefault();
+    this.preencherMenuDeAcordoComUsuario();
   }
 
   ionViewDidEnter() {
@@ -196,6 +198,45 @@ export class HomePage {
         }
       })
     }, this.tempo);
+
+  }
+
+  preencherMenuDeAcordoComUsuario(){
+    console.log('Chegou aqui');
+
+    this.email = this.storageService.getLocalUser().email;
+    this.usuarioService.findByEmail(this.email)
+    .subscribe((response=>{
+      console.log(response);
+
+      this.perfis = response['perfis'];
+      this.storageService.setUserPerfil(this.perfis)
+      for(let i = 0; i<this.perfis.length;i++){
+        let perfil = this.perfis[i];
+        if(perfil==='ADMIN'){
+          this.global.pages  = [
+            {title:'Home',component:'HomePage'},
+            { title: 'Meu Perfil', component: 'ProfilePage' },
+            {title:'Meus Funcionarios',component:'FuncionariosPage'},
+            {title:'Gráficos',component:'GraficosPage'},
+            {title:'Cadastrar Novo Funcionário',component:'SignupPage'},
+            {title:'Logout',component:''}
+          ];
+          break;
+        }else{
+          this.global.pages  = [
+            {title:'Home',component:'HomePage'},
+            { title: 'Meu Perfil', component: 'ProfilePage' },
+            {title:'Gráficos',component:'GraficosPage'},
+            {title:'Logout',component:''}
+          ];
+        }
+      }
+
+
+
+
+    }))
 
   }
 

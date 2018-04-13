@@ -57,15 +57,15 @@ ion-title {
 }
 
 .sidebar .content {
-    background: 	#b2152d	;
+    background: 		#0089BA	;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(	#b2152d	,#5e0013);
+    background: -webkit-linear-gradient(		#0089BA	,#2C73D2);
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(	#b2152d	, #5e0013);
+    background: -o-linear-gradient(		#0089BA	, #2C73D2);
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(	#b2152d	, #5e0013);
+    background: -moz-linear-gradient(		#0089BA	, #2C73D2);
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(	#b2152d	, #5e0013);
+    background: linear-gradient(		#0089BA	, #2C73D2);
     /* Standard syntax (must be last) */
 }
 
@@ -92,6 +92,8 @@ ion-title {
 {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     background: transparent;
+    color:black;
+    font-weight: bolder;
 }
 
 .sidebar,

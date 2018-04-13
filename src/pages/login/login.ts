@@ -45,6 +45,32 @@ export class LoginPage {
   }
 
   ionViewWillLeave(){
+    this.preencherMenuDeAcordoComUsuario();
+  }
+
+
+  ionViewDidEnter() {
+    this.auth.refreshToken()
+      .subscribe(response => {
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot('HomePage');
+      },
+      error => {});
+  }
+
+  login() {
+    this.auth.authenticate(this.creds)
+      .subscribe(response => {
+        this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.navCtrl.setRoot('HomePage');
+      },
+      error => {});
+  }
+  signup(){
+    this.navCtrl.push('SignupPage')
+  }
+
+  preencherMenuDeAcordoComUsuario(){
     console.log('Chegou aqui');
 
     this.email = this.storageService.getLocalUser().email;
@@ -81,27 +107,5 @@ export class LoginPage {
 
     }))
 
-  }
-
-
-  ionViewDidEnter() {
-    this.auth.refreshToken()
-      .subscribe(response => {
-        this.auth.successfulLogin(response.headers.get('Authorization'));
-        this.navCtrl.setRoot('HomePage');
-      },
-      error => {});
-  }
-
-  login() {
-    this.auth.authenticate(this.creds)
-      .subscribe(response => {
-        this.auth.successfulLogin(response.headers.get('Authorization'));
-        this.navCtrl.setRoot('HomePage');
-      },
-      error => {});
-  }
-  signup(){
-    this.navCtrl.push('SignupPage')
   }
 }
