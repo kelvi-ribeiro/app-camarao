@@ -60,7 +60,6 @@ export class FuncionariosPage {
       if(position!=-1){
         this.funcionarios.splice(position,1)
       }
-      console.log(this.funcionarios);
 
       this.funcionarios.forEach(funcionario => {
 

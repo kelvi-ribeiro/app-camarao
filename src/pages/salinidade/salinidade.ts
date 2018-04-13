@@ -37,10 +37,6 @@ this.exibirPhEmCincoSegundos();
 
 }
 
-  ionViewDidLoad() {
-
-  }
-
   ionViewWillLeave() {
     this.loopRecursivas = false;
 
