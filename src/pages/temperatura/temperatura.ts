@@ -44,18 +44,16 @@ export class TemperaturaPage {
   }
 
   exibirTemperaturaEmCincoSegundos() {
+    if (this.loopRecursivas) {
       this.temperaturaService.findTemperatura().subscribe(response => {
         this.temperatura = response;
         if(this.carregando){
           this.createChart();
           this.carregando = false;
         }
-
-
-        if (this.loopRecursivas) {
-          this.exibirTemperaturaEmCincoSegundos();
-        }
-      })
+        this.exibirTemperaturaEmCincoSegundos();
+        })
+      }
   }
 
   createChart() {

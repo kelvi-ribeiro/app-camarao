@@ -32,7 +32,7 @@ export class HomePage {
   email;
   usuario;
   perfis = [];
-  temperatura:any;
+  temperatura: any;
   ph;
   amoniaTotal;
   nitrato;
@@ -40,24 +40,24 @@ export class HomePage {
   oxigenioDissolvido;
   salinidade;
   transparencia;
-  loopRecursivas:boolean;
-  tempo:number = 2000;
+  loopRecursivas: boolean;
+  tempo: number = 2000;
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public loadingCtrl:LoadingController,
-              public storageService:StorageService,
-              public usuarioService:UsuarioService,
-              public temperaturaService:TemperaturaService,
-              public phService:PhService,
-              public amoniaTotalService:AmoniaTotalService,
-              public nitratoService:NitratoService,
-              public nitritoService:NitritoService,
-              public oxigenioDissolvidoService:OxigenioDissolvidoService,
-              public salinidadeService:SalinidadeService,
-              public transparenciaService:TransparenciaService,
-              public global:Globals
-            ) {
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public storageService: StorageService,
+    public usuarioService: UsuarioService,
+    public temperaturaService: TemperaturaService,
+    public phService: PhService,
+    public amoniaTotalService: AmoniaTotalService,
+    public nitratoService: NitratoService,
+    public nitritoService: NitritoService,
+    public oxigenioDissolvidoService: OxigenioDissolvidoService,
+    public salinidadeService: SalinidadeService,
+    public transparenciaService: TransparenciaService,
+    public global: Globals
+  ) {
     this.loopRecursivas = true;
     this.exibirTemperaturaEmCincoSegundos();
     this.exibirPhEmCincoSegundos();
@@ -78,8 +78,8 @@ export class HomePage {
 
   }
 
-  ionViewWillLeave(){
-    this.loopRecursivas=false;
+  ionViewWillLeave() {
+    this.loopRecursivas = false;
 
   }
 
@@ -92,111 +92,105 @@ export class HomePage {
 
     setTimeout(() => {
       loading.dismiss();
-    },this.tempo);
+    }, this.tempo);
   }
 
   getImageIfExists() {
     this.usuarioService.getImageFromBucket(this.usuario.id)
-    .subscribe(response => {
-      this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
-    },
-    error => {});
+      .subscribe(response => {
+        this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+      },
+        error => { });
   }
 
-  exibirTemperaturaEmCincoSegundos(){
+  exibirTemperaturaEmCincoSegundos() {
     setTimeout(() => {
-      this.temperaturaService.findTemperatura().subscribe(response=>{
-        this.temperatura = response;
-        if(this.loopRecursivas){
+      if (this.loopRecursivas) {
+        this.temperaturaService.findTemperatura().subscribe(response => {
+          this.temperatura = response;
           this.exibirTemperaturaEmCincoSegundos();
-        }
-      })
+        })
+      }
     }, this.tempo);
   }
 
-  exibirPhEmCincoSegundos(){
+  exibirPhEmCincoSegundos() {
     setTimeout(() => {
-      this.phService.findPhs().subscribe(response=>{
-        this.ph = response;
-        if(this.loopRecursivas){
-
+      if (this.loopRecursivas) {
+      this.phService.findPhs().subscribe(response => {
+          this.ph = response;
           this.exibirPhEmCincoSegundos();
-        }
-      })
+        })
+      }
     }, this.tempo);
   }
-  exibirNitratoEmCincoSegundos(){
+  exibirNitratoEmCincoSegundos() {
     setTimeout(() => {
-      this.nitratoService.findNitratos().subscribe(response=>{
-        this.nitrato = response;
-        if(this.loopRecursivas){
-
+      if (this.loopRecursivas) {
+      this.nitratoService.findNitratos().subscribe(response => {
+          this.nitrato = response;
           this.exibirNitratoEmCincoSegundos();
-        }
-      })
+        })
+      }
     }, this.tempo);
   }
-  exibirNitritoEmCincoSegundos(){
+  exibirNitritoEmCincoSegundos() {
     setTimeout(() => {
-      this.nitritoService.findNitrito().subscribe(response=>{
-        this.nitrito = response;
-        if(this.loopRecursivas){
-
+      if (this.loopRecursivas) {
+      this.nitritoService.findNitrito().subscribe(response => {
+          this.nitrito = response;
           this.exibirNitritoEmCincoSegundos();
-        }
-      })
+        })
+      }
     }, this.tempo);
 
   }
 
-  exibirOxigenioDissolvidoEmCincoSegundos(){
+  exibirOxigenioDissolvidoEmCincoSegundos() {
     setTimeout(() => {
-      this.oxigenioDissolvidoService.findOxigenioDissolvido().subscribe(response=>{
-        this.oxigenioDissolvido = response;
-        if(this.loopRecursivas){
-
+      if (this.loopRecursivas) {
+      this.oxigenioDissolvidoService.findOxigenioDissolvido().subscribe(response => {
+          this.oxigenioDissolvido = response;
           this.exibirOxigenioDissolvidoEmCincoSegundos();
-        }
-      })
+        })
+      }
     }, this.tempo);
 
   }
 
-  exibirSalinidadeEmCincoSegundos(){
+  exibirSalinidadeEmCincoSegundos() {
     setTimeout(() => {
-      this.salinidadeService.findSalinidade().subscribe(response=>{
-        this.salinidade = response;
-        if(this.loopRecursivas){
-
+      if (this.loopRecursivas) {
+      this.salinidadeService.findSalinidade().subscribe(response => {
+          this.salinidade = response;
           this.exibirSalinidadeEmCincoSegundos();
-        }
       })
+    }
     }, this.tempo);
 
   }
 
-  exibirTransparenciaEmCincoSegundos(){
+  exibirTransparenciaEmCincoSegundos() {
     setTimeout(() => {
-      this.transparenciaService.findTransparencia().subscribe(response=>{
-        this.transparencia = response;
-        if(this.loopRecursivas){
-
+      if (this.loopRecursivas) {
+      this.transparenciaService.findTransparencia().subscribe(response => {
+          this.transparencia = response;
           this.exibirTransparenciaEmCincoSegundos();
-        }
       })
+    }
     }, this.tempo);
 
   }
 
-  exibirAmoniaTotalEmCincoSegundos(){
+  exibirAmoniaTotalEmCincoSegundos() {
     setTimeout(() => {
-      this.amoniaTotalService.findAmonias().subscribe(response=>{
-        this.amoniaTotal = response;
-        if(this.loopRecursivas){
-
+      if (this.loopRecursivas) {
+        this.amoniaTotalService.findAmonias().subscribe(response => {
+          this.amoniaTotal = response;
           this.exibirAmoniaTotalEmCincoSegundos();
-        }
-      })
+
+        })
+      }
     }, this.tempo);
 
   }

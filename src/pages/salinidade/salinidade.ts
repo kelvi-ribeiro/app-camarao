@@ -21,40 +21,38 @@ export class SalinidadePage {
   salinidade;
   phOld;
 
-  tempo:number = 10000;
+  tempo: number = 10000;
   loopRecursivas: boolean;
 
-  carregando:boolean = true;
+  carregando: boolean = true;
 
   lineChart;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public salinidadeService:SalinidadeService) {
-      this.loopRecursivas = true;
-this.exibirPhEmCincoSegundos();
+    public salinidadeService: SalinidadeService) {
+    this.loopRecursivas = true;
+    this.exibirSalinidadeEmCincoSegundos();
 
-}
+  }
 
   ionViewWillLeave() {
     this.loopRecursivas = false;
 
   }
 
-  exibirPhEmCincoSegundos() {
+  exibirSalinidadeEmCincoSegundos() {
+    if (this.loopRecursivas) {
       this.salinidadeService.findSalinidade().subscribe(response => {
         this.salinidade = response;
-        if(this.carregando){
+        if (this.carregando) {
           this.createChart();
           this.carregando = false;
         }
-
-
-        if (this.loopRecursivas) {
-          this.exibirPhEmCincoSegundos();
-        }
+        this.exibirSalinidadeEmCincoSegundos();
       })
+    }
   }
 
   createChart() {
@@ -71,21 +69,21 @@ this.exibirPhEmCincoSegundos();
     });
     this.updateChart();
     this.carregando = false;
-}
+  }
 
-updateChart() {
-  setTimeout(() => {
-    if(this.phOld!=undefined){
-      this.lineChart.data.datasets[0].data[0] = this.phOld;
-    }
-    this.lineChart.data.datasets[0].data[1] = this.salinidade.salinidade;
-    this.lineChart.update();
-    this.phOld = this.salinidade.salinidade
-    this.updateChart();
+  updateChart() {
+    setTimeout(() => {
+      if (this.phOld != undefined) {
+        this.lineChart.data.datasets[0].data[0] = this.phOld;
+      }
+      this.lineChart.data.datasets[0].data[1] = this.salinidade.salinidade;
+      this.lineChart.update();
+      this.phOld = this.salinidade.salinidade
+      this.updateChart();
 
 
-  }, this.tempo);
-}
+    }, this.tempo);
+  }
 
 
 }

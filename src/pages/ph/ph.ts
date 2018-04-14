@@ -38,18 +38,16 @@ export class PhPage {
   }
 
   exibirPhEmCincoSegundos() {
+      if (this.loopRecursivas) {
       this.phService.findPhs().subscribe(response => {
         this.ph = response;
         if(this.carregando){
           this.createChart();
           this.carregando = false;
         }
-
-
-        if (this.loopRecursivas) {
-          this.exibirPhEmCincoSegundos();
-        }
-      })
+        this.exibirPhEmCincoSegundos();
+        })
+      }
   }
 
   createChart() {
