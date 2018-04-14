@@ -11,88 +11,82 @@ import { Globals } from "../../globals.array";
 export class UsuarioService {
   perfis;
   email;
-    constructor(
-        public http: HttpClient,
-        public storage: StorageService,
-        public imageUtilService: ImageUtilService,
-        public global:Globals,
-        public storageService:StorageService) {
-    }
+  constructor(
+    public http: HttpClient,
+    public storage: StorageService,
+    public imageUtilService: ImageUtilService,
+    public global: Globals,
+    public storageService: StorageService) {
+  }
 
-    findById(id: string) {
-        return this.http.get(`${API_CONFIG.baseUrl}/usuarios/${id}`);
-    }
+  findById(id: string) {
+    return this.http.get(`${API_CONFIG.baseUrl}/usuarios/${id}`);
+  }
 
-    findAll(){
-      return this.http.get(`${API_CONFIG.baseUrl}/usuarios`);
-    }
+  findAll() {
+    return this.http.get(`${API_CONFIG.baseUrl}/usuarios`);
+  }
 
-    findByEmail(email: string) {
-        return this.http.get(`${API_CONFIG.baseUrl}/usuarios/email?value=${email}`);
-    }
+  findByEmail(email: string) {
+    return this.http.get(`${API_CONFIG.baseUrl}/usuarios/email?value=${email}`);
+  }
 
-    getImageFromBucket(id : string) : Observable<any> {
-        let url = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`
-        return this.http.get(url, {responseType : 'blob'});
-    }
+  getImageFromBucket(id: string): Observable<any> {
+    let url = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
-    insert(obj : UsuarioDTO) {
-        return this.http.post(
-            `${API_CONFIG.baseUrl}/usuarios`,
-            obj,
-            {
-                observe: 'response',
-                responseType: 'text'
-            }
-        );
-    }
+  insert(obj: UsuarioDTO) {
+    return this.http.post(
+      `${API_CONFIG.baseUrl}/usuarios`,
+      obj,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
 
-    uploadPicture(picture) {
-        let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
-        let formData : FormData = new FormData();
-        formData.set('file', pictureBlob, 'file.png');
-        return this.http.post(
-            `${API_CONFIG.baseUrl}/usuarios/picture`,
-            formData,
-            {
-                observe: 'response',
-                responseType: 'text'
-            }
-        );
-    }
+  uploadPicture(picture) {
+    let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
+    let formData: FormData = new FormData();
+    formData.set('file', pictureBlob, 'file.png');
+    return this.http.post(
+      `${API_CONFIG.baseUrl}/usuarios/picture`,
+      formData,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
 
-    preencherMenuDeAcordoComUsuario(){
-      if(this.storageService.getLocalUser()){
-        this.email = this.storageService.getLocalUser().email;
-        this.findByEmail(this.email)
-        .subscribe((response=>{
+  preencherMenuDeAcordoComUsuario() {
+    if (this.storageService.getLocalUser()) {
+      this.email = this.storageService.getLocalUser().email;
+      this.findByEmail(this.email)
+        .subscribe((response => {
           this.perfis = response['perfis'];
-          this.storageService.setUserPerfil(this.perfis)
-          for(let i = 0; i<this.perfis.length;i++){
-            let perfil = this.perfis[i];
-            if(perfil==='ADMIN'){
-              this.global.pages  = [
-                {title:'Home',component:'HomePage',icone:'md-home'},
-                { title: 'Meu Perfil', component: 'ProfilePage',icone:'ios-contact' },
-                {title:'Meus Funcionarios',component:'FuncionariosPage',icone:'ios-people'},
-                {title:'Gráficos',component:'GraficosPage',icone:'ios-pie-outline'},
-                {title:'Adicionar Funcionário',component:'SignupPage',icone:'md-person-add'},
-                {title:'Logout',component:'',icone:'md-exit'}
+          this.storageService.setUserPerfil(this.perfis);
+          this.perfis.forEach(perfil => {
+            this.global.pages = [
+                { title: 'Home', component: 'HomePage', icone: 'md-home' },
+                { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
+                { title: 'Gráficos', component: 'GraficosPage', icone: 'ios-pie-outline' },
               ];
-              break;
-            }else{
-              this.global.pages  = [
-                {title:'Home',component:'HomePage',icone:'md-home'},
-                { title: 'Meu Perfil', component: 'ProfilePage',icone:'ios-contact' },
-                {title:'Gráficos',component:'GraficosPage',icone:'ios-pie-outline'},
-                {title:'Logout',component:'',icone:'md-exit'}
-              ];
-            }
-          }
+              if (perfil === 'ADMIN') {
+                this.global.pages.push(
+                  { title: 'Meus Funcionarios', component: 'FuncionariosPage', icone: 'ios-people' },
+                  { title: 'Adicionar Funcionário', component: 'SignupPage', icone: 'md-person-add' },
+                )
+              }
+              this.global.pages.push({ title: 'Logout', component: '', icone: 'md-exit' },)
+          });
+
         }))
 
-      }else{
-        return null;
-      }
-      }
+    } else {
+      return null;
     }
+  }
+}
