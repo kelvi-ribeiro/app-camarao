@@ -44,7 +44,7 @@ export class MyApp {
 
 
 
-  openPage(page:{title:string,component:string}) {
+  openPage(page:{title:string,component:string,icone:string}) {
     switch(page.title){
       case'Logout':
 

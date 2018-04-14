@@ -3,9 +3,10 @@
 
     <ion-content class="content" *ngIf="globals.pages">
       <ion-list no-lines class="options">
-        <a  menuClose ion-item *ngFor="let p of globals.pages" (click)="openPage(p)">
+        <button  menuClose ion-item *ngFor="let p of globals.pages" (click)="openPage(p)">
+            <ion-icon [name]="p.icone"></ion-icon>
           {{p.title}}
-        </a>
+        </button>
       </ion-list>
     </ion-content>
 

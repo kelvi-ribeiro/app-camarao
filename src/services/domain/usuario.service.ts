@@ -72,20 +72,20 @@ export class UsuarioService {
             let perfil = this.perfis[i];
             if(perfil==='ADMIN'){
               this.global.pages  = [
-                {title:'Home',component:'HomePage'},
-                { title: 'Meu Perfil', component: 'ProfilePage' },
-                {title:'Meus Funcionarios',component:'FuncionariosPage'},
-                {title:'Gráficos',component:'GraficosPage'},
-                {title:'Cadastrar Novo Funcionário',component:'SignupPage'},
-                {title:'Logout',component:''}
+                {title:'Home',component:'HomePage',icone:'md-home'},
+                { title: 'Meu Perfil', component: 'ProfilePage',icone:'ios-contact' },
+                {title:'Meus Funcionarios',component:'FuncionariosPage',icone:'ios-people'},
+                {title:'Gráficos',component:'GraficosPage',icone:'ios-pie-outline'},
+                {title:'Adicionar Funcionário',component:'SignupPage',icone:'md-person-add'},
+                {title:'Logout',component:'',icone:'md-exit'}
               ];
               break;
             }else{
               this.global.pages  = [
-                {title:'Home',component:'HomePage'},
-                { title: 'Meu Perfil', component: 'ProfilePage' },
-                {title:'Gráficos',component:'GraficosPage'},
-                {title:'Logout',component:''}
+                {title:'Home',component:'HomePage',icone:'md-home'},
+                { title: 'Meu Perfil', component: 'ProfilePage',icone:'ios-contact' },
+                {title:'Gráficos',component:'GraficosPage',icone:'ios-pie-outline'},
+                {title:'Logout',component:'',icone:'md-exit'}
               ];
             }
           }

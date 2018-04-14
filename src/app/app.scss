@@ -75,7 +75,7 @@ ion-title {
     border-top: 1px solid rgba(0, 0, 0, 0.2) !important;
 }
 
-.sidebar .options a
+.sidebar .options button
 {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     background: transparent;
@@ -84,13 +84,13 @@ ion-title {
 }
 
 .sidebar,
-.sidebar .options a,
+.sidebar .options button,
 .container-perfil,
 .options-grad>* {
     color: #FFF;
 }
 
-.options a
+.options button
 {
     padding: 14px 16px;
     border: 0;
