@@ -32,23 +32,23 @@ export class FuncionariosPage {
 
   }
 
-  ionViewCanEnter(){
-    this.perfis = this.storageService.getUserPerfil();
-    for(let i = 0;i<this.perfis.length;i++){
+  // ionViewCanEnter(){
+  //   this.perfis = this.storageService.getUserPerfil();
+  //   for(let i = 0;i<this.perfis.length;i++){
 
-      let perfil = this.perfis[i];
-      if(perfil==='ADMIN'){
-        break;
-      }
-        else{
-        this.navCtrl.setRoot('HomePage');
-        return false;
+  //     let perfil = this.perfis[i];
+  //     if(perfil==='ADMIN'){
+  //       break;
+  //     }
+  //       else{
+  //       this.navCtrl.setRoot('HomePage');
+  //       return false;
 
-      }
-    }
-    return true;
+  //     }
+  //   }
+  //   return true;
 
-    }
+  //   }
 
 
   ionViewDidLoad() {
