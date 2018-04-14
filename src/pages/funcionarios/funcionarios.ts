@@ -2,7 +2,7 @@ import { AuthService } from './../../services/auth.service';
 import { StorageService } from './../../services/storage.service';
 import { UsuarioService } from './../../services/domain/usuario.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
 import { LoginPage } from '../login/login';
 
@@ -23,12 +23,13 @@ export class FuncionariosPage {
   emailUsuarioLogado;
   perfis = []
   constructor(
-              public navCtrl: NavController,
-              public navParams: NavParams,
-              public usuarioService:UsuarioService,
-              public storageService:StorageService,
-              public authService:AuthService
-              ) {
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public usuarioService: UsuarioService,
+    public storageService: StorageService,
+    public authService: AuthService,
+    public loadingCtrl: LoadingController
+  ) {
 
   }
 
@@ -52,34 +53,43 @@ export class FuncionariosPage {
 
 
   ionViewDidLoad() {
+    let loading = this.presentLoadingDefault();
     this.emailUsuarioLogado = this.storageService.getLocalUser().email
-    this.usuarioService.findAll().subscribe((response=>{
+    this.usuarioService.findAll().subscribe((response => {
 
       this.funcionarios = response;
-      let position = this.funcionarios.findIndex(funcionario=> funcionario.email === this.emailUsuarioLogado );
-      if(position!=-1){
-        this.funcionarios.splice(position,1)
+      let position = this.funcionarios.findIndex(funcionario => funcionario.email === this.emailUsuarioLogado);
+      if (position != -1) {
+        this.funcionarios.splice(position, 1)
       }
 
       this.funcionarios.forEach(funcionario => {
-
-          funcionario = this.getImageIfExists(funcionario);
-
-
+        funcionario = this.getImageIfExists(funcionario);
       });
+      loading.dismiss();
 
-    }),error=>{
 
+    }), error => {
+      loading.dismiss()
     })
   }
 
   getImageIfExists(funcionario) {
     this.usuarioService.getImageFromBucket(funcionario.id)
-    .subscribe(response => {
-      funcionario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${funcionario.id}.jpg`;
-      return funcionario;
-    },
-    error => {});
+      .subscribe(response => {
+        funcionario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${funcionario.id}.jpg`;
+        return funcionario;
+      },
+        error => { });
+  }
+
+  presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando...'
+    });
+
+    loading.present();
+    return loading;
   }
 
 }
