@@ -54,21 +54,20 @@ ion-title {
     text-align: center;
     color:white;
     font-weight: bolder;
-
-
 }
 
 .sidebar .content,.toolbar-background {
-    background: 		#ff512f	;
+    background: 		#e52d27	;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(		#ff512f	,#f09819);
+    background: -webkit-linear-gradient(		#e52d27	,#b31217);
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(		#ff512f	, #f09819);
+    background: -o-linear-gradient(		#e52d27	, #b31217);
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(		#ff512f	, #f09819);
+    background: -moz-linear-gradient(		#e52d27	, #b31217);
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(		#ff512f	, #f09819);
+    background: linear-gradient(		#e52d27	, #b31217);
     /* Standard syntax (must be last) */
+
 }
 
 .first-option {
@@ -81,6 +80,7 @@ ion-title {
     background: transparent;
     color:black;
     font-weight: bolder;
+    font-size:19px;
 }
 
 .sidebar,
@@ -175,15 +175,20 @@ map {
     height: 1px;
 }
 
-.alert-checkbox-label {
-    white-space: normal !important;
-}
 
 .toolbar-title.toolbar-title-md,
 .toolbar-title.toolbar-title-ios,
 .toolbar-title.toolbar-title-wp {
   color:white;
+  font-size: 25px;
  }
+ ion-navbar.toolbar.toolbar-ios,.toolbar.toolbar-md{
+  padding:14px;
+ }
+ .scroll-content{
+  top:20x;
+ }
+
 
 
 
