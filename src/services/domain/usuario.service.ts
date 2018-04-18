@@ -60,7 +60,6 @@ export class UsuarioService {
       }
     );
   }
-
   preencherMenuDeAcordoComUsuario() {
     if (this.storageService.getLocalUser()) {
       this.email = this.storageService.getLocalUser().email;
@@ -68,25 +67,35 @@ export class UsuarioService {
         .subscribe((response => {
           this.perfis = response['perfis'];
           this.storageService.setUserPerfil(this.perfis);
-          this.perfis.forEach(perfil => {
-            this.global.pages = [
+          for (let i = 0; i < this.perfis.length; i++) {
+            let perfil = this.perfis[i];
+            if (perfil === 'ADMIN') {
+              this.global.pages = [
+                { title: 'Home', component: 'HomePage', icone: 'md-home' },
+                { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
+                { title: 'Meus Funcionarios', component: 'FuncionariosPage', icone: 'ios-people' },
+                { title: 'Gráficos', component: 'GraficosPage', icone: 'ios-pie-outline' },
+                { title: 'Adicionar Funcionário', component: 'SignupPage', icone: 'md-person-add' },
+                { title: 'Logout', component: '', icone: 'md-exit' }
+              ];
+              break;
+            } else {
+              this.global.pages = [
                 { title: 'Home', component: 'HomePage', icone: 'md-home' },
                 { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
                 { title: 'Gráficos', component: 'GraficosPage', icone: 'ios-pie-outline' },
-              ];
-              if (perfil === 'ADMIN') {
-                this.global.pages.push(
-                  { title: 'Meus Funcionarios', component: 'FuncionariosPage', icone: 'ios-people' },
-                  { title: 'Adicionar Funcionário', component: 'SignupPage', icone: 'md-person-add' },
-                )
+                { title: 'Logout', component: '', icone: 'md-exit' }
+              ]
               }
-              this.global.pages.push({ title: 'Logout', component: '', icone: 'md-exit' },)
-          });
+            }
+          }))
 
-        }))
-
-    } else {
-      return null;
+        }else{
+          return null;
+        }
+      }
     }
-  }
-}
+
+
+
+
