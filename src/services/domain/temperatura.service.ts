@@ -11,4 +11,8 @@ export class TemperaturaService{
   findTemperatura():Observable<any>{
     return this.http.get(`${API_CONFIG.baseUrl}/temperaturas`)
   }
+  gerarTemperaturaForaDoPadrao():Observable<any>{
+    console.log('Chegou aqui');
+    return this.http.get(`${API_CONFIG.baseUrl}/temperaturas/generateOut`)
+  }
 }

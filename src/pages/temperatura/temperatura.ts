@@ -43,6 +43,13 @@ export class TemperaturaPage {
 
   }
 
+  gerarTemperaturaForaPadrao(){
+    this.temperaturaService.gerarTemperaturaForaDoPadrao().subscribe(response=>{
+
+
+    })
+  }
+
   exibirTemperaturaEmCincoSegundos() {
     if (this.loopRecursivas) {
       this.temperaturaService.findTemperatura().subscribe(response => {
