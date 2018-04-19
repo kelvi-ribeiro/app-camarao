@@ -1,18 +1,40 @@
-<ion-content padding>
+<div padding class="conteudo content-login">
+  <div class="list-form">
+    <ion-grid class="grid-img">
+      <ion-row>
+        <ion-col width-100 no-padding>
+          <img src="assets/imgs/logo-login-camarao.png" class="icon-webescola" alt="Unigranrio">
+
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+    <form (ngSubmit)="login()" class="form-login">
 
 
-  <img src="assets/imgs/logo-login-camarao.png" alt="Uma imagem da tela inicial">
-  <h3 class="title-page">Monitoramento de Água</h3>
-  <form >
-    <ion-item>
-      <ion-label floating>Email</ion-label>
-      <ion-input [(ngModel)]="creds.email" name="email" type="text"></ion-input>
-    </ion-item>
+            <ion-item class="input-login">
+                <ion-label>
+                  <ion-icon name="person" class="icone-form"></ion-icon>
+                </ion-label>
+                <ion-input name="email" type="text" placeholder="Email" [(ngModel)]="creds.email" ></ion-input>
+              </ion-item>
+              <ion-item class="input-login">
+                <ion-label>
+                  <ion-icon name="key" class="icone-form"></ion-icon>
+                </ion-label>
+                <ion-input name="senha" type="password" placeholder="Senha" [(ngModel)]="creds.senha"  maxlength="10"></ion-input>
+              </ion-item>
 
-    <ion-item>
-    <ion-label floating>Senha</ion-label>
-    <ion-input [(ngModel)]="creds.senha" name="senha" type="password"></ion-input>
-  </ion-item>
-  <button (click)="login()" ion-button block>Entrar</button>
-  </form>
-</ion-content>
+    <ion-grid>
+        <ion-row class="btn-row">
+          <ion-col>
+            <button ion-button round small  type="submit" class="btn-login"  >Entrar</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</div>
+
+
