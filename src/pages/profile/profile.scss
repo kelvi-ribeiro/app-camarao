@@ -5,6 +5,18 @@ page-profile {
     margin:auto;
     display: block;
     padding: 10px;
+    border-radius: 60%;
   }
+
+  ion-icon {
+    font-size: 70px;
+    margin-left:38%;
+}
+.row-camera{
+  font-weight: bolder;
+}
+.row-camera p{
+  margin-left:38%;
+}
 
 }
