@@ -70,6 +70,8 @@ ion-title {
 
 }
 
+
+
 .first-option {
     border-top: 1px solid rgba(0, 0, 0, 0.2) !important;
 }
@@ -88,6 +90,11 @@ ion-title {
 .container-perfil,
 .options-grad>* {
     color: #FFF;
+}
+
+.bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
+  color: white;
+  background-color: transparent;
 }
 
 .options button
