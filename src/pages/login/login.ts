@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { CreadenciaisDTO } from '../../models/credenciais.dto';
 import { Globals } from '../../globals.array';
@@ -32,7 +32,8 @@ export class LoginPage {
     public auth: AuthService,
     public global:Globals,
     public usuarioService:UsuarioService,
-    public storageService:StorageService) {
+    public storageService:StorageService,
+    public alertCtrl:AlertController) {
 
   }
 
@@ -65,10 +66,30 @@ export class LoginPage {
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.navCtrl.setRoot('HomePage');
       },
-      error => {});
+      error => {
+        this.showAlert();
+      });
   }
   signup(){
     this.navCtrl.push('SignupPage')
+  }
+
+  showAlert(){
+    let alert = this.alertCtrl.create({
+      title:'Falha!',
+      message:'Falha na conexão, tente novamente...',
+      enableBackdropDismiss:false,
+      buttons:[
+        {
+          text:'Ok',
+          handler:() =>{
+
+          }
+        }
+      ]
+
+    });
+    alert.present();
   }
 
 }
