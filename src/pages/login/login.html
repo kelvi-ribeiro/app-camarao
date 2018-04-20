@@ -10,26 +10,26 @@
 
     </ion-grid>
 
-    <form (ngSubmit)="login()" class="form-login">
+    <form  #loginForm="ngForm" (ngSubmit)="login()" class="form-login">
 
 
             <ion-item class="input-login">
                 <ion-label>
                   <ion-icon name="person" class="icone-form"></ion-icon>
                 </ion-label>
-                <ion-input name="email" type="text" placeholder="Email" [(ngModel)]="creds.email" ></ion-input>
+                <ion-input name="email" type="text" placeholder="Email" required [(ngModel)]="creds.email" ></ion-input>
               </ion-item>
               <ion-item class="input-login">
                 <ion-label>
                   <ion-icon name="key" class="icone-form"></ion-icon>
                 </ion-label>
-                <ion-input name="senha" type="password" placeholder="Senha" [(ngModel)]="creds.senha"  maxlength="10"></ion-input>
+                <ion-input name="senha" type="password" placeholder="Senha" required [(ngModel)]="creds.senha" ></ion-input>
               </ion-item>
 
     <ion-grid>
         <ion-row class="btn-row">
           <ion-col>
-            <button ion-button round small  type="submit" class="btn-login"  >Entrar</button>
+            <button ion-button round small [disabled]="!loginForm.form.valid" type="submit" class="btn-login"  >Entrar</button>
           </ion-col>
         </ion-row>
       </ion-grid>
