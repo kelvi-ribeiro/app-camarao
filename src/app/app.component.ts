@@ -18,14 +18,16 @@ export class MyApp {
   perfis = []
   @ViewChild(Nav) nav: Nav;
 
-  rootPage = LoginPage;
+  rootPage;
   constructor(
               public platform: Platform,
               public statusBar: StatusBar,
               public splashScreen: SplashScreen,
               public authService:AuthService,
-              public globals:Globals
+              public globals:Globals,
+              public storageService:StorageService
               ) {
+    this.verificaUsuarioLogado();
 
     this.initializeApp();
 
@@ -55,6 +57,17 @@ export class MyApp {
       default:
       this.nav.setRoot(page.component);
 
+    }
+  }
+  verificaUsuarioLogado(){
+    if(this.storageService.getLocalUser()){
+      console.log(this.storageService.getLocalUser());
+
+      this.rootPage = 'HomePage';
+    }else{
+      console.log('Chegou no false');
+
+      this.rootPage = LoginPage;
     }
   }
 }
