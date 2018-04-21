@@ -70,12 +70,11 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    this.presentLoadingDefault();
-    this.usuarioService.preencherMenuDeAcordoComUsuario();
   }
 
   ionViewDidEnter() {
-
+    this.presentLoadingDefault();
+    this.usuarioService.preencherMenuDeAcordoComUsuario();
   }
 
   ionViewWillLeave() {
