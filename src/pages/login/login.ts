@@ -67,7 +67,7 @@ export class LoginPage {
         this.navCtrl.setRoot('HomePage');
       },
       error => {
-        this.showAlert();
+        //this.showAlert();
       });
   }
   signup(){
