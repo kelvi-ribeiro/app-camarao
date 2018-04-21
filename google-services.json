@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "497675357862",
+    "firebase_url": "https://pushcamarao.firebaseio.com",
+    "project_id": "pushcamarao",
+    "storage_bucket": "pushcamarao.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497675357862:android:951d70327a802367",
+        "android_client_info": {
+          "package_name": "com.macuxi.camarao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497675357862-jl19lp30gvu70h31kpvps780cetnnh43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd-YfixnszLG2X5bWF0U7MjTKKLDXwqUM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,12 +2,12 @@ import { UsuarioService } from './../services/domain/usuario.service';
 import { Globals } from './../globals.array';
 import { AuthService } from './../services/auth.service';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 import { StorageService } from '../services/storage.service';
-
+import { Push, PushOptions, PushObject } from '@ionic-native/push';
 
 
 @Component({
@@ -25,11 +25,14 @@ export class MyApp {
               public splashScreen: SplashScreen,
               public authService:AuthService,
               public globals:Globals,
-              public storageService:StorageService
-              ) {
-    this.verificaUsuarioLogado();
+              public storageService:StorageService,
+              public alertCtrl:AlertController,
+              public push:Push
+            ) {
 
-    this.initializeApp();
+
+              this.pushsetup();
+              this.initializeApp();
 
     // used for an example of ngFor and navigation
 
@@ -41,6 +44,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.verificaUsuarioLogado();
     });
   }
 
@@ -70,4 +74,31 @@ export class MyApp {
       this.rootPage = LoginPage;
     }
   }
+  pushsetup() {
+
+  const options: PushOptions = {};
+
+  const pushObject: PushObject = this.push.init(options);
+  pushObject.on("registration").subscribe((registration: any) => {});
+
+  pushObject.on("notification").subscribe((notification: any) => {
+
+      if (notification.additionalData.foreground) {
+
+        let youralert = this.alertCtrl.create({
+
+          title: notification.label,
+
+          message: notification.message
+
+        });
+
+    youralert.present();
+
+      }
+
+    });
+
 }
+
+    }

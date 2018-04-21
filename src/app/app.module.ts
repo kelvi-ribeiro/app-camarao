@@ -1,3 +1,4 @@
+import { Push } from '@ionic-native/push';
 import { SalinidadeService } from './../services/domain/salinidade.service';
 import { OxigenioDissolvidoService } from './../services/domain/oxigenioDissolvido.service';
 import { NitratoService } from './../services/domain/nitrato.service';
@@ -8,11 +9,7 @@ import { Globals } from './../globals.array';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
 import { MyApp } from './app.component';
-
-
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
@@ -48,6 +45,7 @@ import { NitritoService } from '../services/domain/nitrito.service';
   providers: [
     StatusBar,
     SplashScreen,
+    Push,
     {provide: ErrorHandler, useClass: IonicErrorHandler} ,
     AuthInterceptorProvider,
     ErrorInterceptorProvider,
@@ -66,6 +64,8 @@ import { NitritoService } from '../services/domain/nitrito.service';
     OxigenioDissolvidoService,
     SalinidadeService,
     TransparenciaService
+
+
   ]
 })
 export class AppModule {}
