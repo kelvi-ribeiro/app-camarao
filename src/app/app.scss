@@ -84,12 +84,14 @@ ion-title {
     font-weight: bolder;
     font-size:19px;
 }
-
 .sidebar,
 .sidebar .options button,
 .container-perfil,
 .options-grad>* {
     color: #FFF;
+}
+.content-md,.content-ios {
+  background-color: #FAFFD1;
 }
 
 .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
