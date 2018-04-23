@@ -41,7 +41,7 @@ export class HomePage {
   salinidade;
   transparencia;
   loopRecursivas: boolean;
-  tempo: number = 2000;
+  tempo: number = 5000;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -59,14 +59,7 @@ export class HomePage {
     public global: Globals
   ) {
     this.loopRecursivas = true;
-    this.exibirTemperaturaEmCincoSegundos();
-    this.exibirPhEmCincoSegundos();
-    this.exibirNitratoEmCincoSegundos();
-    this.exibirNitritoEmCincoSegundos();
-    this.exibirOxigenioDissolvidoEmCincoSegundos();
-    this.exibirSalinidadeEmCincoSegundos();
-    this.exibirTransparenciaEmCincoSegundos();
-    this.exibirAmoniaTotalEmCincoSegundos();
+
   }
 
   ionViewDidLoad() {
@@ -75,6 +68,7 @@ export class HomePage {
   ionViewDidEnter() {
     this.presentLoadingDefault();
     this.usuarioService.preencherMenuDeAcordoComUsuario();
+    this.invocaMetodoMedicoes();
   }
 
   ionViewWillLeave() {
@@ -102,98 +96,66 @@ export class HomePage {
         error => { });
   }
 
-  exibirTemperaturaEmCincoSegundos() {
-    setTimeout(() => {
-      if (this.loopRecursivas) {
+  exibirTemperatura() {
         this.temperaturaService.findTemperatura().subscribe(response => {
           this.temperatura = response;
-          this.exibirTemperaturaEmCincoSegundos();
-        })
-      }
-    }, this.tempo);
+        });
   }
 
-  exibirPhEmCincoSegundos() {
-    setTimeout(() => {
-      if (this.loopRecursivas) {
+  exibirPh() {
       this.phService.findPhs().subscribe(response => {
           this.ph = response;
-          this.exibirPhEmCincoSegundos();
         })
-      }
-    }, this.tempo);
+
   }
-  exibirNitratoEmCincoSegundos() {
-    setTimeout(() => {
-      if (this.loopRecursivas) {
+  exibirNitrato() {
       this.nitratoService.findNitratos().subscribe(response => {
           this.nitrato = response;
-          this.exibirNitratoEmCincoSegundos();
         })
-      }
-    }, this.tempo);
   }
-  exibirNitritoEmCincoSegundos() {
-    setTimeout(() => {
-      if (this.loopRecursivas) {
+  exibirNitrito() {
       this.nitritoService.findNitrito().subscribe(response => {
           this.nitrito = response;
-          this.exibirNitritoEmCincoSegundos();
         })
-      }
-    }, this.tempo);
+       }
 
-  }
-
-  exibirOxigenioDissolvidoEmCincoSegundos() {
-    setTimeout(() => {
-      if (this.loopRecursivas) {
+  exibirOxigenioDissolvido() {
       this.oxigenioDissolvidoService.findOxigenioDissolvido().subscribe(response => {
           this.oxigenioDissolvido = response;
-          this.exibirOxigenioDissolvidoEmCincoSegundos();
         })
-      }
-    }, this.tempo);
+     }
 
-  }
-
-  exibirSalinidadeEmCincoSegundos() {
-    setTimeout(() => {
-      if (this.loopRecursivas) {
+  exibirSalinidade() {
       this.salinidadeService.findSalinidade().subscribe(response => {
           this.salinidade = response;
-          this.exibirSalinidadeEmCincoSegundos();
       })
     }
-    }, this.tempo);
 
-  }
-
-  exibirTransparenciaEmCincoSegundos() {
-    setTimeout(() => {
-      if (this.loopRecursivas) {
+  exibirTransparencia() {
       this.transparenciaService.findTransparencia().subscribe(response => {
           this.transparencia = response;
-          this.exibirTransparenciaEmCincoSegundos();
-      })
+      });
     }
-    }, this.tempo);
 
-  }
-
-  exibirAmoniaTotalEmCincoSegundos() {
-    setTimeout(() => {
-      if (this.loopRecursivas) {
+  exibirAmoniaTotal() {
         this.amoniaTotalService.findAmonias().subscribe(response => {
           this.amoniaTotal = response;
-          this.exibirAmoniaTotalEmCincoSegundos();
-
         })
-      }
+     }
+
+  invocaMetodoMedicoes(){
+    setTimeout(() => {
+      if (this.loopRecursivas) {
+      this.exibirTemperatura();
+      this.exibirPh();
+      this.exibirNitrato();
+      this.exibirNitrito();
+      this.exibirOxigenioDissolvido();
+      this.exibirSalinidade();
+      this.exibirTransparencia();
+      this.exibirAmoniaTotal();
+      this.invocaMetodoMedicoes()
+    }
     }, this.tempo);
-
   }
-
-
-
 }

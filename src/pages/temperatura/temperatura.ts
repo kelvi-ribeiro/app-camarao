@@ -22,7 +22,7 @@ export class TemperaturaPage {
   temperatura;
   temperaturaOld;
 
-  tempo:number = 10000;
+  tempo:number = 5000;
   loopRecursivas: boolean;
 
   carregando:boolean = true;
@@ -34,6 +34,7 @@ export class TemperaturaPage {
             public navParams: NavParams,
             public temperaturaService:TemperaturaService) {
               this.loopRecursivas = true;
+
     this.exibirTemperaturaEmCincoSegundos();
 
   }
@@ -51,16 +52,19 @@ export class TemperaturaPage {
   }
 
   exibirTemperaturaEmCincoSegundos() {
-    if (this.loopRecursivas) {
-      this.temperaturaService.findTemperatura().subscribe(response => {
-        this.temperatura = response;
-        if(this.carregando){
-          this.createChart();
-          this.carregando = false;
+    setTimeout(() => {
+      if (this.loopRecursivas) {
+        this.temperaturaService.findTemperatura().subscribe(response => {
+          this.temperatura = response;
+          if(this.carregando){
+            this.createChart();
+            this.carregando = false;
+          }
+          this.exibirTemperaturaEmCincoSegundos();
+          })
         }
-        this.exibirTemperaturaEmCincoSegundos();
-        })
-      }
+
+    }, this.tempo);
   }
 
   createChart() {
