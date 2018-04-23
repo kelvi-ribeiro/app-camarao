@@ -46,8 +46,6 @@ export class TemperaturaPage {
 
   gerarTemperaturaForaPadrao(){
     this.temperaturaService.gerarTemperaturaForaDoPadrao().subscribe(response=>{
-
-
     })
   }
 

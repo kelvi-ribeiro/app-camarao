@@ -73,7 +73,6 @@ export class HomePage {
 
   ionViewWillLeave() {
     this.loopRecursivas = false;
-
   }
 
   presentLoadingDefault() {
