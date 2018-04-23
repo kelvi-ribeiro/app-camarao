@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 
 import { API_CONFIG } from '../../config/api.config';
@@ -19,6 +19,7 @@ export class ProfilePage {
   picture: string;
   cameraOn: boolean = false;
   profileImage;
+  apertouCamera = false;
 
   constructor(
     public navCtrl: NavController,
@@ -26,12 +27,16 @@ export class ProfilePage {
     public storage: StorageService,
     public usuarioService: UsuarioService,
     public camera: Camera,
-    public sanitazer:DomSanitizer) {
+    public sanitazer:DomSanitizer,
+    public loadingCtrl:LoadingController) {
       this.profileImage = 'assets/imgs/avatar-blank.png';
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     this.loadData();
+  }
+  ionViewWillLeave(){
+    this.profileImage = null;
   }
 
   loadData() {
@@ -54,7 +59,6 @@ export class ProfilePage {
   }
 
   getImageIfExists() {
-
     this.usuarioService.getImageFromBucket(this.usuario.id)
     .subscribe(response => {
       this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
@@ -79,6 +83,7 @@ export class ProfilePage {
   }
 
   getCameraPicture() {
+    this.apertouCamera = true;
     this.cameraOn = true;
     const options: CameraOptions = {
       quality: 100,
@@ -96,9 +101,7 @@ export class ProfilePage {
   }
 
   getGalleryPicture() {
-
     this.cameraOn = true;
-
     const options: CameraOptions = {
       quality: 100,
       sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -108,6 +111,7 @@ export class ProfilePage {
     }
 
     this.camera.getPicture(options).then((imageData) => {
+
      this.picture = 'data:image/png;base64,' + imageData;
      this.cameraOn = false;
     }, (err) => {
@@ -117,16 +121,32 @@ export class ProfilePage {
 
 
   sendPicture() {
+    let loading = this.presentLoadingDefault();
+    this.apertouCamera = false;
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(response => {
         this.picture = null;
         this.getImageIfExists();
+        loading.dismiss();
       },
       error => {
+      loading.dismiss();
       });
+
   }
 
   cancel() {
     this.picture = null;
+    this.apertouCamera = false;
+  }
+
+  presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+      content: 'Enviando Imagem...'
+    });
+
+    loading.present();
+    return loading;
+
   }
 }

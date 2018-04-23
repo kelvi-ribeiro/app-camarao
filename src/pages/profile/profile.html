@@ -13,24 +13,29 @@
 
   <ion-row class="row-camera">
     <ion-col col-6>
-      <ion-icon color="dark"   (click)="getCameraPicture()"  name="ios-camera"></ion-icon>
+      <button class="icon-button" ion-button icon-only clear  [disabled]="apertouCamera" (click)="getCameraPicture()" >
+        <ion-icon color="dark" name="ios-camera"></ion-icon>
+      </button>
       <p>Camera</p>
     </ion-col>
-    <ion-col col-6>
-    <ion-icon color="dark"   (click)="getGalleryPicture()"  name="md-photos"></ion-icon>
+
+    <ion-col showWhen="android" col-6>
+      <button class="icon-button" ion-button icon-only clear  [disabled]="apertouCamera" (click)="getGalleryPicture()" >
+    <ion-icon color="dark"  name="md-photos"></ion-icon>
+    </button>
     <p>Galeria</p>
   </ion-col>
+
   </ion-row>
   <h2 text-center>{{usuario?.nome}}</h2>
   <p text-center>{{usuario?.email}}</p>
-  <ion-card>
-    <ion-item *ngIf="picture">
+  <ion-card *ngIf="picture">
+    <ion-item >
       <img [src]="picture">
     </ion-item>
-    <ion-item>
-
-      <button *ngIf="picture" ion-button block outline (click)="sendPicture()" [disabled]="cameraOn">Enviar imagem</button>
-      <button *ngIf="picture" ion-button block outline (click)="cancel()" [disabled]="cameraOn">Descartar imagem</button>
+    <ion-item *ngIf="picture">
+      <button ion-button block outline (click)="sendPicture()" [disabled]="cameraOn">Enviar imagem</button>
+      <button ion-button block outline (click)="cancel()" [disabled]="cameraOn">Descartar imagem</button>
     </ion-item>
   </ion-card>
 </ion-content>
