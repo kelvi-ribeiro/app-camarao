@@ -132,7 +132,7 @@ export class ProfilePage {
         this.profileImage = null;
         this.getImageIfExists();
         loading.dismiss();
-        
+
       },
       error => {
       loading.dismiss();

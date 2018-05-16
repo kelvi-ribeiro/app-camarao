@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content padding>
+  <div *ngIf="!picture">
   <img  [src]="profileImage">
   <ion-avatar></ion-avatar>
 
@@ -27,15 +28,29 @@
   </ion-col>
 
   </ion-row>
+</div>
+
+<div *ngIf="picture" >
+    <img  [src]="picture">
+    <ion-avatar></ion-avatar>
+
+    <ion-row class="row-camera">
+      <ion-col align-self-start >
+          <button  ion-button icon-only clear   (click)="sendPicture()" [disabled]="cameraOn">
+          <ion-icon color="secondary" name="ios-checkbox"></ion-icon>
+        </button>
+
+      </ion-col>
+
+      <ion-col align-self-end >
+          <button  ion-button icon-only clear   (click)="cancel()" [disabled]="cameraOn">
+      <ion-icon color="danger"  name="ios-close-circle"></ion-icon>
+      </button>
+    </ion-col>
+
+    </ion-row>
+  </div>
   <h2 text-center>{{usuario?.nome}}</h2>
   <p text-center>{{usuario?.email}}</p>
-  <ion-card *ngIf="picture">
-    <ion-item >
-      <img [src]="picture">
-    </ion-item>
-    <ion-item *ngIf="picture">
-      <button ion-button block outline (click)="sendPicture()" [disabled]="cameraOn">Enviar imagem</button>
-      <button ion-button block outline (click)="cancel()" [disabled]="cameraOn">Descartar imagem</button>
-    </ion-item>
-  </ion-card>
+
 </ion-content>
