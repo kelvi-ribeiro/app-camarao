@@ -29,14 +29,17 @@ export class ProfilePage {
     public camera: Camera,
     public sanitazer:DomSanitizer,
     public loadingCtrl:LoadingController) {
-      this.profileImage = 'assets/imgs/avatar-blank.png';
+
   }
 
   ionViewDidEnter() {
+    this.profileImage = 'assets/imgs/avatar-blank.png';
+    this.picture = null;
     this.loadData();
   }
   ionViewWillLeave(){
-    this.profileImage = null;
+    this.profileImage = 'assets/imgs/avatar-blank.png';
+    this.picture = null;
   }
 
   loadData() {
@@ -126,8 +129,10 @@ export class ProfilePage {
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(response => {
         this.picture = null;
+        this.profileImage = null;
         this.getImageIfExists();
         loading.dismiss();
+        
       },
       error => {
       loading.dismiss();
