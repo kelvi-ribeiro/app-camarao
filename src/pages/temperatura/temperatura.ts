@@ -73,25 +73,34 @@ export class TemperaturaPage {
           label: 'Temperatura',
           data: [this.temperatura.temperatura],
           fill: false,
-          backgroundColor: "rgba(179, 18, 23, 1)",
-          borderColor: "rgba(179, 18, 23, 1)",
+          backgroundColor: "rgba(255,255,255,255)",
+          borderColor: "rgba(255,255,255,255)",
           borderDash: [],
           borderDashOffset: 0.0,
           borderJoinStyle: 'miter',
-          pointBorderColor: "rgba(179, 18, 23, 1)",
-          pointBackgroundColor: "rgba(179, 18, 23, 1)",
+          pointBorderColor: "rgba(255,255,255,255)",
+          pointBackgroundColor: "rgba(255,255,255,255)",
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgba(179, 18, 23, 1)",
-          pointHoverBorderColor: "rgba(179, 18, 23, 1)",
+          pointHoverBackgroundColor: "rgba(255,255,255,255)",
+          pointHoverBorderColor: "rgba(255,255,255,255)",
           pointHoverBorderWidth: 2,
           pointRadius: 5,
           pointHitRadius: 15,
 
+
         }],
 
       },
+      options:{
+        display:false
+      }
     });
+
+
+    Chart.defaults.global.defaultFontColor = 'white';
+    Chart.defaults.global.defaultFontStyle = 'bold';
+    Chart.defaults.global.defaultFontSize = 18;
     this.updateChart();
     this.carregando = false;
 }
