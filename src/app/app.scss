@@ -40,6 +40,7 @@
 
 /* Formatação de elementos comuns */
 
+
 .central-margin {
     margin: auto;
 }
@@ -57,15 +58,15 @@ ion-title {
 }
 
 .sidebar .content,.toolbar-background {
-    background: 		#e52d27	;
+    background: 		#3C3B3F	;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(		#e52d27	,#b31217);
+    background: -webkit-linear-gradient(		#3C3B3F	,#414345);
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(		#e52d27	, #b31217);
+    background: -o-linear-gradient(		#3C3B3F	, #414345);
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(		#e52d27	, #b31217);
+    background: -moz-linear-gradient(		#3C3B3F	, #414345);
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(		#e52d27	, #b31217);
+    background: linear-gradient(		#3C3B3F	, #414345);
     /* Standard syntax (must be last) */
 
 }
@@ -90,9 +91,7 @@ ion-title {
 .options-grad>* {
     color: #FFF;
 }
-.content-md,.content-ios {
-  background-color: #FAFFD1;
-}
+
 
 .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default {
   color: white;
