@@ -74,7 +74,6 @@ export class UsuarioService {
                 { title: 'Home', component: 'HomePage', icone: 'md-home' },
                 { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
                 { title: 'Meus Funcionarios', component: 'FuncionariosPage', icone: 'ios-people' },
-                { title: 'Gráficos', component: 'GraficosPage', icone: 'ios-pie-outline' },
                 { title: 'Adicionar Funcionário', component: 'SignupPage', icone: 'md-person-add' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ];
@@ -83,7 +82,6 @@ export class UsuarioService {
               this.global.pages = [
                 { title: 'Home', component: 'HomePage', icone: 'md-home' },
                 { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
-                { title: 'Gráficos', component: 'GraficosPage', icone: 'ios-pie-outline' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ]
               }
