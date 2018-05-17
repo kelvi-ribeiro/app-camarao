@@ -11,7 +11,61 @@
 
 
   <ion-content padding>
-    <ion-item>Temperatura:{{temperatura?.temperatura | number : '1.2-2' }}°   <ion-icon ></ion-icon></ion-item>
+      <ion-list class="list-chats">
+          <ion-row>
+            <ion-grid>
+              <ion-item [navPush]="'AmoniaPage'">
+                <img src="assets/imgs/amonia-icone.png">
+                <p>Amônia</p>
+                <p>{{amoniaTotal?.amoniaTotal | number : '1.2-2'}}</p>
+              </ion-item>
+
+              <ion-item [navPush]="'NitratoPage'">
+                <img src="assets/imgs/nitrato-icone.png">
+                <p>Nitrato</p>
+                <p>{{nitrato?.nitrato | number : '1.2-2'}}</p>
+              </ion-item>
+
+              <ion-item [navPush]="'NitritoPage'">
+                <img src="assets/imgs/nitrito-icone.png">
+                <p>Nitrito</p>
+                <p>{{nitrito?.nitrito | number : '1.2-2'}}</p>
+              </ion-item>
+
+              <ion-item [navPush]="'OxigenioPage'">
+                <img src="assets/imgs/oxigenio-icone.png">
+                <p>Oxigênio</p>
+                <p>{{oxigenioDissolvido?.oxigenioDissolvido | number : '1.2-2'}} mg/L</p>
+              </ion-item>
+
+              <ion-item [navPush]="'PhPage'">
+                <img src="assets/imgs/ph-icone.png">
+                <p>PH</p>
+                <p>{{ph?.ph | number : '1.2-2'}}</p>
+              </ion-item>
+
+              <ion-item [navPush]="'SalinidadePage'">
+                <img src="assets/imgs/salinidade-icone.png">
+                <p>Salinidade</p>
+                <p>{{salinidade?.salinidade | number : '1.2-2'}} ppt</p>
+              </ion-item>
+
+              <ion-item [navPush]="'TemperaturaPage'">
+                <img src="assets/imgs/temperatura-icone.png">
+                <p>Temperatura</p>
+                <p>{{temperatura?.temperatura | number : '1.2-2'}} °C</p>
+              </ion-item>
+
+              <ion-item [navPush]="'TransparenciaPage'">
+                <img src="assets/imgs/transparencia-icone.png">
+                <p>Transparência</p>
+                <p>{{transparencia?.transparencia | number : '1.2-2'}} cm</p>
+              </ion-item>
+
+            </ion-grid>
+          </ion-row>
+        </ion-list>
+    <!-- <ion-item>Temperatura:{{temperatura?.temperatura | number : '1.2-2' }}°   <ion-icon ></ion-icon></ion-item>
     <ion-item>Nível de PH:{{ph?.ph | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
     <ion-item>Amonia Total:{{amoniaTotal?.amoniaTotal | number : '1.2-2'}} mg/L <ion-icon ></ion-icon> </ion-item>
     <ion-item>Oxigênio Dissolvido:{{oxigenioDissolvido?.oxigenioDissolvido | number : '1.2-2'}} mg/L <ion-icon ></ion-icon> </ion-item>
@@ -19,6 +73,6 @@
     <ion-item>Nitrito:{{nitrito?.nitrito | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
     <ion-item>Salinidade:{{salinidade?.salinidade | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
     <ion-item>Transparencia:{{transparencia?.transparencia | number : '1.2-2'}} cms <ion-icon ></ion-icon> </ion-item>
-    <!-- <ion-item>Temperatura:{{temperatura.horaMarcada | date:"y-MM-dd HH:mm:ss"}} <ion-icon color="danger" name="flame"></ion-icon></ion-item> -->
+    <ion-item>Temperatura:{{temperatura.horaMarcada | date:"y-MM-dd HH:mm:ss"}} <ion-icon color="danger" name="flame"></ion-icon></ion-item> -->
 
   </ion-content>

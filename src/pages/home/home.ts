@@ -140,6 +140,7 @@ export class HomePage {
         this.amoniaTotalService.findAmonias().subscribe(response => {
           this.amoniaTotal = response;
         })
+
      }
 
   invocaMetodoMedicoes(){

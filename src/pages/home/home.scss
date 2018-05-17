@@ -7,4 +7,24 @@ ion-card-header {
     font-weight: bold;
 }
 
+img{
+  width: 35%;
+  align-self: center;
+  margin:auto;
+  display: block;
+  padding: 10px;
+  }
+
+.list-chats p{
+  font-size: 25px;
+  text-align: center;
+  font-weight: bold;
+  color:white;
+}
+.list-chats ion-item{
+  margin-bottom: 20px;
+  border-radius: 10%;
+  background:#232526;
+}
+
 }
