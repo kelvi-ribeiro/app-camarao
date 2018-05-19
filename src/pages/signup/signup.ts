@@ -101,22 +101,12 @@ export class SignupPage {
     this.http.get(`https://viacep.com.br/ws/${this.formGroup.value.cep}/json/`).subscribe(res=>{
       console.log('res',res);
       this.formGroup.controls.estadoId.setValue(this.estados.find(estado=>estado['uf']===res['uf']).id);
-      this.updateCidades()
-      console.log(this.cidades);
       this.cidadeService.findAll(this.formGroup.value.estadoId).subscribe(cidades=>{
-        // cidades.forEach(cidade=>{
-        //   if(cidade.nome==res['localidade']){
-        //     console.log('chegou aqui ',cidade);
-        //     this.formGroup.controls.cidadeId.setValue(cidade.id)
-        //   }
-
-        // })
-        console.log('cidades',cidades);
-
         for (let cidade in cidades) {
           if(cidades[cidade].nome == res['localidade']){
-          console.log('chegou aqui ',cidade);
           this.formGroup.controls.cidadeId.setValue(cidades[cidade].id)
+          this.cidades = []
+          this.cidades[0] = cidades[cidade]
           break;
           }
       }
@@ -125,5 +115,6 @@ export class SignupPage {
     this.formGroup.controls.bairro.setValue(res['bairro']);
     this.formGroup.controls.logradouro.setValue(res['logradouro']);
     })
+
   }
 }
