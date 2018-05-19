@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { CidadeDTO } from './../../models/cidade.dto';
 import { EstadoService } from './../../services/domain/estado.service';
 import { CidadeService } from './../../services/domain/cidade.service';
@@ -25,7 +26,8 @@ export class SignupPage {
     public cidadeService:CidadeService,
     public estadoService:EstadoService,
     public usuarioService:UsuarioService,
-    public alertCtrl:AlertController) {
+    public alertCtrl:AlertController,
+    public http:HttpClient) {
 
     this.formGroup = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
@@ -93,5 +95,15 @@ export class SignupPage {
   backHome(){
     this.navCtrl.setRoot('HomePage');
 
+  }
+
+  buscarViaCep(){
+    this.http.get(`https://viacep.com.br/ws/${this.formGroup.value.cep}/json/`).subscribe(res=>{
+      console.log('res',res);
+      this.formGroup.controls.estadoId.setValue(this.estados.find(estado=>estado['uf']===res['uf']).id);
+      this.updateCidades()
+      this.formGroup.controls.bairro.setValue(res['bairro']);
+      this.formGroup.controls.logradouro.setValue(res['logradouro']);
+    })
   }
 }
