@@ -102,8 +102,28 @@ export class SignupPage {
       console.log('res',res);
       this.formGroup.controls.estadoId.setValue(this.estados.find(estado=>estado['uf']===res['uf']).id);
       this.updateCidades()
-      this.formGroup.controls.bairro.setValue(res['bairro']);
-      this.formGroup.controls.logradouro.setValue(res['logradouro']);
+      console.log(this.cidades);
+      this.cidadeService.findAll(this.formGroup.value.estadoId).subscribe(cidades=>{
+        // cidades.forEach(cidade=>{
+        //   if(cidade.nome==res['localidade']){
+        //     console.log('chegou aqui ',cidade);
+        //     this.formGroup.controls.cidadeId.setValue(cidade.id)
+        //   }
+
+        // })
+        console.log('cidades',cidades);
+
+        for (let cidade in cidades) {
+          if(cidades[cidade].nome == res['localidade']){
+          console.log('chegou aqui ',cidade);
+          this.formGroup.controls.cidadeId.setValue(cidades[cidade].id)
+          break;
+          }
+      }
+  })
+
+    this.formGroup.controls.bairro.setValue(res['bairro']);
+    this.formGroup.controls.logradouro.setValue(res['logradouro']);
     })
   }
 }
