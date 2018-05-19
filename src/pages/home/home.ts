@@ -1,4 +1,3 @@
-import { Globals } from './../../globals.array';
 import { TransparenciaService } from './../../services/domain/transparencia.service';
 import { SalinidadeService } from './../../services/domain/salinidade.service';
 import { OxigenioDissolvidoService } from './../../services/domain/oxigenioDissolvido.service';
@@ -13,6 +12,10 @@ import { UsuarioService } from '../../services/domain/usuario.service';
 import { TemperaturaService } from '../../services/domain/temperatura.service';
 import { PhService } from '../../services/domain/ph.service';
 import { API_CONFIG } from '../../config/api.config';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Globals } from '../../globals.array';
+import { UsuarioDTO } from '../../models/usuario.dto';
+import { LoginPage } from '../login/login';
 
 
 /**
@@ -28,9 +31,9 @@ import { API_CONFIG } from '../../config/api.config';
   templateUrl: 'home.html',
 })
 export class HomePage {
-
+  usuario:UsuarioDTO
+  profileImage;
   email;
-  usuario;
   perfis = [];
   temperatura: any;
   ph;
@@ -56,44 +59,70 @@ export class HomePage {
     public oxigenioDissolvidoService: OxigenioDissolvidoService,
     public salinidadeService: SalinidadeService,
     public transparenciaService: TransparenciaService,
-    public global: Globals
+    public sanitazer:DomSanitizer,
+    public globals:Globals,
+    public storage:StorageService
+
   ) {
     this.loopRecursivas = true;
 
   }
 
-  ionViewDidLoad() {
-  }
-
   ionViewDidEnter() {
-    this.presentLoadingDefault();
     this.usuarioService.preencherMenuDeAcordoComUsuario();
     this.invocaMetodoMedicoes();
+
+
   }
 
   ionViewWillLeave() {
     this.loopRecursivas = false;
   }
+  getUser(){
+    let localUser = this.storage.getLocalUser();
+    if (localUser && localUser.email) {
+      this.usuarioService.findByEmail(localUser.email)
+        .subscribe(response => {
+          this.usuario = response as UsuarioDTO;
+          console.log(this.usuario);
+          this.getImageIfExists();
+        },
+        error => {
+          if (error.status == 403) {
+            this.navCtrl.setRoot(LoginPage);
+          }
+        });
+    }
+    else {
+      this.navCtrl.setRoot(LoginPage);
+    }
 
-  presentLoadingDefault() {
-    let loading = this.loadingCtrl.create({
-      content: 'Carregando...'
-    });
 
-    loading.present();
-
-    setTimeout(() => {
-      loading.dismiss();
-    }, this.tempo);
   }
 
   getImageIfExists() {
     this.usuarioService.getImageFromBucket(this.usuario.id)
-      .subscribe(response => {
-        this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
-      },
-        error => { });
+    .subscribe(response => {
+      this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+      this.blobToDataURL(response).then(dataUrl => {
+        let str:string = dataUrl as string;
+        this.globals.profileImage = this.sanitazer.bypassSecurityTrustUrl(str);
+      })
+    },
+    error => {
+      this.profileImage = 'assets/imgs/avatar-blank.png';
+    });
   }
+
+  blobToDataURL(blob) {
+    return new Promise((fulfill, reject) => {
+        let reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = (e) => fulfill(reader.result);
+        reader.readAsDataURL(blob);
+    })
+  }
+
 
   exibirTemperatura() {
         this.temperaturaService.findTemperatura().subscribe(response => {
