@@ -76,26 +76,30 @@ export class MyApp {
   }
   pushsetup() {
 
-  const options: PushOptions = {};
+    const options: PushOptions = {
+      android: {
+    icon: "notification",
+    iconColor: "orange",
+    sound: true,
+    vibrate: true,
+    forceShow: true
+    },
+
+   };
 
   const pushObject: PushObject = this.push.init(options);
   pushObject.on("registration").subscribe((registration: any) => {});
 
   pushObject.on("notification").subscribe((notification: any) => {
 
-      if (notification.additionalData.foreground) {
-
         let youralert = this.alertCtrl.create({
 
           title: notification.label,
 
-          message: notification.message
-
+          message: notification.message,
         });
 
     youralert.present();
-
-      }
 
     });
 
