@@ -70,6 +70,7 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.usuarioService.preencherMenuDeAcordoComUsuario();
+    this.getUser();
     this.invocaMetodoMedicoes();
 
 
