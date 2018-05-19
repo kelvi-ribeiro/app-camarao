@@ -60,6 +60,20 @@ export class UsuarioService {
       }
     );
   }
+
+  sendNotificao(notificacao) {
+    console.log('sendNotificao',notificacao);
+
+    return this.http.post(
+      `${API_CONFIG.baseUrl}/usuarios/mensagem`,
+      notificacao,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
+
   preencherMenuDeAcordoComUsuario() {
     if (this.storageService.getLocalUser()) {
       this.email = this.storageService.getLocalUser().email;
@@ -75,6 +89,7 @@ export class UsuarioService {
                 { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
                 { title: 'Meus Funcionarios', component: 'FuncionariosPage', icone: 'ios-people' },
                 { title: 'Adicionar Funcionário', component: 'SignupPage', icone: 'md-person-add' },
+                { title: 'Enviar Notificação', component: 'FormNotificacaoPage', icone: 'md-mail' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ];
               break;
