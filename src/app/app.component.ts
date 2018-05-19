@@ -15,7 +15,8 @@ import { Push, PushOptions, PushObject } from '@ionic-native/push';
 })
 export class MyApp {
   email;
-  perfis = []
+  perfis = [];
+  profile;
   @ViewChild(Nav) nav: Nav;
 
   rootPage;

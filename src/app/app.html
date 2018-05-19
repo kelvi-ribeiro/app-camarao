@@ -2,6 +2,7 @@
 
 
     <ion-content class="content" *ngIf="globals.pages">
+      <img menuClose (click)="openPage({component:'ProfilePage'})" class="img-perfil-menu" [src]="this.globals.profileImage"/>
       <ion-list no-lines class="options">
         <button  menuClose ion-item *ngFor="let p of globals.pages" (click)="openPage(p)">
             <ion-icon [name]="p.icone"></ion-icon>
