@@ -1,3 +1,4 @@
+import { Globals } from './../globals.array';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../config/api.config";
@@ -13,7 +14,8 @@ export class AuthService {
     jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(public http: HttpClient,
-                public storage: StorageService
+                public storage: StorageService,
+                public globals:Globals
                 ) {
     }
 
@@ -50,5 +52,6 @@ export class AuthService {
     logout() {
         this.storage.setLocalUser(null);
         this.storage.setUserPerfil(null);
+        this.globals.profileImage = 'assets/imgs/avatar-blank.png'
     }
 }
