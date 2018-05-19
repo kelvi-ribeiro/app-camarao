@@ -48,6 +48,8 @@ export class ProfilePage {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(response => {
           this.usuario = response as UsuarioDTO;
+          console.log(this.usuario);
+
           this.getImageIfExists();
         },
         error => {

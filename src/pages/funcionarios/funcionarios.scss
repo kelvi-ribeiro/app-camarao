@@ -1,3 +1,37 @@
 page-funcionarios {
+  .card-md h1,
+  .card-ios h1,
+  .card-md h2,
+  .card-ios h2 {
+    color: #fff;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  .item-md p {
+    color: #fff;
+    font: #fff;
+    text-align: center;
+  }
+  img {
+    width: 100%;
+    vertical-align: middle;
+    height: inherit;
+    border-radius: 50%;
+    max-height: 50%;
+    max-width: 50%;
+    margin-left: 25%;
+  }
+  .div_img{
+    margin-bottom: 30px;
+  }
+
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid white;;
+    margin: 1em 0;
+    padding: 0;
+}
 
 }

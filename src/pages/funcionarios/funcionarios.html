@@ -1,42 +1,56 @@
 <ion-header>
-<ion-navbar>
-  <button ion-button menuToggle>
-    <ion-icon name="menu"></ion-icon>
-  </button>
-  <ion-title>Funcionários</ion-title>
-</ion-navbar>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Funcionários</ion-title>
+  </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <ion-card *ngFor="let funcionario of funcionarios;">
-
-    <ion-item>
-      <ion-avatar item-start>
-        <img class="circle" [src]="funcionario?.imageUrl || 'assets/imgs/avatar-blank.png'">
-      </ion-avatar>
-      <h2>{{funcionario?.nome}}</h2>
-      <h2>{{funcionario?.email}}</h2>
-      <h2>{{funcionario?.cpf}}</h2>
-    </ion-item>
-    <ion-card-header>
-      Telefones
-    </ion-card-header>
-    <ion-item>
-        <p *ngFor="let telefone of funcionario.telefones">{{telefone}}</p>
-    </ion-item>
-
-    <ion-card-header>
-            Endereços
-          </ion-card-header>
-    <ion-card-content *ngFor="let endereco of funcionario.enderecos">
-
-      <ion-item>
-        <h2>{{endereco?.logradouro}}, {{endereco?.numero}}</h2>
-        <p>{{endereco?.complemento}} {{endereco?.bairro}} CEP {{endereco?.cep}}</p>
-        <p>{{endereco?.cidade.nome}}, {{endereco?.cidade.estado.nome}}</p>
+  <ion-card style="background-color: #3C3B3F;" *ngFor="let funcionario of funcionarios;">
+    <ion-list>
+      <ion-item style="background-color: #3C3B3F;">
+        <div class="div_img">
+          <img [src]="funcionario?.imageUrl || 'assets/imgs/avatar-blank.png'">
+        </div>
+        <ion-card-header>
+          <h1>Dados Pessoais</h1>
+        </ion-card-header>
+        <h2>Nome:{{funcionario?.nome}}</h2>
+        <h2>Email:{{funcionario?.email}}</h2>
+        <h2>cpf:{{funcionario?.cpf}}</h2>
       </ion-item>
-    </ion-card-content>
+      <hr/>
 
+      <ion-list>
+
+        <ion-item style="background-color: #3C3B3F">
+          <ion-card-header>
+            <h1>Telefones</h1>
+          </ion-card-header>
+          <p *ngFor="let telefone of funcionario.telefones">{{telefone}}</p>
+        </ion-item>
+        <hr/>
+      </ion-list>
+      <ion-list>
+
+        <ion-card-header>
+          <h1>Endereços</h1>
+        </ion-card-header>
+        <ion-card-content *ngFor="let endereco of funcionario.enderecos">
+          <ion-item style="background-color: #3C3B3F">
+            <h2>{{endereco?.logradouro}}, {{endereco?.numero}}</h2>
+            <p>{{endereco?.complemento}} {{endereco?.bairro}} CEP {{endereco?.cep}}</p>
+            <p>{{endereco?.cidade.nome}}, {{endereco?.cidade.estado.nome}}</p>
+          </ion-item>
+        </ion-card-content>
+
+      </ion-list>
+
+    </ion-list>
   </ion-card>
+
+
 </ion-content>
