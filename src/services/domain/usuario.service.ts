@@ -60,7 +60,7 @@ export class UsuarioService {
       }
     );
   }
-  
+
   preencherMenuDeAcordoComUsuario() {
     if (this.storageService.getLocalUser()) {
       this.email = this.storageService.getLocalUser().email;
@@ -84,9 +84,9 @@ export class UsuarioService {
             } else {
               this.global.pages = [
                 { title: 'Home', component: 'HomePage', icone: 'md-home' },
+                { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
                 { title: 'Mensagens', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
                 { title: 'Enviar Notificação', component: 'FormNotificacaoPage', icone: 'md-mail' },
-                { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ]
               }
