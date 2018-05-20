@@ -7,9 +7,9 @@
 <ion-header>
 
   <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Mensagens</ion-title>
   </ion-navbar>
 
@@ -17,14 +17,24 @@
 
 
 <ion-content padding>
-
-  <ion-list *ngFor="let mensagem of mensagens">
+  <ion-card text-center *ngFor="let mensagem of mensagens;">
     <ion-item>
       <h1>{{this.mensagem?.titulo}}</h1>
-      <h2>{{this.mensagem?.mensagem}}</h2>
-      <h3>{{this.mensagem?.horaMarcada}}</h3>
-      <h4>{{this.mensagem?.nomeCliente}}</h4>
+      <h2>{{this.mensagem?.nomeCliente}}</h2>
     </ion-item>
-  </ion-list>
+
+    <ion-card-content>
+      <p>{{this.mensagem?.mensagem}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col center text-center>
+        <ion-note>
+          {{this.mensagem?.horaMarcada}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
 
 </ion-content>
