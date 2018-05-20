@@ -17,7 +17,9 @@ export class MensagemService{
   }
 
   deleteAll():Observable<any>{
+    console.log('chegou');
     return this.http.delete(`${API_CONFIG.baseUrl}/mensagens/todos`)
+
   }
 
   insert(mensagem) {
