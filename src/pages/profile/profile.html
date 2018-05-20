@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="!picture">
+  <div *ngIf="!picture || mandandoFoto">
   <img  [src]="profileImage">
 
 
@@ -30,13 +30,13 @@
   </ion-row>
 </div>
 
-<div *ngIf="picture" >
+<div *ngIf="picture && !mandandoFoto" >
     <img  [src]="picture">
     <ion-avatar></ion-avatar>
 
     <ion-row class="row-camera">
       <ion-col align-self-start >
-          <button  ion-button icon-only clear   (click)="sendPicture()" [disabled]="cameraOn">
+          <button  ion-button icon-only clear (click)="sendPicture()" [disabled]="cameraOn">
           <ion-icon color="secondary" name="ios-checkbox"></ion-icon>
         </button>
 

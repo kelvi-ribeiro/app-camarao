@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 
 import { API_CONFIG } from '../../config/api.config';
@@ -20,6 +20,7 @@ export class ProfilePage {
   cameraOn: boolean = false;
   profileImage;
   apertouCamera = false;
+  mandandoFoto = false;
 
   constructor(
     public navCtrl: NavController,
@@ -28,7 +29,7 @@ export class ProfilePage {
     public usuarioService: UsuarioService,
     public camera: Camera,
     public sanitazer:DomSanitizer,
-    public loadingCtrl:LoadingController) {
+    public toastCtrl:ToastController) {
 
   }
 
@@ -126,18 +127,18 @@ export class ProfilePage {
 
 
   sendPicture() {
-    let loading = this.presentLoadingDefault();
+    this.presentToast();
+    this.mandandoFoto = true;
     this.apertouCamera = false;
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(response => {
         this.picture = null;
         this.profileImage = null;
         this.getImageIfExists();
-        loading.dismiss();
 
       },
       error => {
-      loading.dismiss();
+
       });
 
   }
@@ -147,13 +148,13 @@ export class ProfilePage {
     this.apertouCamera = false;
   }
 
-  presentLoadingDefault() {
-    let loading = this.loadingCtrl.create({
-      content: 'Enviando Imagem...'
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Sua foto será alterada dentro de alguns minutos...',
+      duration: 3000,
+      position: 'middle'
     });
 
-    loading.present();
-    return loading;
-
+    toast.present();
   }
 }

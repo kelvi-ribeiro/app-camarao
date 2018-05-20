@@ -36,7 +36,6 @@ import { LoginPage } from "../login/login";
 })
 export class HomePage {
   usuario: UsuarioDTO;
-  profileImage;
   email;
   perfis = [];
   temperatura: any;
@@ -116,7 +115,7 @@ export class HomePage {
         });
       },
       error => {
-        this.profileImage = "assets/imgs/avatar-blank.png";
+        this.globals.profileImage = "assets/imgs/avatar-blank.png";
       }
     );
   }
