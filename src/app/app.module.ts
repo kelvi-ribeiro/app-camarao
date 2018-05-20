@@ -1,3 +1,4 @@
+import { MensagemService } from './../services/domain/mensagem.service';
 import { Push } from '@ionic-native/push';
 import { SalinidadeService } from './../services/domain/salinidade.service';
 import { OxigenioDissolvidoService } from './../services/domain/oxigenioDissolvido.service';
@@ -63,7 +64,8 @@ import { NitritoService } from '../services/domain/nitrito.service';
     NitritoService,
     OxigenioDissolvidoService,
     SalinidadeService,
-    TransparenciaService
+    TransparenciaService,
+    MensagemService
 
 
   ]

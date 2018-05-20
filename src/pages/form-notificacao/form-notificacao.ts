@@ -1,7 +1,8 @@
-import { UsuarioService } from './../../services/domain/usuario.service';
+import { MensagemService } from './../../services/domain/mensagem.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Globals } from '../../globals.array';
 
 /**
  * Generated class for the FormNotificacaoPage page.
@@ -17,16 +18,20 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class FormNotificacaoPage {
   formGroup: FormGroup;
+  usuarioId;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public formBuilder: FormBuilder,
-              public usuarioService:UsuarioService,
-              public alertCtrl:AlertController) {
+              public mensagemService:MensagemService,
+              public alertCtrl:AlertController,
+              public globals:Globals) {
 
-                this.formGroup = this.formBuilder.group({
-                  titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-                  mensagem: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(120)]],
-                });
+          this.usuarioId = this.globals.usuario.id
+          this.formGroup = this.formBuilder.group({
+            titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+            mensagem: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(120)]],
+            clienteId: [this.usuarioId],
+          });
   }
 
   ionViewDidLoad() {
@@ -34,7 +39,7 @@ export class FormNotificacaoPage {
   }
 
   mandarNotificao() {
-    this.usuarioService.sendNotificao(this.formGroup.value)
+    this.mensagemService.insert(this.formGroup.value)
     .subscribe(response=>{
       this.showInsertOk();
     },
@@ -49,7 +54,7 @@ export class FormNotificacaoPage {
         {
           text:'Ok',
           handler:() =>{
-
+            this.navCtrl.setRoot('ListaMensagensPage')
           }
         }
       ]

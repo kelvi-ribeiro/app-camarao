@@ -86,6 +86,7 @@ export class HomePage {
     if (localUser && localUser.email) {
       this.usuarioService.findByEmail(localUser.email).subscribe(
         response => {
+          this.globals.usuario = response;
           this.usuario = response as UsuarioDTO;
           console.log(this.usuario);
           this.getImageIfExists();

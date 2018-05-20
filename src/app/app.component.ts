@@ -69,8 +69,7 @@ export class MyApp {
       console.log(this.storageService.getLocalUser());
 
       this.rootPage = 'HomePage';
-    }else{
-      console.log('Chegou no false');
+    }else{     
 
       this.rootPage = LoginPage;
     }
