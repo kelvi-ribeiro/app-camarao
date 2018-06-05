@@ -7,5 +7,6 @@ export class Globals {
    pages = [];
    profileImage;
    usuario;
+   perfis;
 
 }

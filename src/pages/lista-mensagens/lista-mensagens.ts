@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ModalController }
 import { MensagemService } from '../../services/domain/mensagem.service';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { API_CONFIG } from '../../config/api.config';
+import { Globals } from '../../globals.array';
 
 /**
  * Generated class for the ListaMensagensPage page.
@@ -18,17 +19,30 @@ import { API_CONFIG } from '../../config/api.config';
 })
 export class ListaMensagensPage {
   mensagens;
+  admin = false;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public mensagemService:MensagemService,
               public alertCtrl:AlertController,
               public usuarioService:UsuarioService,
-              public modalCtrl:ModalController) {
+              public modalCtrl:ModalController,
+              public globals:Globals) {
   }
 
   ionViewDidLoad() {
     this.obterMensagens()
+    this.verificaUsuarioAdmin()
   }
+
+  verificaUsuarioAdmin(){
+    console.log(this.globals.perfis);
+
+    if(this.globals.perfis.find( e => e =='ADMIN')){
+      this.admin = true
+    }
+  }
+
+
 
   obterMensagens(){
     this.mensagemService.findAll().subscribe((mensagens)=>{

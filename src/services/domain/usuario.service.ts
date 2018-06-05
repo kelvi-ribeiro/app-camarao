@@ -67,6 +67,7 @@ export class UsuarioService {
       this.findByEmail(this.email)
         .subscribe((response => {
           this.perfis = response['perfis'];
+          this.global.perfis = response['perfis'];
           this.storageService.setUserPerfil(this.perfis);
           for (let i = 0; i < this.perfis.length; i++) {
             let perfil = this.perfis[i];
