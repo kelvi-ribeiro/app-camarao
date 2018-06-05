@@ -32,12 +32,12 @@
     <ion-list no-lines>
       <ion-item   *ngFor="let mensagem of mensagens">
         <img  [src]="mensagem?.imageUrl || 'assets/imgs/avatar-blank.png'">
+        <span style="position: relative;left:60%;" (click)="openModal(mensagem)"> <ion-icon  color="primary" name="eye"></ion-icon></span>
+        <span *ngIf="admin" style="position: relative;left:45%;" (click)="alertApagarMensagem(mensagem.id)"> <ion-icon  color="danger" name="trash"></ion-icon></span>
         <ion-row>
           <ion-col>
-            <span *ngIf="admin" style="position: relative;left:163%;" (click)="alertApagarMensagem(mensagem.id)"> <ion-icon  color="danger" name="trash"></ion-icon></span>
           </ion-col>
           <ion-col>
-            <span style="position: relative;left:75%;" (click)="openModal(mensagem)"> <ion-icon  color="primary" name="eye"></ion-icon></span>
           </ion-col>
 
         </ion-row>
