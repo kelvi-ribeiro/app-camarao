@@ -35,6 +35,8 @@ export class LoginPage {
     public storageService:StorageService,
     public alertCtrl:AlertController) {
 
+      this.creds.email = storageService.getEmail()
+
   }
 
   ionViewWillEnter() {
@@ -64,6 +66,7 @@ export class LoginPage {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
         this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.alertSalvarLogin(this.creds.email)
         this.navCtrl.setRoot('HomePage');
       },
       error => {
@@ -91,5 +94,34 @@ export class LoginPage {
     });
     alert.present();
   }
+
+  salvarLogin(email){
+    this.storageService.setEmail(email)
+  }
+
+  alertSalvarLogin(email){
+    let alert = this.alertCtrl.create({
+      title:'Salvar Login!',
+      message:'Deseja Salvar o Login ?',
+      enableBackdropDismiss:false,
+      buttons:[
+        {
+          text:'Sim',
+          handler:() =>{
+            this.salvarLogin(email)
+          }
+
+        },
+        {
+          text:'Não',
+          handler:()=> {
+            this.storageService.setEmail(null)
+          }
+        }
+
+      ]
+    });
+    alert.present();
+   }
 
 }

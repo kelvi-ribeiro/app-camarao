@@ -37,6 +37,24 @@ export class StorageService {
     }else{
       localStorage.setItem(STORAGE_KEYS.perfil,JSON.stringify(perfil))
     }
+  }
 
+
+  setEmail(email) {
+    if(email == null){
+      localStorage.removeItem(STORAGE_KEYS.email);
+    }else{
+      localStorage.setItem(STORAGE_KEYS.email,JSON.stringify(email))
+    }
+
+  }
+
+  getEmail() {
+    let email = localStorage.getItem(STORAGE_KEYS.email);
+    if (email == null) {
+      return "";
+    } else {
+      return JSON.parse(email);
+    }
   }
 }

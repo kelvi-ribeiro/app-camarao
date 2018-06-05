@@ -69,7 +69,7 @@ export class MyApp {
       console.log(this.storageService.getLocalUser());
 
       this.rootPage = 'HomePage';
-    }else{     
+    }else{
 
       this.rootPage = LoginPage;
     }
