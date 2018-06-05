@@ -28,7 +28,7 @@ export class FormNotificacaoPage {
 
           this.usuarioId = this.globals.usuario.id
           this.formGroup = this.formBuilder.group({
-            titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+            titulo: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
             mensagem: ['', [Validators.required, Validators.minLength(3),Validators.maxLength(120)]],
             clienteId: [this.usuarioId],
           });

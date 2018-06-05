@@ -13,7 +13,7 @@ export class MensagemService{
   }
 
   delete(id):Observable<any>{
-    return this.http.delete(`${API_CONFIG.baseUrl}/salinidades/${id}`)
+    return this.http.delete(`${API_CONFIG.baseUrl}/mensagens/${id}`)
   }
 
   deleteAll():Observable<any>{

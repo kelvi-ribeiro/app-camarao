@@ -11,46 +11,55 @@
     </button>
     <ion-title>Mensagens</ion-title>
     <ion-buttons end>
-        <button (click)="alertApagarTodos()" ion-button icon-only>
-          <ion-icon color="danger" name="trash"></ion-icon>
-        </button>
-      </ion-buttons>
+      <button (click)="alertApagarTodos()" ion-button icon-only>
+        <ion-icon color="danger" name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <div class="main-app-top">
+  <div class="main-app-top">
 
-        <div class="top-header">
-          <i class="fa-1 fa fa-bars" aria-hidden="true"></i>
+    <div class="top-header">
+      <i class="fa-1 fa fa-bars" aria-hidden="true"></i>
 
-          <i class="fa-2 fa fa-cog" aria-hidden="true"></i>
+      <i class="fa-2 fa fa-cog" aria-hidden="true"></i>
+    </div>
+
+    <ion-list no-lines>
+      <ion-item   *ngFor="let mensagem of mensagens">
+        <img  [src]="mensagem?.imageUrl || 'assets/imgs/avatar-blank.png'">
+        <span style="position: relative;left:60%;" (click)="alertApagarMensagem(mensagem.id)"> <ion-icon  color="danger" name="trash"></ion-icon></span>
+        <span style="position: relative;left:45%;" (click)="openModal(mensagem)"> <ion-icon  color="primary" name="eye"></ion-icon></span>
+        <div class="item-detail-container">
+          <div class="item-container">
+            <ion-row >
+              <h3>{{mensagem?.titulo}}</h3>
+            </ion-row>
+            <h4>Por {{mensagem?.nomeCliente}}</h4>
+            <p>{{mensagem?.mensagem | mensagemReduzida:24 }}</p>
+            <p>
+              <strong>{{mensagem?.horaMarcada}} </strong>
+            </p>
+            <span>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            </span>
+
+          </div>
+
+
         </div>
 
-        <ion-list no-lines>
-          <ion-item *ngFor="let mensagem of mensagens">
-            <img [src]="mensagem?.imageUrl || 'assets/imgs/avatar-blank.png'">
-            <div class="item-detail-container">
-              <div class="item-container">
-                <h3>{{this.mensagem?.titulo}}</h3>
-                <h4>Por {{this.mensagem?.nomeCliente}}</h4>
-                <p>{{this.mensagem?.mensagem}}</p>
-                <p> <strong>{{this.mensagem?.horaMarcada}}</strong></p>
-                <span>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star-o" aria-hidden="true"></i>
-                </span>
-              </div>
+      </ion-item>
 
-            </div>
-          </ion-item>
-
-        </ion-list>
-      </div>
+    </ion-list>
+  </div>
 
 </ion-content>

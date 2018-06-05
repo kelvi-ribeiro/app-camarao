@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
 import { MensagemService } from '../../services/domain/mensagem.service';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { API_CONFIG } from '../../config/api.config';
@@ -22,7 +22,8 @@ export class ListaMensagensPage {
               public navParams: NavParams,
               public mensagemService:MensagemService,
               public alertCtrl:AlertController,
-              public usuarioService:UsuarioService) {
+              public usuarioService:UsuarioService,
+              public modalCtrl:ModalController) {
   }
 
   ionViewDidLoad() {
@@ -41,7 +42,7 @@ export class ListaMensagensPage {
   alertApagarTodos(){
     let alert = this.alertCtrl.create({
       title:'Atenção!',
-      message:'Esta ação vai apagar todas as mensagens',
+      message:'Esta ação vai apagar todas as mensagens, deseja mesmo fazer isso ?',
       enableBackdropDismiss:false,
       buttons:[
         {
@@ -59,11 +60,50 @@ export class ListaMensagensPage {
     });
     alert.present();
    }
+
+   alertApagarMensagem(id){
+    let alert = this.alertCtrl.create({
+      title:'Atenção!',
+      message:'Deseja mesmo apagar essa mensagem ?',
+      enableBackdropDismiss:false,
+      buttons:[
+        {
+          text:'Sim',
+          handler:() =>{
+            this.apagarMensagem(id)
+          }
+
+        },
+        {
+          text:'Não'
+        }
+
+      ]
+    });
+    alert.present();
+   }
+
+   apagarMensagem(id){
+
+   this.mensagemService.delete(id).subscribe(res=>{
+     this.obterMensagens()
+   })
+ }
+
    apagarTodos(){
      this.mensagemService.deleteAll().subscribe(res=>{
        this.obterMensagens()
      })
    }
+
+   openModal(mensagem) {
+    let modal = this.modalCtrl.create('DetalhesMensagemPage', {mensagem:mensagem});
+    modal.present();
+    // refresh data after modal dismissed
+    modal.onDidDismiss(() => this.ionViewDidLoad())
+  }
+
+
   //  buscarFuncionarios(){
   //   this.usuarioService.findAll().subscribe((response => {
 

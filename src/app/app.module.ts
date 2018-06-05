@@ -36,6 +36,7 @@ import { NitritoService } from '../services/domain/nitrito.service';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
