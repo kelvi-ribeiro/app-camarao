@@ -1,18 +1,25 @@
-import { Chart } from "chart.js";
-import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
-import { PhService } from "../../services/domain/ph.service";
+import { Chart } from 'chart.js';
+import { OxigenioDissolvidoService } from './../../services/domain/oxigenioDissolvido.service';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+/**
+ * Generated class for the OxigenioPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: "page-ph",
-  templateUrl: "ph.html"
+  selector: 'page-oxigenio',
+  templateUrl: 'oxigenio.html',
 })
-export class PhPage {
+export class OxigenioPage {
   @ViewChild("lineCanvas") lineCanvas;
 
-  ph;
-  phOld;
+  oxigenio;
+  oxigenioOld;
 
   tempo: number = 5000;
   loopRecursivas: boolean;
@@ -24,27 +31,27 @@ export class PhPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public phService: PhService
+    public oxigenioService: OxigenioDissolvidoService
   ) {
     this.loopRecursivas = true;
 
-    this.exibirPhEmCincoSegundos();
+    this.exibirOxigenioEmCincoSegundos();
   }
 
   ionViewWillLeave() {
     this.loopRecursivas = false;
   }
 
-  exibirPhEmCincoSegundos() {
+  exibirOxigenioEmCincoSegundos() {
     setTimeout(() => {
       if (this.loopRecursivas) {
-        this.phService.findPhs().subscribe(response => {
-          this.ph = response;
+        this.oxigenioService.findOxigenioDissolvido().subscribe(response => {
+          this.oxigenio = response;
           if (this.carregando) {
             this.createChart();
             this.carregando = false;
           }
-          this.exibirPhEmCincoSegundos();
+          this.exibirOxigenioEmCincoSegundos();
         });
       }
     }, this.tempo);
@@ -56,8 +63,8 @@ export class PhPage {
       data: {
         datasets: [
           {
-            label: "Salinidade",
-            data: [this.ph.ph],
+            label: "Oxigênio Dissolvido",
+            data: [this.oxigenio.oxigenio],
             fill: false,
             backgroundColor: "rgba(255,255,255,255)",
             borderColor: "rgba(255,255,255,255)",
@@ -90,13 +97,15 @@ export class PhPage {
 
   updateChart() {
     setTimeout(() => {
-      if (this.phOld != undefined) {
-        this.lineChart.data.datasets[0].data[0] = this.phOld;
+      if (this.oxigenioOld != undefined) {
+        this.lineChart.data.datasets[0].data[0] = this.oxigenioOld;
       }
-      this.lineChart.data.datasets[0].data[1] = this.ph.ph;
+      this.lineChart.data.datasets[0].data[1] = this.oxigenio.oxigenio;
       this.lineChart.update();
-      this.phOld = this.ph.ph;
+      this.oxigenioOld = this.oxigenio.oxigenio;
       this.updateChart();
     }, this.tempo);
   }
+
+
 }

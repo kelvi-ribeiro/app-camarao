@@ -1,18 +1,25 @@
-import { Chart } from "chart.js";
-import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
-import { PhService } from "../../services/domain/ph.service";
+import { Chart } from 'chart.js';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { TransparenciaService } from '../../services/domain/transparencia.service';
+
+/**
+ * Generated class for the TransparenciaPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: "page-ph",
-  templateUrl: "ph.html"
+  selector: 'page-transparencia',
+  templateUrl: 'transparencia.html',
 })
-export class PhPage {
+export class TransparenciaPage {
   @ViewChild("lineCanvas") lineCanvas;
 
-  ph;
-  phOld;
+  transparencia;
+  transparenciaOld;
 
   tempo: number = 5000;
   loopRecursivas: boolean;
@@ -24,27 +31,27 @@ export class PhPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public phService: PhService
+    public transparenciaService: TransparenciaService
   ) {
     this.loopRecursivas = true;
 
-    this.exibirPhEmCincoSegundos();
+    this.exibirTransparenciaEmCincoSegundos();
   }
 
   ionViewWillLeave() {
     this.loopRecursivas = false;
   }
 
-  exibirPhEmCincoSegundos() {
+  exibirTransparenciaEmCincoSegundos() {
     setTimeout(() => {
       if (this.loopRecursivas) {
-        this.phService.findPhs().subscribe(response => {
-          this.ph = response;
+        this.transparenciaService.findTransparencia().subscribe(response => {
+          this.transparencia = response;
           if (this.carregando) {
             this.createChart();
             this.carregando = false;
           }
-          this.exibirPhEmCincoSegundos();
+          this.exibirTransparenciaEmCincoSegundos();
         });
       }
     }, this.tempo);
@@ -56,8 +63,8 @@ export class PhPage {
       data: {
         datasets: [
           {
-            label: "Salinidade",
-            data: [this.ph.ph],
+            label: "Transparência",
+            data: [this.transparencia.transparencia],
             fill: false,
             backgroundColor: "rgba(255,255,255,255)",
             borderColor: "rgba(255,255,255,255)",
@@ -90,13 +97,15 @@ export class PhPage {
 
   updateChart() {
     setTimeout(() => {
-      if (this.phOld != undefined) {
-        this.lineChart.data.datasets[0].data[0] = this.phOld;
+      if (this.transparenciaOld != undefined) {
+        this.lineChart.data.datasets[0].data[0] = this.transparenciaOld;
       }
-      this.lineChart.data.datasets[0].data[1] = this.ph.ph;
+      this.lineChart.data.datasets[0].data[1] = this.transparencia.transparencia;
       this.lineChart.update();
-      this.phOld = this.ph.ph;
+      this.transparenciaOld = this.transparencia.transparencia;
       this.updateChart();
     }, this.tempo);
   }
+
+
 }

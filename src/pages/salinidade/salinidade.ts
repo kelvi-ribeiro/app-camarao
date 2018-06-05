@@ -19,20 +19,21 @@ export class SalinidadePage {
   @ViewChild('lineCanvas') lineCanvas;
 
   salinidade;
-  phOld;
+  salinidadeOld;
 
-  tempo: number = 10000;
+  tempo:number = 5000;
   loopRecursivas: boolean;
 
-  carregando: boolean = true;
+  carregando:boolean = true;
 
   lineChart;
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    public salinidadeService: SalinidadeService) {
-    this.loopRecursivas = true;
+            public navCtrl: NavController,
+            public navParams: NavParams,
+            public salinidadeService:SalinidadeService) {
+              this.loopRecursivas = true;
+
     this.exibirSalinidadeEmCincoSegundos();
 
   }
@@ -43,16 +44,19 @@ export class SalinidadePage {
   }
 
   exibirSalinidadeEmCincoSegundos() {
-    if (this.loopRecursivas) {
-      this.salinidadeService.findSalinidade().subscribe(response => {
-        this.salinidade = response;
-        if (this.carregando) {
-          this.createChart();
-          this.carregando = false;
+    setTimeout(() => {
+      if (this.loopRecursivas) {
+        this.salinidadeService.findSalinidade().subscribe(response => {
+          this.salinidade = response;
+          if(this.carregando){
+            this.createChart();
+            this.carregando = false;
+          }
+          this.exibirSalinidadeEmCincoSegundos();
+          })
         }
-        this.exibirSalinidadeEmCincoSegundos();
-      })
-    }
+
+    }, this.tempo);
   }
 
   createChart() {
@@ -60,30 +64,54 @@ export class SalinidadePage {
       type: 'line',
       data: {
         datasets: [{
-          label: 'salinidade',
+          label: 'Salinidade',
           data: [this.salinidade.salinidade],
+          fill: false,
+          backgroundColor: "rgba(255,255,255,255)",
+          borderColor: "rgba(255,255,255,255)",
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(255,255,255,255)",
+          pointBackgroundColor: "rgba(255,255,255,255)",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(255,255,255,255)",
+          pointHoverBorderColor: "rgba(255,255,255,255)",
+          pointHoverBorderWidth: 2,
+          pointRadius: 5,
+          pointHitRadius: 15,
+
 
         }],
 
       },
+      options:{
+        display:false
+      }
     });
+
+
+    Chart.defaults.global.defaultFontColor = 'white';
+    Chart.defaults.global.defaultFontStyle = 'bold';
+    Chart.defaults.global.defaultFontSize = 18;
     this.updateChart();
     this.carregando = false;
-  }
+}
 
-  updateChart() {
-    setTimeout(() => {
-      if (this.phOld != undefined) {
-        this.lineChart.data.datasets[0].data[0] = this.phOld;
-      }
-      this.lineChart.data.datasets[0].data[1] = this.salinidade.salinidade;
-      this.lineChart.update();
-      this.phOld = this.salinidade.salinidade
-      this.updateChart();
+updateChart() {
+  setTimeout(() => {
+    if(this.salinidadeOld!=undefined){
+      this.lineChart.data.datasets[0].data[0] = this.salinidadeOld;
+    }
+    this.lineChart.data.datasets[0].data[1] = this.salinidade.salinidade;
+    this.lineChart.update();
+    this.salinidadeOld = this.salinidade.salinidade
+    this.updateChart();
 
 
-    }, this.tempo);
-  }
+  }, this.tempo);
+}
 
 
 }

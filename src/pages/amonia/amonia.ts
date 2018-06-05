@@ -1,18 +1,25 @@
-import { Chart } from "chart.js";
-import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
-import { PhService } from "../../services/domain/ph.service";
+import { Chart } from 'chart.js';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AmoniaTotalService } from '../../services/domain/amoniaTotal.service';
+
+/**
+ * Generated class for the AmoniaPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: "page-ph",
-  templateUrl: "ph.html"
+  selector: 'page-amonia',
+  templateUrl: 'amonia.html',
 })
-export class PhPage {
+export class AmoniaPage {
   @ViewChild("lineCanvas") lineCanvas;
 
-  ph;
-  phOld;
+  amonia;
+  amoniaOld;
 
   tempo: number = 5000;
   loopRecursivas: boolean;
@@ -24,27 +31,27 @@ export class PhPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public phService: PhService
+    public amoniaService: AmoniaTotalService
   ) {
     this.loopRecursivas = true;
 
-    this.exibirPhEmCincoSegundos();
+    this.exibirAmoniaEmCincoSegundos();
   }
 
   ionViewWillLeave() {
     this.loopRecursivas = false;
   }
 
-  exibirPhEmCincoSegundos() {
+  exibirAmoniaEmCincoSegundos() {
     setTimeout(() => {
       if (this.loopRecursivas) {
-        this.phService.findPhs().subscribe(response => {
-          this.ph = response;
+        this.amoniaService.findAmonias().subscribe(response => {
+          this.amonia = response;
           if (this.carregando) {
             this.createChart();
             this.carregando = false;
           }
-          this.exibirPhEmCincoSegundos();
+          this.exibirAmoniaEmCincoSegundos();
         });
       }
     }, this.tempo);
@@ -56,8 +63,8 @@ export class PhPage {
       data: {
         datasets: [
           {
-            label: "Salinidade",
-            data: [this.ph.ph],
+            label: "Amônia Total",
+            data: [this.amonia.amoniaTotal],
             fill: false,
             backgroundColor: "rgba(255,255,255,255)",
             borderColor: "rgba(255,255,255,255)",
@@ -90,13 +97,14 @@ export class PhPage {
 
   updateChart() {
     setTimeout(() => {
-      if (this.phOld != undefined) {
-        this.lineChart.data.datasets[0].data[0] = this.phOld;
+      if (this.amoniaOld != undefined) {
+        this.lineChart.data.datasets[0].data[0] = this.amoniaOld;
       }
-      this.lineChart.data.datasets[0].data[1] = this.ph.ph;
+      this.lineChart.data.datasets[0].data[1] = this.amonia.amoniaTotal;
       this.lineChart.update();
-      this.phOld = this.ph.ph;
+      this.amoniaOld = this.amonia.amoniaTotal;
       this.updateChart();
     }, this.tempo);
   }
+
 }

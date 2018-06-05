@@ -1,18 +1,25 @@
-import { Chart } from "chart.js";
-import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
-import { PhService } from "../../services/domain/ph.service";
+import { Chart } from 'chart.js';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NitratoService } from '../../services/domain/nitrato.service';
+
+/**
+ * Generated class for the NitratoPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: "page-ph",
-  templateUrl: "ph.html"
+  selector: 'page-nitrato',
+  templateUrl: 'nitrato.html',
 })
-export class PhPage {
+export class NitratoPage {
   @ViewChild("lineCanvas") lineCanvas;
 
-  ph;
-  phOld;
+  nitrato;
+  nitratoOld;
 
   tempo: number = 5000;
   loopRecursivas: boolean;
@@ -24,27 +31,27 @@ export class PhPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public phService: PhService
+    public nitratoService: NitratoService
   ) {
     this.loopRecursivas = true;
 
-    this.exibirPhEmCincoSegundos();
+    this.exibirNitratoEmCincoSegundos();
   }
 
   ionViewWillLeave() {
     this.loopRecursivas = false;
   }
 
-  exibirPhEmCincoSegundos() {
+  exibirNitratoEmCincoSegundos() {
     setTimeout(() => {
       if (this.loopRecursivas) {
-        this.phService.findPhs().subscribe(response => {
-          this.ph = response;
+        this.nitratoService.findNitratos().subscribe(response => {
+          this.nitrato = response;
           if (this.carregando) {
             this.createChart();
             this.carregando = false;
           }
-          this.exibirPhEmCincoSegundos();
+          this.exibirNitratoEmCincoSegundos();
         });
       }
     }, this.tempo);
@@ -56,8 +63,8 @@ export class PhPage {
       data: {
         datasets: [
           {
-            label: "Salinidade",
-            data: [this.ph.ph],
+            label: "Nitrato",
+            data: [this.nitrato.nitrato],
             fill: false,
             backgroundColor: "rgba(255,255,255,255)",
             borderColor: "rgba(255,255,255,255)",
@@ -90,13 +97,14 @@ export class PhPage {
 
   updateChart() {
     setTimeout(() => {
-      if (this.phOld != undefined) {
-        this.lineChart.data.datasets[0].data[0] = this.phOld;
+      if (this.nitratoOld != undefined) {
+        this.lineChart.data.datasets[0].data[0] = this.nitratoOld;
       }
-      this.lineChart.data.datasets[0].data[1] = this.ph.ph;
+      this.lineChart.data.datasets[0].data[1] = this.nitrato.nitrato;
       this.lineChart.update();
-      this.phOld = this.ph.ph;
+      this.nitratoOld = this.nitrato.nitrato;
       this.updateChart();
     }, this.tempo);
   }
+
 }

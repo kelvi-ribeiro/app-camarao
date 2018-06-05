@@ -46,14 +46,14 @@
                 <img src="assets/imgs/ph-icone.png">
                 <p>PH</p>
                 <p *ngIf="ph">{{ph?.ph | number : '1.2-2'}}</p>
-                <p *ngIf="!ph">{{ph?.ph | number : '1.2-2'}}</p>
+                <p *ngIf="!ph">Carregando...</p>
               </ion-item>
 
               <ion-item [navPush]="'SalinidadePage'">
                 <img src="assets/imgs/salinidade-icone.png">
                 <p>Salinidade</p>
                 <p *ngIf="salinidade">{{salinidade?.salinidade | number : '1.2-2'}} ppt</p>
-                <p *ngIf="!salinidade">{{salinidade?.salinidade | number : '1.2-2'}} ppt</p>
+                <p *ngIf="!salinidade">Carregando...</p>
               </ion-item>
 
               <ion-item [navPush]="'TemperaturaPage'">
