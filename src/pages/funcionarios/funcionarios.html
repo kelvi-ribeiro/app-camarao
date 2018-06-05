@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card style="background-color: #3C3B3F;" *ngFor="let funcionario of funcionarios;">
+  <ion-card style="background-color: #3C3B3F;margin-bottom:50px;" *ngFor="let funcionario of funcionarios;">
     <ion-list>
       <ion-item style="background-color: #3C3B3F;">
         <div class="div_img">
@@ -20,7 +20,7 @@
         </ion-card-header>
         <h2>Nome:{{funcionario?.nome}}</h2>
         <h2>Email:{{funcionario?.email}}</h2>
-        <h2>cpf:{{funcionario?.cpf}}</h2>
+        <h2>CPF:{{funcionario?.cpf}}</h2>
       </ion-item>
       <hr/>
 
