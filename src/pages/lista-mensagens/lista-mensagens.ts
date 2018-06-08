@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ModalController, LoadingController } from 'ionic-angular';
 import { MensagemService } from '../../services/domain/mensagem.service';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { API_CONFIG } from '../../config/api.config';
@@ -26,12 +26,15 @@ export class ListaMensagensPage {
               public alertCtrl:AlertController,
               public usuarioService:UsuarioService,
               public modalCtrl:ModalController,
-              public globals:Globals) {
+              public globals:Globals,
+              public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
-    this.obterMensagens()
-    this.verificaUsuarioAdmin()
+    const loading = this.presentLoadingDefault()
+    this.obterMensagens();
+    this.verificaUsuarioAdmin();
+    loading.dismiss();
   }
 
   verificaUsuarioAdmin(){
@@ -117,18 +120,6 @@ export class ListaMensagensPage {
     modal.onDidDismiss(() => this.ionViewDidLoad())
   }
 
-
-  //  buscarFuncionarios(){
-  //   this.usuarioService.findAll().subscribe((response => {
-
-  //     this.funcionarios = response;
-  //     this.funcionarios.forEach(funcionario => {
-  //       funcionario = this.getImageIfExists(funcionario);
-  //     });
-  //   }), error => {
-
-  //   })
-  // }
   getImageIfExists(mensagem) {
     this.usuarioService.getImageFromBucket(mensagem['clienteId'])
       .subscribe(response => {
@@ -136,6 +127,15 @@ export class ListaMensagensPage {
         return mensagem;
       },
         error => { });
+  }
+
+  presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando...'
+    });
+
+    loading.present();
+    return loading;
   }
 
   }
