@@ -7,17 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>form-tanque</ion-title>
+    <ion-title>Criar Tanque</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <form [formGroup]="formGroup" (ngSubmit)="mandarNotificao(); $event.preventDefault()">
+    <form [formGroup]="formGroup" (ngSubmit)="obterLatitudeLogitude(); $event.preventDefault()">
         <ion-item>
           <ion-label floating>Nome do Tanque</ion-label>
-          <ion-input formControlName="titulo"  type="text"></ion-input>
+          <ion-input formControlName="nome"  type="text"></ion-input>
         </ion-item>
         <button ion-button block color="primary" type="submit" [disabled]="formGroup.invalid">Criar Tanque</button>
       </form>

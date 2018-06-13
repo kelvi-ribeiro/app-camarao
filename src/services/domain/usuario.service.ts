@@ -77,7 +77,7 @@ export class UsuarioService {
                 { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
                 { title: 'Meus Funcionarios', component: 'FuncionariosPage', icone: 'ios-people' },
                 { title: 'Adicionar Funcionário', component: 'SignupPage', icone: 'md-person-add' },
-                { title: 'Criar Tanque', component: 'ListaMensagensPage', icone: 'water' },
+                { title: 'Criar Tanque', component: 'FormTanquePage', icone: 'water' },
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
                 { title: 'Logout', component: '', icone: 'md-exit' }

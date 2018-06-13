@@ -25,6 +25,8 @@ import { TemperaturaService } from '../services/domain/temperatura.service';
 import { PhService } from '../services/domain/ph.service';
 import { TransparenciaService } from '../services/domain/transparencia.service';
 import { NitritoService } from '../services/domain/nitrito.service';
+import { Geolocation } from '@ionic-native/geolocation';
+import { TanqueService } from '../services/domain/tanque.service';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { NitritoService } from '../services/domain/nitrito.service';
     StatusBar,
     SplashScreen,
     Push,
+    Geolocation,
+    TanqueService,
     {provide: ErrorHandler, useClass: IonicErrorHandler} ,
     AuthInterceptorProvider,
     ErrorInterceptorProvider,
