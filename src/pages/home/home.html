@@ -1,79 +1,91 @@
-<ion-header >
+<ion-header>
 
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+    <ion-buttons  end>
+      <button *ngIf="amoniaTotal?.horaMarcada"  (click)="exibirToastAtualizado()" ion-button icon-only>
+        <h5 style="margin-right:12%;">{{amoniaTotal?.horaMarcada | date:"HH:mm:ss"}}
+        </h5>
+        <ion-icon color="secondary" ios="ios-timer" md="md-timer"></ion-icon>
       </button>
-      <ion-title >Home</ion-title>
-    </ion-navbar>
+      <button *ngIf="!amoniaTotal?.horaMarcada"  (click)="exibirToastDesatualizado()" ion-button icon-only>
+          <p style="margin-right:12%;">Off</p>
+          <ion-icon color="danger" name="alert"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
 
-  </ion-header>
+
+</ion-header>
 
 
-  <ion-content padding>
-      <ion-list class="list-chats">
-          <ion-row>
-            <ion-grid>
-              <ion-item [navPush]="'AmoniaPage'">
-                <img src="assets/imgs/amonia-icone.png">
-                <p>Amônia</p>
-                <p *ngIf="amoniaTotal">{{amoniaTotal?.amoniaTotal | number : '1.2-2'}}</p>
-                <p *ngIf="!amoniaTotal">Carregando...</p>
-              </ion-item>
+<ion-content padding>
+  <ion-list class="list-chats">
+    <ion-row>
+      <ion-grid>
+        <ion-item [navPush]="'AmoniaPage'">
+          <img src="assets/imgs/amonia-icone.png">
+          <p>Amônia</p>
+          <p *ngIf="amoniaTotal">{{amoniaTotal?.amoniaTotal | number : '1.2-2'}}</p>
+          <p *ngIf="!amoniaTotal">Carregando...</p>
+        </ion-item>
 
-              <ion-item [navPush]="'NitratoPage'">
-                <img src="assets/imgs/nitrato-icone.png">
-                <p>Nitrato</p>
-                <p *ngIf="nitrato">{{nitrato?.nitrato | number : '1.2-2'}}</p>
-                <p *ngIf="!nitrato">Carregando...</p>
-              </ion-item>
+        <ion-item [navPush]="'NitratoPage'">
+          <img src="assets/imgs/nitrato-icone.png">
+          <p>Nitrato</p>
+          <p *ngIf="nitrato">{{nitrato?.nitrato | number : '1.2-2'}}</p>
+          <p *ngIf="!nitrato">Carregando...</p>
+        </ion-item>
 
-              <ion-item [navPush]="'NitritoPage'">
-                <img src="assets/imgs/nitrito-icone.png">
-                <p>Nitrito</p>
-                <p *ngIf="nitrato">{{nitrito?.nitrito | number : '1.2-2'}}</p>
-                <p *ngIf="!nitrato">Carregando...</p>
-              </ion-item>
+        <ion-item [navPush]="'NitritoPage'">
+          <img src="assets/imgs/nitrito-icone.png">
+          <p>Nitrito</p>
+          <p *ngIf="nitrato">{{nitrito?.nitrito | number : '1.2-2'}}</p>
+          <p *ngIf="!nitrato">Carregando...</p>
+        </ion-item>
 
-              <ion-item [navPush]="'OxigenioPage'">
-                <img src="assets/imgs/oxigenio-icone.png">
-                <p>Oxigênio</p>
-                <p *ngIf="oxigenioDissolvido">{{oxigenioDissolvido?.oxigenioDissolvido | number : '1.2-2'}} mg/L</p>
-                <p *ngIf="!oxigenioDissolvido">Carregando...</p>
-              </ion-item>
+        <ion-item [navPush]="'OxigenioPage'">
+          <img src="assets/imgs/oxigenio-icone.png">
+          <p>Oxigênio</p>
+          <p *ngIf="oxigenioDissolvido">{{oxigenioDissolvido?.oxigenioDissolvido | number : '1.2-2'}} mg/L</p>
+          <p *ngIf="!oxigenioDissolvido">Carregando...</p>
+        </ion-item>
 
-              <ion-item [navPush]="'PhPage'">
-                <img src="assets/imgs/ph-icone.png">
-                <p>PH</p>
-                <p *ngIf="ph">{{ph?.ph | number : '1.2-2'}}</p>
-                <p *ngIf="!ph">Carregando...</p>
-              </ion-item>
+        <ion-item [navPush]="'PhPage'">
+          <img src="assets/imgs/ph-icone.png">
+          <p>PH</p>
+          <p *ngIf="ph">{{ph?.ph | number : '1.2-2'}}</p>
+          <p *ngIf="!ph">Carregando...</p>
+        </ion-item>
 
-              <ion-item [navPush]="'SalinidadePage'">
-                <img src="assets/imgs/salinidade-icone.png">
-                <p>Salinidade</p>
-                <p *ngIf="salinidade">{{salinidade?.salinidade | number : '1.2-2'}} ppt</p>
-                <p *ngIf="!salinidade">Carregando...</p>
-              </ion-item>
+        <ion-item [navPush]="'SalinidadePage'">
+          <img src="assets/imgs/salinidade-icone.png">
+          <p>Salinidade</p>
+          <p *ngIf="salinidade">{{salinidade?.salinidade | number : '1.2-2'}} ppt</p>
+          <p *ngIf="!salinidade">Carregando...</p>
+        </ion-item>
 
-              <ion-item [navPush]="'TemperaturaPage'">
-                <img src="assets/imgs/temperatura-icone.png">
-                <p>Temperatura</p>
-                <p *ngIf="temperatura">{{temperatura?.temperatura | number : '1.2-2'}} °C</p>
-                <p *ngIf="!temperatura">Carregando...</p>
-              </ion-item>
+        <ion-item [navPush]="'TemperaturaPage'">
+          <img src="assets/imgs/temperatura-icone.png">
+          <p>Temperatura</p>
+          <p *ngIf="temperatura">{{temperatura?.temperatura | number : '1.2-2'}} °C</p>
+          <p *ngIf="!temperatura">Carregando...</p>
+        </ion-item>
 
-              <ion-item [navPush]="'TransparenciaPage'">
-                <img src="assets/imgs/transparencia-icone.png">
-                <p>Transparência</p>
-                <p *ngIf="transparencia">{{transparencia?.transparencia | number : '1.2-2'}} cm</p>
-                <p *ngIf="!transparencia">Carregando...</p>
-              </ion-item>
+        <ion-item [navPush]="'TransparenciaPage'">
+          <img src="assets/imgs/transparencia-icone.png">
+          <p>Transparência</p>
+          <p *ngIf="transparencia">{{transparencia?.transparencia | number : '1.2-2'}} cm</p>
+          <p *ngIf="!transparencia">Carregando...</p>
+        </ion-item>
 
-            </ion-grid>
-          </ion-row>
-        </ion-list>
-    <!-- <ion-item>Temperatura:{{temperatura?.temperatura | number : '1.2-2' }}°   <ion-icon ></ion-icon></ion-item>
+      </ion-grid>
+    </ion-row>
+  </ion-list>
+  <!-- <ion-item>Temperatura:{{temperatura?.temperatura | number : '1.2-2' }}°   <ion-icon ></ion-icon></ion-item>
     <ion-item>Nível de PH:{{ph?.ph | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
     <ion-item>Amonia Total:{{amoniaTotal?.amoniaTotal | number : '1.2-2'}} mg/L <ion-icon ></ion-icon> </ion-item>
     <ion-item>Oxigênio Dissolvido:{{oxigenioDissolvido?.oxigenioDissolvido | number : '1.2-2'}} mg/L <ion-icon ></ion-icon> </ion-item>
@@ -83,4 +95,4 @@
     <ion-item>Transparencia:{{transparencia?.transparencia | number : '1.2-2'}} cms <ion-icon ></ion-icon> </ion-item>
     <ion-item>Temperatura:{{temperatura.horaMarcada | date:"y-MM-dd HH:mm:ss"}} <ion-icon color="danger" name="flame"></ion-icon></ion-item> -->
 
-  </ion-content>
+</ion-content>

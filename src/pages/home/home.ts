@@ -11,7 +11,8 @@ import {
   IonicPage,
   NavController,
   NavParams,
-  LoadingController
+  LoadingController,
+  ToastController
 } from "ionic-angular";
 import { UsuarioService } from "../../services/domain/usuario.service";
 import { TemperaturaService } from "../../services/domain/temperatura.service";
@@ -66,7 +67,7 @@ export class HomePage {
     public sanitazer: DomSanitizer,
     public globals: Globals,
     public storage: StorageService,
-
+    public toastCtrl:ToastController
   ) {
     this.loopRecursivas = true;
   }
@@ -191,5 +192,24 @@ export class HomePage {
         this.invocaMetodoMedicoes();
       }
     }, this.tempo);
+  }
+  exibirToastAtualizado() {
+    let toast = this.toastCtrl.create({
+      message: 'Medição de propriedades está em tempo Real',
+      duration: 3000,
+      position: 'middle'
+    });
+
+    toast.present();
+  }
+
+  exibirToastDesatualizado() {
+    let toast = this.toastCtrl.create({
+      message: 'Medição de propriedaes está desatualizado',
+      duration: 3000,
+      position: 'middle'
+    });
+
+    toast.present();
   }
 }
