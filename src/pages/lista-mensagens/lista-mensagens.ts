@@ -59,7 +59,7 @@ export class ListaMensagensPage {
   alertApagarTodos(){
     let alert = this.alertCtrl.create({
       title:'Atenção!',
-      message:'Esta ação vai apagar todas as mensagens, deseja mesmo fazer isso ?',
+      message:'Esta ação vai apagar todas os avisos, deseja mesmo fazer isso ?',
       enableBackdropDismiss:false,
       buttons:[
         {
@@ -81,7 +81,7 @@ export class ListaMensagensPage {
    alertApagarMensagem(id){
     let alert = this.alertCtrl.create({
       title:'Atenção!',
-      message:'Deseja mesmo apagar essa mensagem ?',
+      message:'Deseja mesmo apagar esse Aviso ?',
       enableBackdropDismiss:false,
       buttons:[
         {
