@@ -26,7 +26,12 @@ import { PhService } from '../services/domain/ph.service';
 import { TransparenciaService } from '../services/domain/transparencia.service';
 import { NitritoService } from '../services/domain/nitrito.service';
 import { Geolocation } from '@ionic-native/geolocation';
+import { GoogleMaps } from '@ionic-native/google-maps';
+
 import { TanqueService } from '../services/domain/tanque.service';
+import { MapsProvider } from '../services/google-maps/maps';
+import { JsMapsProvider } from '../services/google-maps/js-maps';
+import { NativeMapsProvider } from '../services/google-maps/native-maps';
 
 @NgModule({
   declarations: [
@@ -51,6 +56,7 @@ import { TanqueService } from '../services/domain/tanque.service';
     SplashScreen,
     Push,
     Geolocation,
+    GoogleMaps,
     TanqueService,
     {provide: ErrorHandler, useClass: IonicErrorHandler} ,
     AuthInterceptorProvider,
@@ -70,7 +76,10 @@ import { TanqueService } from '../services/domain/tanque.service';
     OxigenioDissolvidoService,
     SalinidadeService,
     TransparenciaService,
-    MensagemService
+    MensagemService,
+    MapsProvider,
+    JsMapsProvider,
+    NativeMapsProvider
 
 
   ]
