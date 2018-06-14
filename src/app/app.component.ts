@@ -1,17 +1,16 @@
-import { UsuarioService } from './../services/domain/usuario.service';
-import { Globals } from './../globals.array';
-import { AuthService } from './../services/auth.service';
-import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { LoginPage } from '../pages/login/login';
-import { StorageService } from '../services/storage.service';
-import { Push, PushOptions, PushObject } from '@ionic-native/push';
-
+import { UsuarioService } from "./../services/domain/usuario.service";
+import { Globals } from "./../globals.array";
+import { AuthService } from "./../services/auth.service";
+import { Component, ViewChild } from "@angular/core";
+import { Nav, Platform, AlertController } from "ionic-angular";
+import { StatusBar } from "@ionic-native/status-bar";
+import { SplashScreen } from "@ionic-native/splash-screen";
+import { LoginPage } from "../pages/login/login";
+import { StorageService } from "../services/storage.service";
+import { Push, PushOptions, PushObject } from "@ionic-native/push";
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: "app.html"
 })
 export class MyApp {
   email;
@@ -21,22 +20,19 @@ export class MyApp {
 
   rootPage;
   constructor(
-              public platform: Platform,
-              public statusBar: StatusBar,
-              public splashScreen: SplashScreen,
-              public authService:AuthService,
-              public globals:Globals,
-              public storageService:StorageService,
-              public alertCtrl:AlertController,
-              public push:Push
-            ) {
-
-
-              this.pushsetup();
-              this.initializeApp();
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public authService: AuthService,
+    public globals: Globals,
+    public storageService: StorageService,
+    public alertCtrl: AlertController,
+    public push: Push
+  ) {
+    this.pushsetup();
+    this.initializeApp();
 
     // used for an example of ngFor and navigation
-
   }
 
   initializeApp() {
@@ -49,60 +45,71 @@ export class MyApp {
     });
   }
 
-
-
-  openPage(page:{title:string,component:string,icone:string}) {
-    switch(page.title){
-      case'Logout':
-
-      this.authService.logout();
-
-      this.nav.setRoot(LoginPage);
-      break;
+  openPage(page: { title: string; component: string; icone: string }) {
+    switch (page.title) {
+      case "Logout":
+        this.alertCertezaSair()
+        break;
       default:
-      this.nav.setRoot(page.component);
-
+        this.nav.setRoot(page.component);
     }
   }
-  verificaUsuarioLogado(){
-    if(this.storageService.getLocalUser()){
+  verificaUsuarioLogado() {
+    if (this.storageService.getLocalUser()) {
       console.log(this.storageService.getLocalUser());
 
-      this.rootPage = 'HomePage';
-    }else{
-
+      this.rootPage = "HomePage";
+    } else {
       this.rootPage = LoginPage;
     }
   }
   pushsetup() {
-
     const options: PushOptions = {
       android: {
-    icon: "notification",
-    iconColor: "orange",
-    sound: true,
-    vibrate: true,
-    forceShow: true
-    },
+        icon: "notification",
+        iconColor: "orange",
+        sound: true,
+        vibrate: true,
+        forceShow: true
+      }
+    };
 
-   };
+    const pushObject: PushObject = this.push.init(options);
+    pushObject.on("registration").subscribe((registration: any) => {});
 
-  const pushObject: PushObject = this.push.init(options);
-  pushObject.on("registration").subscribe((registration: any) => {});
+    pushObject.on("notification").subscribe((notification: any) => {
+      let youralert = this.alertCtrl.create({
+        title: notification.label,
 
-  pushObject.on("notification").subscribe((notification: any) => {
+        message: notification.message
+      });
 
-        let youralert = this.alertCtrl.create({
-
-          title: notification.label,
-
-          message: notification.message,
-        });
-
-    youralert.present();
-
+      youralert.present();
     });
+  }
+  alertCertezaSair(){
+    let alert = this.alertCtrl.create({
+      title:'Logout!',
+      message:'Tem Certeza ?',
+      enableBackdropDismiss:false,
+      buttons:[
+        {
+          text:'Sim',
+          handler:() =>{
+        this.authService.logout();
+        this.nav.setRoot(LoginPage);
+          }
 
+        },
+        {
+          text:'Não',
+          handler:()=> {
+            this.storageService.setEmail(null)
+          }
+        }
+
+      ]
+    });
+    alert.present();
+   }
 }
-
-    }
