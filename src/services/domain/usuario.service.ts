@@ -75,7 +75,7 @@ export class UsuarioService {
               this.global.pages = [
                 { title: 'Home', component: 'HomePage', icone: 'md-home' },
                 { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
-                { title: 'Localizar Tanques', component: 'MapaLocalizacaoTanquesPage', icone: 'ios-contact' },
+                { title: 'Localizar Tanques', component: 'MapaLocalizacaoTanquesPage', icone: 'pin' },
                 { title: 'Meus Funcionarios', component: 'FuncionariosPage', icone: 'ios-people' },
                 { title: 'Adicionar Funcionário', component: 'SignupPage', icone: 'md-person-add' },
                 { title: 'Criar Tanque', component: 'FormTanquePage', icone: 'water' },
@@ -88,7 +88,7 @@ export class UsuarioService {
               this.global.pages = [
                 { title: 'Home', component: 'HomePage', icone: 'md-home' },
                 { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
-                { title: 'Localizar Tanques', component: 'MapaLocalizacaoTanquesPage', icone: 'ios-contact' },
+                { title: 'Localizar Tanques', component: 'MapaLocalizacaoTanquesPage', icone: 'pin' },
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
