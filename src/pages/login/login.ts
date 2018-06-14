@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, AlertController, LoadingController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { CreadenciaisDTO } from '../../models/credenciais.dto';
 import { Globals } from '../../globals.array';
@@ -33,7 +33,8 @@ export class LoginPage {
     public global:Globals,
     public usuarioService:UsuarioService,
     public storageService:StorageService,
-    public alertCtrl:AlertController) {
+    public alertCtrl:AlertController,
+    public loadingCtrl:LoadingController) {
 
       this.creds.email = storageService.getEmail()
 
@@ -63,14 +64,17 @@ export class LoginPage {
   }
 
   login() {
+    const loading = this.presentLoadingDefault()
     this.auth.authenticate(this.creds)
       .subscribe(response => {
+        loading.dismiss()
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.alertSalvarLogin(this.creds.email)
         this.navCtrl.setRoot('HomePage');
       },
       error => {
         //this.showAlert();
+        loading.dismiss()
       });
   }
   signup(){
@@ -123,5 +127,13 @@ export class LoginPage {
     });
     alert.present();
    }
+   presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+      content: 'Autenticando...'
+    });
+
+    loading.present();
+    return loading;
+  }
 
 }
