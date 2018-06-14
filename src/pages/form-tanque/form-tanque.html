@@ -5,8 +5,10 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Criar Tanque</ion-title>
   </ion-navbar>
 
@@ -14,13 +16,13 @@
 
 
 <ion-content padding>
-    <form [formGroup]="formGroup" (ngSubmit)="obterLatitudeLogitude(); $event.preventDefault()">
-        <ion-item>
-          <ion-label floating>Nome do Tanque</ion-label>
-          <ion-input formControlName="nome"  type="text"></ion-input>
-        </ion-item>
-        <button ion-button block color="primary" type="submit" [disabled]="formGroup.invalid">Criar Tanque</button>
-      </form>
+  <form [formGroup]="formGroup" (ngSubmit)="obterLatitudeLogitude(); $event.preventDefault()">
+    <ion-item>
+      <ion-label floating>Nome do Tanque</ion-label>
+      <ion-input formControlName="nome" type="text"></ion-input>
+    </ion-item>
+    <button ion-button block color="primary" type="submit" [disabled]="formGroup.invalid">Criar Tanque</button>
+  </form>
 
 
 </ion-content>
