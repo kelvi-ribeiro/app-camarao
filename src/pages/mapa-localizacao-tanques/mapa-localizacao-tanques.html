@@ -1,11 +1,13 @@
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>
+      <ion-select placeholder="Escolha um Tanque" (ionChange)="trocarLocalizacao($event)">
 
-      <ion-select placeholder="Escolha um tanque"  (ionChange)="trocarLocalizacao($event)">
-
-        <ion-option *ngFor="let tanque of tanques"   [value]="tanque"  >{{tanque.nome}}</ion-option>
-        <ion-option *ngIf="tanqueAtivo" selected  >{{tanqueAtivo.nome}}</ion-option>
+        <ion-option *ngFor="let tanque of tanques" [value]="tanque">{{tanque.nome}}</ion-option>
+        <ion-option *ngIf="tanqueAtivo" selected>{{tanqueAtivo.nome}}</ion-option>
       </ion-select>
     </ion-title>
   </ion-navbar>

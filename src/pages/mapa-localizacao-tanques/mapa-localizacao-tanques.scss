@@ -19,7 +19,9 @@ page-mapa-localizacao-tanques {
   }
   ion-select {
     max-width: 120%;
-}
-
-
+  }
+  .select-placeholder.select-text {
+    font-size: 25px;
+    margin-left: 6%;
+  }
 }
