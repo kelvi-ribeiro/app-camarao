@@ -1,0 +1,33 @@
+<!--
+  Generated template for the RelatorioCompletoPropriedadesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Relatório Completo</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>  
+      <div class="row header">          
+          <div class="col">Ph</div>
+          <div class="col">Hora marcada</div>          
+          
+        </div>
+        <div class="row" *ngFor="let ph of phs?.content"> 
+          
+          <div class="col">{{ph?.ph | number : '1.2-2'}}</div>
+          <div class="col">{{ph?.horaMarcada | date:"y-MM-dd HH:mm:ss"}}</div>          
+        </div>    
+  
+  <button (click)="incrementaPage()" ion-button>++</button>
+
+</ion-content>

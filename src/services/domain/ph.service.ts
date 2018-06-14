@@ -11,4 +11,7 @@ export class PhService{
   findPhs():Observable<any>{
     return this.http.get(`${API_CONFIG.baseUrl}/phs`)
   }
+  findPhsPage(page):Observable<any>{
+    return this.http.get(`${API_CONFIG.baseUrl}/phs/paginada?page=${page}`)
+  }
 }
