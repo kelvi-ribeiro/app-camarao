@@ -17,16 +17,33 @@ export class NativeMapsProvider {
     let opts = {
       camera: {
         latLng: latLng,
-        zoom: 11,
+        zoom:70,
         tilt: 30
       }
     };
 
-    this.map = this.googleMaps.create(element.nativeElement, opts);
-    this.map.setMyLocationEnabled(true)
+
+    if(!this.map){
+      this.refreshMap(element,opts)
+    }else{
+      this.map = this.googleMaps.create(element.nativeElement, opts);
     this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+      this.map.setMyLocationEnabled(true)
       console.log('Map is ready!');
     });
+
+    }
+
+  }
+  refreshMap(element, opts){
+
+    let map = GoogleMaps.create(element.nativeElement, opts);
+    map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+    map.setMyLocationEnabled(true)
+      console.log('Map is ready!');
+    });
+
+
   }
 
 }

@@ -1,7 +1,12 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Google Maps
+
+      <ion-select placeholder="Escolha um tanque"  (ionChange)="trocarLocalizacao($event)">
+
+        <ion-option *ngFor="let tanque of tanques"   [value]="tanque"  >{{tanque.nome}}</ion-option>
+        <ion-option *ngIf="tanqueAtivo" selected  >{{tanqueAtivo.nome}}</ion-option>
+      </ion-select>
     </ion-title>
   </ion-navbar>
 </ion-header>

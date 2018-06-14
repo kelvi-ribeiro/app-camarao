@@ -10,4 +10,16 @@ page-mapa-localizacao-tanques {
   ion-app._gmaps_cdv_ .nav-decor {
     background-color: transparent !important;
   }
+  ion-title {
+    padding: 0;
+    margin-bottom: 10px;
+  }
+  .toolbar-title.toolbar-title-md {
+    margin-bottom: 5%;
+  }
+  ion-select {
+    max-width: 120%;
+}
+
+
 }

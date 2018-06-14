@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { MapsProvider } from "../../services/google-maps/maps";
 import { Geolocation } from '@ionic-native/geolocation';
+import { TanqueService } from "../../services/domain/tanque.service";
 
 /**
  * Generated class for the MapaLocalizacaoTanquesPage page.
@@ -20,37 +21,54 @@ export class MapaLocalizacaoTanquesPage {
     latitude: number;
     longitude: number;
   };
+  tanques = []
+  tanqueAtivo
 
   @ViewChild("map") mapElement: ElementRef;
 
   constructor(
     public navCtrl: NavController,
+    public navParams:NavParams,
     public geolocation: Geolocation,
-    public mapsProvider: MapsProvider
-  ) {}
-
-  ionViewDidLoad() {
-    this.findUserLocation();
+    public mapsProvider: MapsProvider,
+    public tanqueService:TanqueService
+  ) {
+    this.tanqueAtivo = this.navParams.get('tanque')
+    console.log('this.tanqueAtivo',this.tanqueAtivo)
   }
 
-  findUserLocation() {
+  ionViewDidLoad() {
+    this.obterTanques()
+
+  }
+
+  findUserLocation(tanque) {
     let options = {
       enableHighAccuracy: true,
       timeout: 25000
     };
 
-    this.geolocation
-      .watchPosition(options)
-      .subscribe(position => {
-        console.log(position);
+    this.location = {
+      latitude: tanque.latitude,
+      longitude: tanque.longitude
+    };
+    this.mapsProvider.init(this.location, this.mapElement);
 
-        this.location = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
-        };
-
-        this.mapsProvider.init(this.location, this.mapElement);
-      })
+  }
+  obterTanques(){
+    this.tanqueService.findAll().subscribe(res=>{
+      this.tanques = res;
+      if(this.tanqueAtivo){
+        const index = this.tanques.findIndex(el=> this.tanqueAtivo.id===el.id)
+        console.log('index',index)
+        this.tanques.splice(index,1)
+      }
+      this.findUserLocation(this.tanqueAtivo ? this.tanqueAtivo : this.tanques[0]);
+    })
+  }
+  trocarLocalizacao(tanque){
+    console.log('see',tanque);
+    this.navCtrl.setRoot('MapaLocalizacaoTanquesPage',{tanque:tanque})
 
   }
 }
