@@ -21,6 +21,27 @@
       <ion-label floating>Nome do Tanque</ion-label>
       <ion-input formControlName="nome" type="text"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label floating>Latitude</ion-label>
+      <ion-input disabled [value]="formGroup.value.latitude"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Longitude</ion-label>
+      <ion-input disabled [value]="formGroup.value.longitude"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Certifique a Localização</ion-label>
+      <ion-textarea disabled [value]="endereco"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Usuário à Cadastrar</ion-label>
+        <ion-input disabled [value]="nomeUsuario"></ion-input>
+      </ion-item>
+
     <button ion-button block color="primary" type="submit" [disabled]="formGroup.invalid">Criar Tanque</button>
   </form>
 

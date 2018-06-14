@@ -26,4 +26,9 @@ export class TanqueService{
       }
     );
   }
+
+  buscarEndereco(latitude,longitude):Observable<any>{
+    return this.http.get(`${API_CONFIG.urlGeolocation}latlng=${latitude},${longitude}&key=${API_CONFIG.apiKeyGeolocation}`)
+
+  }
 }
