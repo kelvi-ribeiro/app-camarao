@@ -195,7 +195,7 @@ export class HomePage {
   }
   exibirToastAtualizado() {
     let toast = this.toastCtrl.create({
-      message: 'Medição de propriedades está em tempo Real',
+      message: 'Medição de propriedades estão em tempo Real',
       duration: 3000,
       position: 'middle'
     });
