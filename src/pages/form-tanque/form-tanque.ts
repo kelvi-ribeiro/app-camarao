@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Globals } from '../../globals.array';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -25,7 +25,9 @@ export class FormTanquePage {
               public formBuilder: FormBuilder,
               public globals:Globals,
               public geolocation:Geolocation,
-              public tanqueService:TanqueService)
+              public tanqueService:TanqueService,
+              public alertCtrl:AlertController)
+
                {
 
 
@@ -38,7 +40,9 @@ export class FormTanquePage {
           });
      }
   criarTanque(){
-    this.tanqueService.insert(this.formGroup.value).subscribe(res=>{})
+    this.tanqueService.insert(this.formGroup.value).subscribe(res=>{
+      this.showInsertOk()
+    })
   }
   obterLatitudeLogitude(){
     this.geolocation.getCurrentPosition().then((resp) => {
@@ -51,5 +55,21 @@ export class FormTanquePage {
      }).catch((error) => {
        console.log('Error getting location', error);
      });
+  }
+  showInsertOk(){
+    let alert = this.alertCtrl.create({
+      title:'Sucesso!',
+      message:'Tanque inserido com sucesso, com a sua localização atual',
+      enableBackdropDismiss:false,
+      buttons:[
+        {
+          text:'Ok',
+          handler:() =>{
+            this.navCtrl.setRoot('HomePage')
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }
