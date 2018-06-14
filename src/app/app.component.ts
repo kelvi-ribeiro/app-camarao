@@ -56,7 +56,6 @@ export class MyApp {
   }
   verificaUsuarioLogado() {
     if (this.storageService.getLocalUser()) {
-      console.log(this.storageService.getLocalUser());
 
       this.rootPage = "HomePage";
     } else {

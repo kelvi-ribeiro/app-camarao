@@ -34,7 +34,7 @@ export class MapaLocalizacaoTanquesPage {
     public tanqueService:TanqueService
   ) {
     this.tanqueAtivo = this.navParams.get('tanque')
-    console.log('this.tanqueAtivo',this.tanqueAtivo)
+
   }
 
   ionViewDidLoad() {
@@ -60,14 +60,13 @@ export class MapaLocalizacaoTanquesPage {
       this.tanques = res;
       if(this.tanqueAtivo){
         const index = this.tanques.findIndex(el=> this.tanqueAtivo.id===el.id)
-        console.log('index',index)
+
         this.tanques.splice(index,1)
       }
       this.findUserLocation(this.tanqueAtivo ? this.tanqueAtivo : this.tanques[0]);
     })
   }
-  trocarLocalizacao(tanque){
-    console.log('see',tanque);
+  trocarLocalizacao(tanque){   
     this.navCtrl.setRoot('MapaLocalizacaoTanquesPage',{tanque:tanque})
 
   }

@@ -45,8 +45,7 @@ export class ListaMensagensPage {
     loading.dismiss();
   }
 
-  verificaUsuarioAdmin() {
-    console.log(this.globals.perfis);
+  verificaUsuarioAdmin() {    
 
     if (this.globals.perfis.find(e => e == "ADMIN")) {
       this.admin = true;

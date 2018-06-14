@@ -48,7 +48,6 @@ export class FormTanquePage {
      }
      ionViewDidLoad(){
        this.nomeUsuario = this.storageService.getUserName()
-       console.log('this.storageService.getUserName()',this.storageService.getUserName())
       this.buscarLocalizacao()
      }
   criarTanque(){
@@ -77,7 +76,7 @@ export class FormTanquePage {
   }
   buscarLocalizacao(){
     this.geolocation.getCurrentPosition().then((resp) => {
-      console.log('resp.coords.latitude',resp.coords.latitude);
+
 
       this.formGroup.controls.latitude.setValue(resp.coords.latitude)
       this.formGroup.controls.longitude.setValue(resp.coords.longitude)
@@ -90,7 +89,6 @@ export class FormTanquePage {
   buscarEndereco(){
     this.tanqueService.buscarEndereco(this.formGroup.value.latitude,this.formGroup.value.longitude).subscribe(res=>{
       this.endereco = res.results[0].formatted_address
-      console.log(this.endereco)
     })
   }
 }
