@@ -69,6 +69,7 @@ export class UsuarioService {
           this.perfis = response['perfis'];
           this.global.perfis = response['perfis'];
           this.storageService.setUserPerfil(this.perfis);
+          this.storageService.setUserName(response['nome'])
           for (let i = 0; i < this.perfis.length; i++) {
             let perfil = this.perfis[i];
             if (perfil === 'ADMIN') {

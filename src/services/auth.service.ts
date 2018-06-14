@@ -52,6 +52,7 @@ export class AuthService {
     logout() {
         this.storage.setLocalUser(null);
         this.storage.setUserPerfil(null);
+        this.storage.setUserName(null)
         this.globals.profileImage = 'assets/imgs/avatar-blank.png'
     }
 }

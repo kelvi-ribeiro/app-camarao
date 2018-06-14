@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Globals } from '../../globals.array';
 import { Geolocation } from '@ionic-native/geolocation';
 import { TanqueService } from '../../services/domain/tanque.service';
+import { API_CONFIG } from '../../config/api.config';
+import { StorageService } from '../../services/storage.service';
 
 /**
  * Generated class for the FormTanquePage page.
@@ -20,13 +22,18 @@ import { TanqueService } from '../../services/domain/tanque.service';
 export class FormTanquePage {
   formGroup: FormGroup;
   usuarioId;
+  endereco;
+  nomeUsuario;
+
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public formBuilder: FormBuilder,
               public globals:Globals,
               public geolocation:Geolocation,
               public tanqueService:TanqueService,
-              public alertCtrl:AlertController)
+              public alertCtrl:AlertController,
+              public storageService:StorageService
+              )
 
                {
 
@@ -39,22 +46,18 @@ export class FormTanquePage {
             usuarioId:[this.usuarioId]
           });
      }
+     ionViewDidLoad(){
+       this.nomeUsuario = this.storageService.getUserName()
+       console.log('this.storageService.getUserName()',this.storageService.getUserName())
+      this.buscarLocalizacao()
+     }
   criarTanque(){
     this.tanqueService.insert(this.formGroup.value).subscribe(res=>{
       this.showInsertOk()
     })
   }
   obterLatitudeLogitude(){
-    this.geolocation.getCurrentPosition().then((resp) => {
-      console.log('resp.coords.latitude',resp.coords.latitude);
-
-      this.formGroup.controls.latitude.setValue(resp.coords.latitude)
-      this.formGroup.controls.longitude.setValue(resp.coords.longitude)
-      this.criarTanque()
-
-     }).catch((error) => {
-       console.log('Error getting location', error);
-     });
+    this.criarTanque()
   }
   showInsertOk(){
     let alert = this.alertCtrl.create({
@@ -71,5 +74,23 @@ export class FormTanquePage {
       ]
     });
     alert.present();
+  }
+  buscarLocalizacao(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log('resp.coords.latitude',resp.coords.latitude);
+
+      this.formGroup.controls.latitude.setValue(resp.coords.latitude)
+      this.formGroup.controls.longitude.setValue(resp.coords.longitude)
+      this.buscarEndereco()
+
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
+  buscarEndereco(){
+    this.tanqueService.buscarEndereco(this.formGroup.value.latitude,this.formGroup.value.longitude).subscribe(res=>{
+      this.endereco = res.results[0].formatted_address
+      console.log(this.endereco)
+    })
   }
 }

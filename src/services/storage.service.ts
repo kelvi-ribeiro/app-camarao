@@ -38,6 +38,22 @@ export class StorageService {
       localStorage.setItem(STORAGE_KEYS.perfil,JSON.stringify(perfil))
     }
   }
+  getUserName() {
+    let nome = localStorage.getItem(STORAGE_KEYS.nome);
+    if (nome == null) {
+      return null;
+    } else {
+      return JSON.parse(nome);
+    }
+  }
+
+  setUserName(nome) {
+    if(nome == null){
+      localStorage.removeItem(STORAGE_KEYS.nome);
+    }else{
+      localStorage.setItem(STORAGE_KEYS.nome,JSON.stringify(nome))
+    }
+  }
 
 
   setEmail(email) {
