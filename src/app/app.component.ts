@@ -15,7 +15,7 @@ import { Push, PushOptions, PushObject } from "@ionic-native/push";
 export class MyApp {
   email;
   perfis = [];
-  profile;
+  profile;  
   @ViewChild(Nav) nav: Nav;
 
   rootPage;
@@ -42,6 +42,7 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.verificaUsuarioLogado();
+      
     });
   }
 
@@ -89,7 +90,7 @@ export class MyApp {
   alertCertezaSair(){
     let alert = this.alertCtrl.create({
       title:'Logout!',
-      message:'Tem Certeza ?',
+      message:'Você deseja se desconectar ?',
       enableBackdropDismiss:false,
       buttons:[
         {
