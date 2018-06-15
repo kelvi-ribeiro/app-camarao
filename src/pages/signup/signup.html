@@ -79,14 +79,14 @@
 
       <ion-item>
         <ion-label floating>Estado*</ion-label>
-        <ion-select formControlName="estadoId" (ionChange)="updateCidades()">
+        <ion-select disabled formControlName="estadoId" (ionChange)="updateCidades()">
           <ion-option *ngFor="let estado of estados; first as f" [value]="estado.id" [selected]="f">{{estado.nome}}</ion-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label floating>Cidade*</ion-label>
-        <ion-select formControlName="cidadeId">
+        <ion-select disabled formControlName="cidadeId">
           <ion-option *ngFor="let cidade of cidades" [value]="cidade.id">{{cidade.nome}}</ion-option>
         </ion-select>
       </ion-item>

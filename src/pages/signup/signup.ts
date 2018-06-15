@@ -107,6 +107,7 @@ export class SignupPage {
               this.formGroup.controls.cidadeId.setValue(cidades[cidade].id)
               this.cidades = []
               this.cidades[0] = cidades[cidade]
+              this.exibirToastEnderecoEncontrado()
               break;        
           }
         }
@@ -114,12 +115,22 @@ export class SignupPage {
 
        this.formGroup.controls.bairro.setValue(res['bairro']);
        this.formGroup.controls.logradouro.setValue(res['logradouro']);
-    },error=>{console.log('error',error)})
+    },error=>this.exibirToastCepInvalido())
   }
   exibirToastCepInvalido() {
     let toast = this.toastCtrl.create({
       message: 'CEP Inválido',
       cssClass: "toast-error",
+      duration: 3000,
+      position: 'middle'
+    });
+
+    toast.present();
+  }
+
+  exibirToastEnderecoEncontrado() {
+    let toast = this.toastCtrl.create({
+      message: 'Endereço Encontrado',      
       duration: 3000,
       position: 'middle'
     });
