@@ -7,27 +7,34 @@
 <ion-header>
 
   <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Relatório Completo</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>  
-      <div class="row header">          
-          <div class="col">Ph</div>
-          <div class="col">Hora marcada</div>          
-          
-        </div>
-        <div class="row" *ngFor="let ph of phs?.content"> 
-          
-          <div class="col">{{ph?.ph | number : '1.2-2'}}</div>
-          <div class="col">{{ph?.horaMarcada | date:"y-MM-dd HH:mm:ss"}}</div>          
-        </div>    
-  
-  <button (click)="incrementaPage()" ion-button>++</button>
+<ion-content padding>
+  <div>
+    <div class="row header">
+        <div class="col">Código</div>
+      <div class="col">{{propriedadeEscolhida}}</div>
+      <div class="col">Hora marcada</div>
+      <div class="col">Nome do tanque</div>
+
+    </div>
+    <div class="row" *ngFor="let propriedade of propriedades;">
+      <div class="col">{{propriedade?.id}}</div>         
+         <div class="col">{{transformaPropriedade(propriedade) | number : '1.2-2'}}</div>         
+          <div class="col">{{propriedade?.horaMarcada | date:"y-MM-dd HH:mm:ss"}}</div>
+          <div class="col">{{tanque?.nome}}</div>
+    </div>
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>

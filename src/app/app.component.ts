@@ -1,8 +1,9 @@
+import { TanqueService } from "./../services/domain/tanque.service";
 import { UsuarioService } from "./../services/domain/usuario.service";
 import { Globals } from "./../globals.array";
 import { AuthService } from "./../services/auth.service";
 import { Component, ViewChild } from "@angular/core";
-import { Nav, Platform, AlertController } from "ionic-angular";
+import { Nav, Platform, NavController,AlertController } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { LoginPage } from "../pages/login/login";
@@ -15,7 +16,8 @@ import { Push, PushOptions, PushObject } from "@ionic-native/push";
 export class MyApp {
   email;
   perfis = [];
-  profile;  
+  profile;
+  tanques;
   @ViewChild(Nav) nav: Nav;
 
   rootPage;
@@ -27,7 +29,8 @@ export class MyApp {
     public globals: Globals,
     public storageService: StorageService,
     public alertCtrl: AlertController,
-    public push: Push
+    public push: Push,
+    public tanqueService: TanqueService
   ) {
     this.pushsetup();
     this.initializeApp();
@@ -42,22 +45,23 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.verificaUsuarioLogado();
-      
     });
   }
 
   openPage(page: { title: string; component: string; icone: string }) {
     switch (page.title) {
       case "Logout":
-        this.alertCertezaSair()
+        this.alertCertezaSair();
         break;
+      case "Relatório Completo":
+        this.obterTanques();
+        return
       default:
         this.nav.setRoot(page.component);
     }
   }
   verificaUsuarioLogado() {
     if (this.storageService.getLocalUser()) {
-
       this.rootPage = "HomePage";
     } else {
       this.rootPage = LoginPage;
@@ -87,29 +91,47 @@ export class MyApp {
       youralert.present();
     });
   }
-  alertCertezaSair(){
+  alertCertezaSair() {
     let alert = this.alertCtrl.create({
-      title:'Logout!',
-      message:'Você deseja se desconectar ?',
-      enableBackdropDismiss:false,
-      buttons:[
+      title: "Logout!",
+      message: "Você deseja se desconectar ?",
+      enableBackdropDismiss: false,
+      buttons: [
         {
-          text:'Sim',
-          handler:() =>{
-        this.authService.logout();
-        this.nav.setRoot(LoginPage);
+          text: "Sim",
+          handler: () => {
+            this.authService.logout();
+            this.nav.setRoot(LoginPage);
           }
-
         },
         {
-          text:'Não',
-          handler:()=> {
-            this.storageService.setEmail(null)
+          text: "Não",
+          handler: () => {
+            this.storageService.setEmail(null);
           }
         }
-
       ]
     });
     alert.present();
-   }
+  }
+
+  alertEscolhaPropriedadeTanqueRelatorio() {
+    let alert = this.alertCtrl.create();
+    alert.setTitle('Escolha um tanque')
+    this.tanques.forEach(element => {
+      alert.addButton({        
+        text: element.nome,
+        handler: data => {
+          this.nav.setRoot('RelatorioCompletoPropriedadesPage',{tanque:element})
+        }
+      });
+    });
+    alert.present()
+  }
+  obterTanques() {
+    this.tanqueService.findAll().subscribe(res => {
+      this.tanques = res;
+      this.alertEscolhaPropriedadeTanqueRelatorio();
+    });
+  }
 }

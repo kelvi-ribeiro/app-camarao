@@ -81,7 +81,7 @@ export class UsuarioService {
                 { title: 'Meus Funcionarios', component: 'FuncionariosPage', icone: 'ios-people' },
                 { title: 'Adicionar Funcionário', component: 'SignupPage', icone: 'md-person-add' },
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
-                { title: 'Relatório Completo', component: 'RelatorioCompletoPropriedadesPage', icone: 'list-box' },
+                { title: 'Relatório Completo', component: '', icone: 'list-box' },
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ];
@@ -92,7 +92,7 @@ export class UsuarioService {
                 { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
                 { title: 'Localizar Tanques', component: 'MapaLocalizacaoTanquesPage', icone: 'pin' },
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
-                { title: 'Relatório Completo', component: 'RelatorioCompletoPropriedadesPage', icone: 'list-box' },
+                { title: 'Relatório Completo',icone: 'list-box' },
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ]
