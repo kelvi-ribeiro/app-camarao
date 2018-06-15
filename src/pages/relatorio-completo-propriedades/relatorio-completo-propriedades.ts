@@ -27,6 +27,7 @@ export class RelatorioCompletoPropriedadesPage {
   objectMockListaPropriedades;
   tanque;
   propriedadeEscolhida;
+  tanqueInexistente = false
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -41,17 +42,17 @@ export class RelatorioCompletoPropriedadesPage {
     public alertCtrl:AlertController
 
   ) {
+    this.tanque = this.navParams.get('tanque');
   }
 
   ionViewDidLoad() {
-    console.log('chegou aqui')
-    this.alertEscolhaPropriedadeRelatorio()
-    this.tanque = this.navParams.get('tanque');
+    if(this.tanque.nome!=='Macuxi'){
+      this.tanqueInexistente = true
+    }
+    console.log(this.tanque)
+    this.tanqueInexistente ? null:this.alertEscolhaPropriedadeRelatorio()
 
-  }
-  incrementaPage(){
-    this.page++;
-    this.pesquisaPropriedade()
+
   }
   pesquisaPropriedade(){
     console.log('pesquisaPropriedade',this.urlPath)

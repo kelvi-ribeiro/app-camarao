@@ -17,7 +17,7 @@
 
 
 <ion-content padding>
-  <div>
+  <div *ngIf="!tanqueInexistente">
     <div class="row header">
         <div class="col">Código</div>
       <div class="col">{{propriedadeEscolhida}}</div>
@@ -26,15 +26,16 @@
 
     </div>
     <div class="row" *ngFor="let propriedade of propriedades;">
-      <div class="col">{{propriedade?.id}}</div>         
-         <div class="col">{{transformaPropriedade(propriedade) | number : '1.2-2'}}</div>         
+      <div class="col">{{propriedade?.id}}</div>
+         <div class="col">{{transformaPropriedade(propriedade) | number : '1.2-2'}}</div>
           <div class="col">{{propriedade?.horaMarcada | date:"y-MM-dd HH:mm:ss"}}</div>
           <div class="col">{{tanque?.nome}}</div>
     </div>
-  </div>
+
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
-
+  </div>
+  <h1 *ngIf="tanqueInexistente">Não há um arduíno cadastrado para esse tanque</h1>
 </ion-content>
