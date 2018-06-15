@@ -16,8 +16,7 @@ export class MensagemService{
     return this.http.delete(`${API_CONFIG.baseUrl}/mensagens/${id}`)
   }
 
-  deleteAll():Observable<any>{
-    console.log('chegou');
+  deleteAll():Observable<any>{    
     return this.http.delete(`${API_CONFIG.baseUrl}/mensagens/todos`)
 
   }

@@ -99,7 +99,6 @@ export class SignupPage {
 
   buscarViaCep(){
     this.http.get(`https://viacep.com.br/ws/${this.formGroup.value.cep}/json/`).subscribe(res=>{
-      console.log('res',res);
       this.formGroup.controls.estadoId.setValue(this.estados.find(estado=>estado['uf']===res['uf']).id);
       this.cidadeService.findAll(this.formGroup.value.estadoId).subscribe(cidades=>{
         for (let cidade in cidades) {

@@ -29,7 +29,7 @@ export class NativeMapsProvider {
       this.map = this.googleMaps.create(element.nativeElement, opts);
     this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
       this.map.setMyLocationEnabled(true)
-      console.log('Map is ready!');
+      
     });
 
     }
@@ -40,7 +40,7 @@ export class NativeMapsProvider {
     let map = GoogleMaps.create(element.nativeElement, opts);
     map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
     map.setMyLocationEnabled(true)
-      console.log('Map is ready!');
+      
     });
 
 
