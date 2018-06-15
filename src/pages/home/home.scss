@@ -8,11 +8,11 @@ ion-card-header {
 }
 
 img{
-  width: 35%;
+  width: 20%;
   align-self: center;
   margin:auto;
   display: block;
-  padding: 10px;
+  
   }
 
 .list-chats p{
@@ -26,5 +26,18 @@ img{
   border-radius: 10%;
   background:#232526;
 }
+ion-item.item.item-block.item-md {
+  border-radius: 45%;
+}
 
+}
+ion-toast.toast-ios.toast-error div,
+ion-toast.toast-md.toast-error div {
+  background-color: #f53d3d;
+  font-size: 15.8px;
+  }
+.toast-md .toast-wrapper,
+.toast-ios .toast-wrapper {
+  background-color: rgb(19, 172, 19);
+  color:black;
 }
