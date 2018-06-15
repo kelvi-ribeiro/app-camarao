@@ -1,14 +1,16 @@
-import { API_CONFIG } from './../../config/api.config';
-import { Observable } from 'rxjs/Rx';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { API_CONFIG } from "./../../config/api.config";
+import { Observable } from "rxjs/Rx";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 @Injectable()
-export class OxigenioDissolvidoService{
-
-  constructor(public http:HttpClient){
-
+export class OxigenioDissolvidoService {
+  constructor(public http: HttpClient) {}
+  findOxigenioDissolvido(): Observable<any> {
+    return this.http.get(`${API_CONFIG.baseUrl}/oxigenioDissolvidos`);
   }
-  findOxigenioDissolvido():Observable<any>{
-    return this.http.get(`${API_CONFIG.baseUrl}/oxigenioDissolvidos`)
+  findPage(page, urlPropriedade): Observable<any> {
+    return this.http.get(
+      `${API_CONFIG.baseUrl}/${urlPropriedade}/paginada?page=${page}`
+    );
   }
 }

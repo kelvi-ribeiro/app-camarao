@@ -1,17 +1,16 @@
-import { API_CONFIG } from './../../config/api.config';
-import { Observable } from 'rxjs/Rx';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { API_CONFIG } from "./../../config/api.config";
+import { Observable } from "rxjs/Rx";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 @Injectable()
-export class PhService{
-
-  constructor(public http:HttpClient){
-
+export class PhService {
+  constructor(public http: HttpClient) {}
+  findPhs(): Observable<any> {
+    return this.http.get(`${API_CONFIG.baseUrl}/phs`);
   }
-  findPhs():Observable<any>{
-    return this.http.get(`${API_CONFIG.baseUrl}/phs`)
-  }
-  findPhsPage(page):Observable<any>{
-    return this.http.get(`${API_CONFIG.baseUrl}/phs/paginada?page=${page}`)
+  findPage(page, urlPropriedade): Observable<any> {
+    return this.http.get(
+      `${API_CONFIG.baseUrl}/${urlPropriedade}/paginada?page=${page}`
+    );
   }
 }

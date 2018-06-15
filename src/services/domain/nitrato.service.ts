@@ -11,4 +11,7 @@ export class NitratoService{
   findNitratos():Observable<any>{
     return this.http.get(`${API_CONFIG.baseUrl}/nitratos`)
   }
+  findPage(page,urlPropriedade): Observable<any> {
+    return this.http.get(`${API_CONFIG.baseUrl}/${urlPropriedade}/paginada?page=${page}`);
+  }
 }
