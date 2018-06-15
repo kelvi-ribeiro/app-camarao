@@ -48,7 +48,7 @@ export class HomePage {
   salinidade;
   transparencia;
   loopRecursivas: boolean;
-  tempo: number = 5000;
+  tempo: number = 20000;
 
   constructor(
     public navCtrl: NavController,
@@ -75,6 +75,7 @@ export class HomePage {
   ionViewDidEnter() {
     this.usuarioService.preencherMenuDeAcordoComUsuario();
     this.getUser();
+    this.executaPrimeiraVez()
     this.invocaMetodoMedicoes();
   }
 
@@ -210,5 +211,16 @@ export class HomePage {
     });
 
     toast.present();
+  }
+  executaPrimeiraVez(){
+    this.exibirTemperatura();
+    this.exibirPh();
+    this.exibirNitrato();
+    this.exibirNitrito();
+    this.exibirOxigenioDissolvido();
+    this.exibirSalinidade();
+    this.exibirTransparencia();
+    this.exibirAmoniaTotal();
+    this.invocaMetodoMedicoes();
   }
 }
