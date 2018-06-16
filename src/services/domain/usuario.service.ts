@@ -16,7 +16,8 @@ export class UsuarioService {
     public storage: StorageService,
     public imageUtilService: ImageUtilService,
     public global: Globals,
-    public storageService: StorageService) {
+    public storageService: StorageService,
+    ) {
   }
 
   findById(id: string) {
@@ -67,7 +68,6 @@ export class UsuarioService {
       this.findByEmail(this.email)
         .subscribe((response => {
           this.perfis = response['perfis'];
-          this.global.perfis = response['perfis'];
           this.storageService.setUserPerfil(this.perfis);
           this.storageService.setUserName(response['nome'])
           for (let i = 0; i < this.perfis.length; i++) {
@@ -85,6 +85,7 @@ export class UsuarioService {
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ];
+              this.storage.setUserFunction('Administrador')
               break;
             } else {
               this.global.pages = [
@@ -96,6 +97,8 @@ export class UsuarioService {
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ]
+              this.storage.setUserFunction('Funcionário')
+              break;
               }
             }
           }))
@@ -104,6 +107,7 @@ export class UsuarioService {
           return null;
         }
       }
+
     }
 
 

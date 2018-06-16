@@ -55,6 +55,23 @@ export class StorageService {
     }
   }
 
+  getUserFunction() {
+    let funcao = localStorage.getItem(STORAGE_KEYS.funcao);
+    if (funcao == null) {
+      return null;
+    } else {
+      return JSON.parse(funcao);
+    }
+  }
+
+  setUserFunction(funcao) {
+    if(funcao == null){
+      localStorage.removeItem(STORAGE_KEYS.funcao);
+    }else{
+      localStorage.setItem(STORAGE_KEYS.funcao,JSON.stringify(funcao))
+    }
+  }
+
 
   setEmail(email) {
     if(email == null){
