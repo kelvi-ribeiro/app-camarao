@@ -126,11 +126,11 @@ export class ListaMensagensPage {
   }
 
   getImageIfExists(mensagem) {
-    this.usuarioService.getImageFromBucket(mensagem["clienteId"]).subscribe(
+    this.usuarioService.getImageFromBucketFromUsers(mensagem['urlFoto']).subscribe(
       response => {
-        mensagem.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${
-          mensagem["clienteId"]
-        }.jpg`;
+        mensagem.imageUrl = `${API_CONFIG.bucketBaseUrl}/${
+          mensagem["urlFoto"]
+        }`
         return mensagem;
       },
       error => {}

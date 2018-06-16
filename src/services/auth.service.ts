@@ -53,7 +53,8 @@ export class AuthService {
         this.storage.setLocalUser(null);
         this.storage.setUserPerfil(null);
         this.storage.setUserName(null);
-        this.storage.setUserFunction(null)
+        this.storage.setUserFunction(null);
+        this.storage.setUserUrlFoto(null);
         this.globals.profileImage = 'assets/imgs/avatar-blank.png'
     }
 }

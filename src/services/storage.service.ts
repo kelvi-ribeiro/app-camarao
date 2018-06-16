@@ -55,6 +55,23 @@ export class StorageService {
     }
   }
 
+
+  setUserUrlFoto(urlFoto) {
+    if(urlFoto == null){
+      localStorage.removeItem(STORAGE_KEYS.urlFoto);
+    }else{
+      localStorage.setItem(STORAGE_KEYS.urlFoto,JSON.stringify(urlFoto))
+    }
+  }
+
+  getUserUrlFoto() {
+    let urlFoto = localStorage.getItem(STORAGE_KEYS.urlFoto);
+    if (urlFoto == null) {
+      return null;
+    } else {
+      return JSON.parse(urlFoto);
+    }
+  }
   getUserFunction() {
     let funcao = localStorage.getItem(STORAGE_KEYS.funcao);
     if (funcao == null) {
@@ -63,6 +80,7 @@ export class StorageService {
       return JSON.parse(funcao);
     }
   }
+
 
   setUserFunction(funcao) {
     if(funcao == null){

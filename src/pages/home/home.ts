@@ -106,7 +106,7 @@ export class HomePage {
   }
 
   getImageIfExists() {
-    this.usuarioService.getImageFromBucket(this.usuario.id).subscribe(
+    this.usuarioService.getImageFromBucket().subscribe(
       response => {
         this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${
           this.usuario.id

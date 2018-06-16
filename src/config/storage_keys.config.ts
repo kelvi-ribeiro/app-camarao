@@ -3,6 +3,7 @@ export const STORAGE_KEYS = {
   perfil:"perfil",
   email:"email",
   nome:"nome",
-  funcao:"funcao"
+  funcao:"funcao",
+  urlFoto:"urlFoto"
 
 }

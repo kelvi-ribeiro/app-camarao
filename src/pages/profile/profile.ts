@@ -19,7 +19,7 @@ export class ProfilePage {
   picture: string;
   cameraOn: boolean = false;
   profileImage;
-  apertouCamera = false;
+  apertouOpcaoFoto = false;
   mandandoFoto = false;
 
   constructor(
@@ -38,17 +38,14 @@ export class ProfilePage {
     this.picture = null;
     this.loadData();
   }
-  ionViewWillLeave(){
-    this.profileImage = 'assets/imgs/avatar-blank.png';
-    this.picture = null;
-  }
+
 
   loadData() {
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
       this.usuarioService.findByEmail(localUser.email)
         .subscribe(response => {
-          this.usuario = response as UsuarioDTO;          
+          this.usuario = response as UsuarioDTO;
 
           this.getImageIfExists();
         },
@@ -64,9 +61,9 @@ export class ProfilePage {
   }
 
   getImageIfExists() {
-    this.usuarioService.getImageFromBucket(this.usuario.id)
+    this.usuarioService.getImageFromBucket()
     .subscribe(response => {
-      this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+      this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/${this.storage.getUserUrlFoto()}`;
       this.blobToDataURL(response).then(dataUrl => {
         let str:string = dataUrl as string;
         this.profileImage =this.sanitazer.bypassSecurityTrustUrl(str);
@@ -88,10 +85,12 @@ export class ProfilePage {
   }
 
   getCameraPicture() {
-    this.apertouCamera = true;
+    this.apertouOpcaoFoto = true;
     this.cameraOn = true;
     const options: CameraOptions = {
-      quality: 100,
+      quality: 65,
+      targetWidth: 800,
+      targetHeight: 600,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE
@@ -107,8 +106,11 @@ export class ProfilePage {
 
   getGalleryPicture() {
     this.cameraOn = true;
+    this.apertouOpcaoFoto = true; // Também servindo para foto
     const options: CameraOptions = {
-      quality: 100,
+      quality: 65,
+      targetWidth: 800,
+      targetHeight: 600,
       sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.PNG,
@@ -126,34 +128,36 @@ export class ProfilePage {
 
 
   sendPicture() {
-    this.presentToast();
+    this.presentToast('Fazendo upload, sua foto será alterada dentro de alguns segundos...','toast-attention');
     this.mandandoFoto = true;
-    this.apertouCamera = false;
+    this.apertouOpcaoFoto = false;
     this.usuarioService.uploadPicture(this.picture)
       .subscribe(response => {
-        this.picture = null;
-        this.profileImage = null;
-        this.getImageIfExists();
-
+          this.navCtrl.setRoot('HomePage')
+          this.navCtrl.setRoot('ProfilePage')
+          this.presentToast('Foto Alterada',null)
       },
       error => {
-
+        this.presentToast('Ocorreu Algum erro na tentiva de envio da foto, Desculpe, tente novamente','toast-error')
       });
 
   }
 
   cancel() {
     this.picture = null;
-    this.apertouCamera = false;
+    this.apertouOpcaoFoto = false;
   }
 
-  presentToast() {
+  presentToast(message,css) {
     let toast = this.toastCtrl.create({
-      message: 'Sua foto será alterada dentro de alguns minutos...',
+      message: message,
       duration: 3000,
-      position: 'middle'
+      position: 'middle',
+      cssClass:css
     });
 
     toast.present();
   }
+
+
 }

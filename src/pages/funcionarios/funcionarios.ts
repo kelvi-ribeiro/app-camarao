@@ -75,9 +75,9 @@ export class FuncionariosPage {
   }
 
   getImageIfExists(funcionario) {
-    this.usuarioService.getImageFromBucket(funcionario.id)
+    this.usuarioService.getImageFromBucketFromUsers(funcionario.urlFoto)
       .subscribe(response => {
-        funcionario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${funcionario.id}.jpg`;
+        funcionario.imageUrl = `${API_CONFIG.bucketBaseUrl}/${funcionario.urlFoto}`;
         return funcionario;
       },
         error => { });

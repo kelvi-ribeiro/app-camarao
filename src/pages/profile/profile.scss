@@ -1,6 +1,6 @@
 page-profile {
-  img{
-    width: 200px;
+  .img-salva{
+    width: 75%;
     align-self: center;
     margin:auto;
     display: block;
@@ -8,18 +8,26 @@ page-profile {
     border-radius: 60%;
   }
 
-  ion-icon {
-    margin-left:38%;
-}
+
 .row-camera{
   font-weight: bolder;
+  text-align: center;
 }
-.row-camera p{
-  margin-left:38%;
-}
+
 
 .icon-button{
-  font-size:38px
-}
 
 }
+.icon-img{
+  width: 80%;
+  height: 80%;
+}
+
+
+}
+
+ion-toast.toast-ios.toast-attention div,
+ion-toast.toast-md.toast-attention div {
+  background-color: rgb(193, 117, 3);
+
+  }

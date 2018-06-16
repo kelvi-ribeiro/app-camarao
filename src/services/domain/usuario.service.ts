@@ -32,8 +32,12 @@ export class UsuarioService {
     return this.http.get(`${API_CONFIG.baseUrl}/usuarios/email?value=${email}`);
   }
 
-  getImageFromBucket(id: string): Observable<any> {
-    let url = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`
+  getImageFromBucket(): Observable<any> {
+    let url = `${API_CONFIG.bucketBaseUrl}/${this.storageService.getUserUrlFoto()}`
+    return this.http.get(url, { responseType: 'blob' });
+  }
+  getImageFromBucketFromUsers(urlFoto): Observable<any> {
+    let url = `${API_CONFIG.bucketBaseUrl}/${urlFoto}`
     return this.http.get(url, { responseType: 'blob' });
   }
 
@@ -69,6 +73,7 @@ export class UsuarioService {
         .subscribe((response => {
           this.perfis = response['perfis'];
           this.global.perfis = response['perfis'];
+          this.storageService.setUserUrlFoto(response['urlFoto'])
           this.storageService.setUserPerfil(this.perfis);
           this.storageService.setUserName(response['nome'])
           for (let i = 0; i < this.perfis.length; i++) {
