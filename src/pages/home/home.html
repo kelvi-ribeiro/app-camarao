@@ -6,12 +6,12 @@
     </button>
     <ion-title>Home</ion-title>
     <ion-buttons  end>
-      <button *ngIf="amoniaTotal?.horaMarcada"  (click)="exibirToastAtualizado()" ion-button icon-only>
+      <button *ngIf="!error"  (click)="exibirToastAtualizado()" ion-button icon-only>
         <h5 style="margin-right:12%;">{{amoniaTotal?.horaMarcada | date:"HH:mm:ss"}}
         </h5>
         <ion-icon color="secondary" name="radio-button-on"></ion-icon>
       </button>
-      <button *ngIf="!amoniaTotal?.horaMarcada"  (click)="exibirToastDesatualizado()" ion-button icon-only>
+      <button *ngIf="error"  (click)="exibirToastDesatualizado()" ion-button icon-only>
           <p style="margin-right:12%;">Off</p>
           <ion-icon color="danger" name="radio-button-on"></ion-icon>
         </button>

@@ -12,7 +12,8 @@ import {
   NavController,
   NavParams,
   LoadingController,
-  ToastController
+  ToastController,
+  AlertController
 } from "ionic-angular";
 import { UsuarioService } from "../../services/domain/usuario.service";
 import { TemperaturaService } from "../../services/domain/temperatura.service";
@@ -36,6 +37,7 @@ import { LoginPage } from "../login/login";
   templateUrl: "home.html"
 })
 export class HomePage {
+  error: boolean = false;
   usuario: UsuarioDTO;
   email;
   perfis = [];
@@ -67,7 +69,8 @@ export class HomePage {
     public sanitazer: DomSanitizer,
     public globals: Globals,
     public storage: StorageService,
-    public toastCtrl:ToastController
+    public toastCtrl:ToastController,
+    public alertCtrl:AlertController
   ) {
     this.loopRecursivas = true;
   }
@@ -76,7 +79,7 @@ export class HomePage {
     this.usuarioService.preencherMenuDeAcordoComUsuario();
     this.getUser();
     this.executaPrimeiraVez()
-    this.invocaMetodoMedicoes();
+
   }
 
   ionViewWillLeave() {
@@ -133,23 +136,27 @@ export class HomePage {
   exibirTemperatura() {
     this.temperaturaService.findTemperatura().subscribe(response => {
       this.temperatura = response;
-    });
+      this.error = false
+    },error=>{this.alertErrorConexao()});
   }
 
   exibirPh() {
     this.phService.findPhs().subscribe(response => {
       this.ph = response;
-    });
+      this.error = false
+    },error=>{console.log(error)});
   }
   exibirNitrato() {
     this.nitratoService.findNitratos().subscribe(response => {
       this.nitrato = response;
-    });
+      this.error = false
+    },error=>{console.log(error)});
   }
   exibirNitrito() {
     this.nitritoService.findNitrito().subscribe(response => {
       this.nitrito = response;
-    });
+      this.error = false
+    },error=>{console.log(error)});
   }
 
   exibirOxigenioDissolvido() {
@@ -157,25 +164,29 @@ export class HomePage {
       .findOxigenioDissolvido()
       .subscribe(response => {
         this.oxigenioDissolvido = response;
-      });
+        this.error = false
+      },error=>{console.log(error)});
   }
 
   exibirSalinidade() {
     this.salinidadeService.findSalinidade().subscribe(response => {
       this.salinidade = response;
-    });
+      this.error = false
+    },error=>{console.log(error)});
   }
 
   exibirTransparencia() {
     this.transparenciaService.findTransparencia().subscribe(response => {
       this.transparencia = response;
-    });
+      this.error = false
+    },error=>{console.log(error)});
   }
 
   exibirAmoniaTotal() {
     this.amoniaTotalService.findAmonias().subscribe(response => {
       this.amoniaTotal = response;
-    });
+      this.error = false
+    },error=>{console.log(error)});
   }
 
   invocaMetodoMedicoes() {
@@ -222,6 +233,28 @@ export class HomePage {
     this.exibirSalinidade();
     this.exibirTransparencia();
     this.exibirAmoniaTotal();
-    this.invocaMetodoMedicoes();
+    this.invocaMetodoMedicoes()
+
+
+
   }
+  alertErrorConexao(){
+    let alert = this.alertCtrl.create({
+      title:'Falha!',
+      message:'Ocorreu algum problema na conexão',
+      buttons:[
+        {
+          text:'Ok',
+
+        }
+      ]
+    });
+    this.error = true
+    alert.present();
+
+    setTimeout(() => {
+      alert.dismiss()
+    }, 5000);
+  }
+
 }
