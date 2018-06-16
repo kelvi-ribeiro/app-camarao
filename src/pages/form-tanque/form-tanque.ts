@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Globals } from '../../globals.array';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -32,7 +32,8 @@ export class FormTanquePage {
               public geolocation:Geolocation,
               public tanqueService:TanqueService,
               public alertCtrl:AlertController,
-              public storageService:StorageService
+              public storageService:StorageService,
+              public toastCtrl:ToastController
               )
 
                {
@@ -49,6 +50,7 @@ export class FormTanquePage {
      ionViewDidLoad(){
        this.nomeUsuario = this.storageService.getUserName()
       this.buscarLocalizacao()
+      this.presentToast(`Prezado ${this.nomeUsuario}, Lembre-se de ligar seu GPS para cadastrar um tanque`,'toast-attention')
      }
   criarTanque(){
     this.tanqueService.insert(this.formGroup.value).subscribe(res=>{
@@ -76,8 +78,6 @@ export class FormTanquePage {
   }
   buscarLocalizacao(){
     this.geolocation.getCurrentPosition().then((resp) => {
-
-
       this.formGroup.controls.latitude.setValue(resp.coords.latitude)
       this.formGroup.controls.longitude.setValue(resp.coords.longitude)
       this.buscarEndereco()
@@ -90,5 +90,15 @@ export class FormTanquePage {
     this.tanqueService.buscarEndereco(this.formGroup.value.latitude,this.formGroup.value.longitude).subscribe(res=>{
       this.endereco = res.results[0].formatted_address
     })
+  }
+  presentToast(message,css) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3500,
+      position: 'bottom',
+      cssClass:css
+    });
+
+    toast.present();
   }
 }
