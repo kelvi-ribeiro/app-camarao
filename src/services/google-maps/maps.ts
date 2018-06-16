@@ -20,8 +20,8 @@ export class MapsProvider {
     }
   }
 
-  init(location, element,tanque){
-    this.map.init(location, element,tanque);
+  init(location, element,markerOptions){
+    this.map.init(location, element,markerOptions);
   }
 
 }

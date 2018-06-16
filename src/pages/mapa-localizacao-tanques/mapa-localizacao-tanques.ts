@@ -4,6 +4,7 @@ import { MapsProvider } from "../../services/google-maps/maps";
 import { Geolocation } from '@ionic-native/geolocation';
 import { TanqueService } from "../../services/domain/tanque.service";
 import { Globals } from "../../globals.array";
+import { LatLng } from "@ionic-native/google-maps";
 
 /**
  * Generated class for the MapaLocalizacaoTanquesPage page.
@@ -23,7 +24,7 @@ export class MapaLocalizacaoTanquesPage {
     longitude: number;
   };
   tanques = []
-  tanqueAtivo
+  markerOptions = []
 
   @ViewChild("map") mapElement: ElementRef;
 
@@ -33,11 +34,8 @@ export class MapaLocalizacaoTanquesPage {
     public geolocation: Geolocation,
     public mapsProvider: MapsProvider,
     public tanqueService:TanqueService,
-    public globals:Globals
-  ) {
-    this.tanqueAtivo = this.navParams.get('tanque')
-    this.globals.tanque = this.navParams.get('tanque')
 
+  ) {
   }
 
   ionViewDidLoad() {
@@ -45,32 +43,45 @@ export class MapaLocalizacaoTanquesPage {
 
   }
 
-  findUserLocation(tanque) {
+  findUserLocation() {
     let options = {
       enableHighAccuracy: true,
       timeout: 25000
     };
+    this.geolocation.getCurrentPosition(options).then((position) => {
 
-    this.location = {
-      latitude: tanque.latitude,
-      longitude: tanque.longitude
-    };
-    this.mapsProvider.init(this.location, this.mapElement,tanque);
-
+      this.location = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      };
+      this.criaObjetoMarksBaseadoTanques()
+      console.log(this.markerOptions,this.location)
+      this.mapsProvider.init(this.location, this.mapElement,this.markerOptions);
+     }).catch((error) => {
+       console.log('Error getting location', error);
+     });
   }
+
+
   obterTanques(){
     this.tanqueService.findAll().subscribe(res=>{
       this.tanques = res;
-      if(this.tanqueAtivo){
-        const index = this.tanques.findIndex(el=> this.tanqueAtivo.id===el.id)
 
-        this.tanques.splice(index,1)
-      }
-      this.findUserLocation(this.tanqueAtivo ? this.tanqueAtivo : this.tanques[0]);
+      this.findUserLocation();
     })
   }
-  trocarLocalizacao(tanque){
-    this.navCtrl.setRoot('MapaLocalizacaoTanquesPage',{tanque:tanque})
 
+  criaObjetoMarksBaseadoTanques(){
+    let latLng;
+    this.tanques.forEach(element => {
+      latLng  = new LatLng(element.latitude, element.longitude);
+      let markerOption ={
+        title:`Tanque ${element.nome}`,
+        position:latLng,
+        icon: 'red',
+        animation: 'DROP',
+      }
+      this.markerOptions.push(markerOption)
+    });
   }
 }

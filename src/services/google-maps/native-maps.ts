@@ -11,7 +11,7 @@ export class NativeMapsProvider {
 
   }
 
-  init(location, element,tanque){
+  init(location, element,markerOptions){
 
     let latLng = new LatLng(location.latitude, location.longitude);
 
@@ -24,24 +24,15 @@ export class NativeMapsProvider {
     };
 
 
-      console.log('this.globals',tanque)
+      console.log('this.globals',markerOptions)
       this.map = this.googleMaps.create(element.nativeElement, opts);
     this.map.one(GoogleMapsEvent.MAP_READY)
     .then(() => {
       this.map.setMyLocationEnabled(true);
-      this.map.addMarker({
-        title: `Tanque ${tanque.nome}`,
-        icon: 'red',
-        animation: 'DROP',
-        position:latLng
-        })
-    .then(marker => {
-      marker.showInfoWindow()
-    marker.on(GoogleMapsEvent.MARKER_CLICK)
-    .subscribe(() => {
-        alert('Clique no Ícone da seta logo abaixo, para criar uma rota entre você e o tanque');
+      markerOptions.forEach(element => {
+        this.map.addMarker(element)
       });
-    });
+
 
     });
 
