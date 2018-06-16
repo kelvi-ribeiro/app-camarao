@@ -11,6 +11,7 @@ import { MensagemService } from "../../services/domain/mensagem.service";
 import { UsuarioService } from "../../services/domain/usuario.service";
 import { API_CONFIG } from "../../config/api.config";
 import { Globals } from "../../globals.array";
+import { StorageService } from "../../services/storage.service";
 
 /**
  * Generated class for the ListaMensagensPage page.
@@ -35,7 +36,8 @@ export class ListaMensagensPage {
     public usuarioService: UsuarioService,
     public modalCtrl: ModalController,
     public globals: Globals,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public storageService:StorageService
   ) {}
 
   ionViewDidLoad() {
@@ -45,10 +47,10 @@ export class ListaMensagensPage {
     loading.dismiss();
   }
 
-  verificaUsuarioAdmin() {    
+  verificaUsuarioAdmin() {
+      if (this.storageService.getUserPerfil().find(e => e == "ADMIN")) {
+        this.admin = true;
 
-    if (this.globals.perfis.find(e => e == "ADMIN")) {
-      this.admin = true;
     }
   }
 
