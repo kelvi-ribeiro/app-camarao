@@ -2,7 +2,7 @@ import { TransparenciaService } from './../../services/domain/transparencia.serv
 import { SalinidadeService } from './../../services/domain/salinidade.service';
 import { OxigenioDissolvidoService } from './../../services/domain/oxigenioDissolvido.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { PhService } from '../../services/domain/ph.service';
 import { AmoniaTotalService } from '../../services/domain/amoniaTotal.service';
 import { NitritoService } from '../../services/domain/nitrito.service';
@@ -27,6 +27,7 @@ export class RelatorioCompletoPropriedadesPage {
   objectMockListaPropriedades;
   tanque;
   propriedadeEscolhida;
+  loading;
   tanqueInexistente = false
   constructor(
     public navCtrl: NavController,
@@ -39,7 +40,8 @@ export class RelatorioCompletoPropriedadesPage {
     public salinidadeService:SalinidadeService,
     public temperaturaSevice:SalinidadeService,
     public transparenciaService:TransparenciaService,
-    public alertCtrl:AlertController
+    public alertCtrl:AlertController,
+    public loadingCtrl:LoadingController
 
   ) {
     this.tanque = this.navParams.get('tanque');
@@ -56,52 +58,65 @@ export class RelatorioCompletoPropriedadesPage {
 
   }
   pesquisaPropriedade(){
-    console.log('pesquisaPropriedade',this.urlPath)
     switch (this.urlPath){
       case "amonias":
+      this.loading = this.presentLoadingDefault()
       this.amoniaService.findPage(this.page,this.urlPath).subscribe(res=>{
-        console.log('objectMockListaProprieades',this.objectMockListaPropriedades)
         this.propriedades = res['content']
-
-
-      })
+        this.loading.dismiss()
+      },error=>{this.loading.dismiss()})
       break;
       case "nitratos":
+      this.loading = this.presentLoadingDefault()
       this.nitratoService.findPage(this.page,this.urlPath).subscribe(res=>{
         this.propriedades = res['content'];
-      })
+        this.loading.dismiss()
+      },error=>{this.loading.dismiss()})
       break;
       case "nitritos":
+      this.loading = this.presentAlertSemArduino()
       this.nitritoService.findPage(this.page,this.urlPath).subscribe(res=>{
         this.propriedades = res['content'];
-      })
+        this.loading.dismiss()
+      },error=>{this.loading.dismiss()})
       break;
       case "oxigenioDissolvidos":
+      this.loading = this.presentLoadingDefault()
       this.oxigenioService.findPage(this.page,this.urlPath).subscribe(res=>{
         this.propriedades = res['content'];
-      })
+        this.loading.dismiss()
+      },error=>{this.loading.dismiss()})
       break;
       case "phs":
+      this.loading = this.presentLoadingDefault()
       this.phService.findPage(this.page,this.urlPath).subscribe(res=>{
         this.propriedades = res['content'];
-      })
+        this.loading.dismiss()
+      },error=>{this.loading.dismiss()})
       break;
       case "salinidades":
+      this.loading = this.presentLoadingDefault()
       this.salinidadeService.findPage(this.page,this.urlPath).subscribe(res=>{
         this.propriedades = res['content'];
-      })
+        this.loading.dismiss()
+      },error=>{this.loading.dismiss()})
       break;
       case "temperaturas":
+      this.loading = this.presentLoadingDefault()
       this.temperaturaSevice.findPage(this.page,this.urlPath).subscribe(res=>{
         this.propriedades = res['content'];
-      })
+        this.loading.dismiss()
+      },error=>{this.loading.dismiss()})
       break;
       case "transparencias":
+      let loading = this.presentLoadingDefault()
       this.transparenciaService.findPage(this.page,this.urlPath).subscribe(res=>{
         this.propriedades = res['content'];
-      })
-
+        this.loading.dismiss()
+        loading.dismiss()
+      },error=>{loading.dismiss()})
       break;
+      default:null
     }
   }
 
@@ -165,7 +180,7 @@ export class RelatorioCompletoPropriedadesPage {
     this.pesquisaPropriedade();
     setTimeout(() => {
       infiniteScroll.complete();
-    }, 2000);
+    }, 3000);
   }
   presentAlertSemArduino() {
     let alert = this.alertCtrl.create({
@@ -178,6 +193,13 @@ export class RelatorioCompletoPropriedadesPage {
       alert.dismiss()
       this.navCtrl.setRoot('HomePage')
     }, 3500);
+  }
+  presentLoadingDefault() {
+    let loading = this.loadingCtrl.create({
+      content: 'Carregando...'
+    });
+    loading.present();
+    return loading;
   }
 
 }

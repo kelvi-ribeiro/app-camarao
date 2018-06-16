@@ -17,7 +17,7 @@
 
 
 <ion-content padding>
-  <div *ngIf="!tanqueInexistente">
+  <div *ngIf="!tanqueInexistente && propriedades">
     <div class="row header">
         <div class="col">Código</div>
       <div class="col">{{propriedadeEscolhida}}</div>
@@ -37,5 +37,5 @@
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
-  
+
 </ion-content>
