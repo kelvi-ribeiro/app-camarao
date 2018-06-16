@@ -1,3 +1,4 @@
+import { Globals } from './../../globals.array';
 import { Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { JsMapsProvider } from './js-maps';
@@ -9,7 +10,8 @@ export class MapsProvider {
 
   map: any;
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform,
+              public globals:Globals) {
     if(this.platform.is('cordova') &&
       (this.platform.is('ios') || this.platform.is('android'))){
       this.map = new NativeMapsProvider(GoogleMaps);
@@ -18,8 +20,8 @@ export class MapsProvider {
     }
   }
 
-  init(location, element){
-    this.map.init(location, element);
+  init(location, element,tanque){
+    this.map.init(location, element,tanque);
   }
 
 }

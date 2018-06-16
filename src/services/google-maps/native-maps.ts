@@ -1,3 +1,4 @@
+import { Globals } from './../../globals.array';
 import { Injectable } from '@angular/core';
 import { GoogleMaps, LatLng, GoogleMapsEvent } from '@ionic-native/google-maps';
 
@@ -10,7 +11,7 @@ export class NativeMapsProvider {
 
   }
 
-  init(location, element){
+  init(location, element,tanque){
 
     let latLng = new LatLng(location.latitude, location.longitude);
 
@@ -23,25 +24,27 @@ export class NativeMapsProvider {
     };
 
 
-    if(!this.map){
-      this.refreshMap(element,opts)
-    }else{
+      console.log('this.globals',tanque)
       this.map = this.googleMaps.create(element.nativeElement, opts);
-    this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-      this.map.setMyLocationEnabled(true)
-      
+    this.map.one(GoogleMapsEvent.MAP_READY)
+    .then(() => {
+      this.map.setMyLocationEnabled(true);
+      this.map.addMarker({
+        title: `Tanque ${tanque.nome}`,
+        icon: 'red',
+        animation: 'DROP',
+        position:latLng
+        })
+    .then(marker => {
+      marker.showInfoWindow()
+    marker.on(GoogleMapsEvent.MARKER_CLICK)
+    .subscribe(() => {
+        alert('Clique no Ícone da seta logo abaixo, para criar uma rota entre você e o tanque');
+      });
     });
 
-    }
-
-  }
-  refreshMap(element, opts){
-
-    let map = GoogleMaps.create(element.nativeElement, opts);
-    map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-    map.setMyLocationEnabled(true)
-      
     });
+
 
 
   }

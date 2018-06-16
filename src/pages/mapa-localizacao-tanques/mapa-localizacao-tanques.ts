@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { MapsProvider } from "../../services/google-maps/maps";
 import { Geolocation } from '@ionic-native/geolocation';
 import { TanqueService } from "../../services/domain/tanque.service";
+import { Globals } from "../../globals.array";
 
 /**
  * Generated class for the MapaLocalizacaoTanquesPage page.
@@ -31,9 +32,11 @@ export class MapaLocalizacaoTanquesPage {
     public navParams:NavParams,
     public geolocation: Geolocation,
     public mapsProvider: MapsProvider,
-    public tanqueService:TanqueService
+    public tanqueService:TanqueService,
+    public globals:Globals
   ) {
     this.tanqueAtivo = this.navParams.get('tanque')
+    this.globals.tanque = this.navParams.get('tanque')
 
   }
 
@@ -52,7 +55,7 @@ export class MapaLocalizacaoTanquesPage {
       latitude: tanque.latitude,
       longitude: tanque.longitude
     };
-    this.mapsProvider.init(this.location, this.mapElement);
+    this.mapsProvider.init(this.location, this.mapElement,tanque);
 
   }
   obterTanques(){
@@ -66,7 +69,7 @@ export class MapaLocalizacaoTanquesPage {
       this.findUserLocation(this.tanqueAtivo ? this.tanqueAtivo : this.tanques[0]);
     })
   }
-  trocarLocalizacao(tanque){   
+  trocarLocalizacao(tanque){
     this.navCtrl.setRoot('MapaLocalizacaoTanquesPage',{tanque:tanque})
 
   }
