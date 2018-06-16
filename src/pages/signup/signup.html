@@ -13,19 +13,19 @@
         <ion-label floating>Nome*</ion-label>
         <ion-input formControlName="nome" type="text"></ion-input>
       </ion-item>
-      <p class="text-danger" *ngIf="formGroup.controls.nome.touched && formGroup.controls.nome.errors" margin-left>Valor inválido</p>
+      <p class="text-danger" *ngIf="formGroup.controls.nome.touched && formGroup.controls.nome.errors" margin-left>Nome inválido</p>
 
       <ion-item>
         <ion-label floating>Email*</ion-label>
         <ion-input formControlName="email" type="text"></ion-input>
       </ion-item>
-      <p class="text-danger" *ngIf="formGroup.controls.email.touched && formGroup.controls.email.errors" margin-left>Valor inválido</p>
+      <p class="text-danger" *ngIf="formGroup.controls.email.touched && formGroup.controls.email.errors" margin-left>Email inválido</p>
 
       <ion-item>
         <ion-label floating>CPF</ion-label>
-        <ion-input formControlName="cpf" type="text"></ion-input>
+        <ion-input formControlName="cpf" type="number"></ion-input>
       </ion-item>
-      <p class="text-danger" *ngIf="formGroup.controls.cpf.touched && formGroup.controls.cpf.errors" margin-left>Valor inválido</p>
+      <p class="text-danger" *ngIf="formGroup.controls.cpf.touched && formGroup.controls.cpf.errors" margin-left>CPF inválido</p>
 
       <ion-item>
         <ion-label floating>Senha*</ion-label>
@@ -37,7 +37,7 @@
           <ion-label floating>Telefone 1*</ion-label>
           <ion-input formControlName="telefone1" type="text"></ion-input>
         </ion-item>
-        <p class="text-danger" *ngIf="formGroup.controls.telefone1.touched && formGroup.controls.telefone1.errors" margin-left>Valor inválido</p>
+        <p class="text-danger" *ngIf="formGroup.controls.telefone1.touched && formGroup.controls.telefone1.errors" margin-left>Telefone inválido</p>
 
         <ion-item>
           <ion-label floating>Telefone 2</ion-label>
@@ -53,13 +53,13 @@
       <ion-label floating>CEP*</ion-label>
         <ion-input (ionBlur)="buscarViaCep()" formControlName="cep" type="text"></ion-input>
       </ion-item>
-      <p class="text-danger" *ngIf="formGroup.controls.cep.touched && formGroup.controls.cep.errors" margin-left>Valor inválido</p>
+      <p class="text-danger" *ngIf="formGroup.controls.cep.touched && formGroup.controls.cep.errors" margin-left>CEP inválido</p>
 
       <ion-item>
         <ion-label floating>Número*</ion-label>
         <ion-input formControlName="numero" type="text"></ion-input>
       </ion-item>
-      <p class="danger" *ngIf="formGroup.controls.numero.touched && formGroup.controls.numero.errors" margin-left>Valor inválido</p>
+      <p class="danger" *ngIf="formGroup.controls.numero.touched && formGroup.controls.numero.errors" margin-left>Número inválido</p>
 
       <ion-item>
         <ion-label floating>Complemento</ion-label>
@@ -75,7 +75,7 @@
           <ion-label floating>Logradouro*</ion-label>
           <ion-input formControlName="logradouro" type="text"></ion-input>
         </ion-item>
-        <p class="danger" *ngIf="formGroup.controls.logradouro.dirty && formGroup.controls.logradouro.errors" margin-left>Valor inválido</p>
+        <p class="danger" *ngIf="formGroup.controls.logradouro.dirty && formGroup.controls.logradouro.errors" margin-left>Logradouro inválido</p>
 
       <ion-item>
         <ion-label floating>Estado*</ion-label>
