@@ -47,7 +47,8 @@ export class RelatorioCompletoPropriedadesPage {
 
   ionViewDidLoad() {
     if(this.tanque.nome!=='Macuxi'){
-      this.tanqueInexistente = true
+      this.presentAlertSemArduino()
+      this.tanqueInexistente = true;
     }
     console.log(this.tanque)
     this.tanqueInexistente ? null:this.alertEscolhaPropriedadeRelatorio()
@@ -165,6 +166,18 @@ export class RelatorioCompletoPropriedadesPage {
     setTimeout(() => {
       infiniteScroll.complete();
     }, 2000);
+  }
+  presentAlertSemArduino() {
+    let alert = this.alertCtrl.create({
+      title:'Sem Arduíno para essse tanque!',
+      message:'Redirecionando para a tela principal... '
+    });
+
+    alert.present();
+    setTimeout(() => {
+      alert.dismiss()
+      this.navCtrl.setRoot('HomePage')
+    }, 3500);
   }
 
 }
