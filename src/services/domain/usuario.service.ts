@@ -68,6 +68,7 @@ export class UsuarioService {
       this.findByEmail(this.email)
         .subscribe((response => {
           this.perfis = response['perfis'];
+          this.global.perfis = response['perfis'];
           this.storageService.setUserPerfil(this.perfis);
           this.storageService.setUserName(response['nome'])
           for (let i = 0; i < this.perfis.length; i++) {
@@ -81,11 +82,11 @@ export class UsuarioService {
                 { title: 'Meus Funcionarios', component: 'FuncionariosPage', icone: 'ios-people' },
                 { title: 'Adicionar Funcionário', component: 'SignupPage', icone: 'md-person-add' },
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
-                { title: 'Relatório Completo', component: '', icone: 'list-box' },
+                { title: 'Relatório Completo', component: 'RelatorioCompletoPropriedadesPage', icone: 'list-box' },
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ];
-              this.storage.setUserFunction('Administrador')
+              this.storageService.setUserFunction('Administrador')
               break;
             } else {
               this.global.pages = [
@@ -93,12 +94,11 @@ export class UsuarioService {
                 { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
                 { title: 'Localizar Tanques', component: 'MapaLocalizacaoTanquesPage', icone: 'pin' },
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
-                { title: 'Relatório Completo',icone: 'list-box' },
+                { title: 'Relatório Completo', component: 'RelatorioCompletoPropriedadesPage', icone: 'list-box' },
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ]
-              this.storage.setUserFunction('Funcionário')
-              break;
+              this.storageService.setUserFunction('Funcionário')
               }
             }
           }))
