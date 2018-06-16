@@ -88,7 +88,7 @@ export class HomePage {
       this.usuarioService.findByEmail(localUser.email).subscribe(
         response => {
           this.globals.usuario = response;
-          this.usuario = response as UsuarioDTO;          
+          this.usuario = response as UsuarioDTO;
           this.getImageIfExists();
         },
         error => {
@@ -195,8 +195,8 @@ export class HomePage {
   }
   exibirToastAtualizado() {
     let toast = this.toastCtrl.create({
-      message: 'Medição de propriedades estão em tempo Real',      
-      duration: 3000,      
+      message: 'Medição de propriedades estão em tempo Real',
+      duration: 3000,
       position: 'middle'
     });
 
@@ -205,7 +205,7 @@ export class HomePage {
 
   exibirToastDesatualizado() {
     let toast = this.toastCtrl.create({
-      message: 'Medição de propriedaes está desatualizado',
+      message: 'Medição de propriedades estão desatualizados',
       cssClass: "toast-error",
       duration: 3000,
       position: 'middle'
