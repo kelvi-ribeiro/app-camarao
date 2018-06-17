@@ -43,11 +43,11 @@ export class RelatorioCompletoPropriedadesPage {
     public alertCtrl:AlertController,
     public loadingCtrl:LoadingController
 
-  ) {
-    this.tanque = this.navParams.get('tanque');
+  ) {    this.tanque = this.navParams.get('tanque');
+
   }
 
-  ionViewDidEnter() {
+  ionViewDidLoad() {
     if(this.tanque){
       if(this.tanque.nome!=='Macuxi'){
       this.presentAlert('Sem Arduíno para essse tanque!','Redirecionando para a tela principal...')
@@ -113,12 +113,12 @@ export class RelatorioCompletoPropriedadesPage {
       },error=>{this.loading.dismiss()})
       break;
       case "transparencias":
-      let loading = this.presentLoadingDefault()
+      this.loading = this.presentLoadingDefault()
       this.transparenciaService.findPage(this.page,this.urlPath).subscribe(res=>{
         this.propriedades = res['content'];
         this.loading.dismiss()
-        loading.dismiss()
-      },error=>{loading.dismiss()})
+
+      },error=>{this.loading.dismiss()})
       break;
       default:null
     }
@@ -169,6 +169,7 @@ export class RelatorioCompletoPropriedadesPage {
         handler: data => {
           this.urlPath = element.urlPath
           this.propriedadeEscolhida = element
+          console.log('this.propriedadeEscolhida',this.propriedadeEscolhida)
           this.pesquisaPropriedade()
         }
       });

@@ -18,10 +18,10 @@
 
 <ion-content padding>
     <ion-item>
-        <ion-label staked>Escolha uma Propriedade</ion-label>
+        <ion-label staked>Escolha outra Propriedade</ion-label>
         <ion-select (ionChange)="escolherPropriedade($event)">
           <ion-option *ngFor="let propriedade of objectMockListaPropriedades"
-          [value]="propriedade" >{{propriedade?.nomePropriedade}}</ion-option>
+          [value]="propriedade"  >{{propriedade?.nomePropriedade}}</ion-option>
         </ion-select>
       </ion-item>
   <div *ngIf="!tanqueInexistente && propriedades">
