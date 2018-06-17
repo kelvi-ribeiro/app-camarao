@@ -48,12 +48,17 @@ export class RelatorioCompletoPropriedadesPage {
   }
 
   ionViewDidEnter() {
-    if(this.tanque.nome!=='Macuxi' || !this.tanque){
-      this.presentAlertSemArduino()
+    if(this.tanque){
+      if(this.tanque.nome!=='Macuxi'){
+      this.presentAlert('Sem Arduíno para essse tanque!','Redirecionando para a tela principal...')
       this.tanqueInexistente = true;
     }else{
       this.tanqueInexistente ? null:this.alertEscolhaPropriedadeRelatorio()
     }
+  }else{
+    this.presentAlert('Sem tanque selecionado','Redirecionando para a tela principal...')
+  }
+
   }
   pesquisaPropriedade(){
     console.log(this.urlPath)
@@ -181,10 +186,10 @@ export class RelatorioCompletoPropriedadesPage {
       infiniteScroll.complete();
     }, 3000);
   }
-  presentAlertSemArduino() {
+  presentAlert(title,message) {
     let alert = this.alertCtrl.create({
-      title:'Sem Arduíno para essse tanque!',
-      message:'Redirecionando para a tela principal... '
+      title:title,
+      message: message
     });
 
     alert.present();
