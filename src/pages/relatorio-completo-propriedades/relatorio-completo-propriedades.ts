@@ -203,7 +203,7 @@ export class RelatorioCompletoPropriedadesPage {
   escolherPropriedade(propriedade){
     console.log(propriedade)
     this.urlPath = propriedade.urlPath
-    this.propriedadeEscolhida = propriedade.nomePropriedade
+    this.propriedadeEscolhida = propriedade
     this.pesquisaPropriedade()
   }
 
