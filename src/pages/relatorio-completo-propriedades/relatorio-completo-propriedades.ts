@@ -47,17 +47,16 @@ export class RelatorioCompletoPropriedadesPage {
     this.tanque = this.navParams.get('tanque');
   }
 
-  ionViewDidLoad() {
-    if(this.tanque.nome!=='Macuxi'){
+  ionViewDidEnter() {
+    if(this.tanque.nome!=='Macuxi' || !this.tanque){
       this.presentAlertSemArduino()
       this.tanqueInexistente = true;
+    }else{
+      this.tanqueInexistente ? null:this.alertEscolhaPropriedadeRelatorio()
     }
-    console.log(this.tanque)
-    this.tanqueInexistente ? null:this.alertEscolhaPropriedadeRelatorio()
-
-
   }
   pesquisaPropriedade(){
+    console.log(this.urlPath)
     switch (this.urlPath){
       case "amonias":
       this.loading = this.presentLoadingDefault()
@@ -74,7 +73,7 @@ export class RelatorioCompletoPropriedadesPage {
       },error=>{this.loading.dismiss()})
       break;
       case "nitritos":
-      this.loading = this.presentAlertSemArduino()
+      this.loading = this.presentLoadingDefault()
       this.nitritoService.findPage(this.page,this.urlPath).subscribe(res=>{
         this.propriedades = res['content'];
         this.loading.dismiss()
@@ -164,7 +163,7 @@ export class RelatorioCompletoPropriedadesPage {
         text: element.nomePropriedade,
         handler: data => {
           this.urlPath = element.urlPath
-          this.propriedadeEscolhida = element.nomePropriedade
+          this.propriedadeEscolhida = element
           this.pesquisaPropriedade()
         }
       });
@@ -200,6 +199,12 @@ export class RelatorioCompletoPropriedadesPage {
     });
     loading.present();
     return loading;
+  }
+  escolherPropriedade(propriedade){
+    console.log(propriedade)
+    this.urlPath = propriedade.urlPath
+    this.propriedadeEscolhida = propriedade.nomePropriedade
+    this.pesquisaPropriedade()
   }
 
 }

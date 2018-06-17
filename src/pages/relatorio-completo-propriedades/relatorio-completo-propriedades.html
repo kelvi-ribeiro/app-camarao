@@ -17,10 +17,17 @@
 
 
 <ion-content padding>
+    <ion-item>
+        <ion-label staked>Escolha uma Propriedade</ion-label>
+        <ion-select (ionChange)="escolherPropriedade($event)">
+          <ion-option *ngFor="let propriedade of objectMockListaPropriedades"
+          [value]="propriedade" >{{propriedade?.nomePropriedade}}</ion-option>
+        </ion-select>
+      </ion-item>
   <div *ngIf="!tanqueInexistente && propriedades">
     <div class="row header">
         <div class="col">Código</div>
-      <div class="col">{{propriedadeEscolhida}}</div>
+      <div class="col">{{propriedadeEscolhida?.nomePropriedade}}</div>
       <div class="col">Hora marcada</div>
       <div class="col">Nome do tanque</div>
 
