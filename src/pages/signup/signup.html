@@ -80,7 +80,7 @@
       <ion-item>
         <ion-label floating>Estado*</ion-label>
         <ion-select disabled formControlName="estadoId" (ionChange)="updateCidades()">
-          <ion-option *ngFor="let estado of estados; first as f" [value]="estado.id" [selected]="f">{{estado.nome}}</ion-option>
+          <ion-option *ngFor="let estado of estado" [value]="estado.id" >{{estado.nome}}</ion-option>
         </ion-select>
       </ion-item>
 
