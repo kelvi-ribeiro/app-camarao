@@ -264,6 +264,7 @@ export class HomePage {
   obterTanques() {
     this.tanqueService.findAll().subscribe(res => {
       this.tanques = res;
+      this.escolherTanque(this.tanques[0])
     });
   }
   escolherTanque(tanque){
