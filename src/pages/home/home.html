@@ -6,7 +6,7 @@
     </button>
     <ion-title>Home</ion-title>
     <ion-buttons  end>
-      <button *ngIf="!error"  (click)="exibirToastAtualizado()" ion-button icon-only>
+      <button *ngIf="!error && !tanqueInexistente"  (click)="exibirToastAtualizado()" ion-button icon-only>
         <h5 style="margin-right:12%;">{{amoniaTotal?.horaMarcada | date:"HH:mm:ss"}}
         </h5>
         <ion-icon color="secondary" name="radio-button-on"></ion-icon>
