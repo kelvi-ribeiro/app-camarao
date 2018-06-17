@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
 import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
@@ -89,6 +89,7 @@ export class UsuarioService {
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
                 { title: 'Relatório Completo', component: 'RelatorioCompletoPropriedadesPage', icone: 'list-box' },
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
+                { title: 'Ajuda', component: 'AjudaPage', icone: 'help-circle' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ];
               this.storageService.setUserFunction('Administrador')
@@ -101,6 +102,7 @@ export class UsuarioService {
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
                 { title: 'Relatório Completo', component: 'RelatorioCompletoPropriedadesPage', icone: 'list-box' },
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
+                { title: 'Ajuda', component: 'AjudaPage', icone: 'help-circle' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ]
               this.storageService.setUserFunction('Funcionário')
