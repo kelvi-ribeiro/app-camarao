@@ -84,6 +84,7 @@ export class UsuarioService {
                 { title: 'Meu Perfil', component: 'ProfilePage', icone: 'ios-contact' },
                 { title: 'Localizar Tanques', component: 'MapaLocalizacaoTanquesPage', icone: 'pin' },
                 { title: 'Criar Tanque', component: 'FormTanquePage', icone: 'water' },
+                { title: 'Gerenciar Tanques', component: 'GerenciaTanquesPage', icone: 'hand' },
                 { title: 'Meus Funcionarios', component: 'FuncionariosPage', icone: 'ios-people' },
                 { title: 'Adicionar Funcionário', component: 'SignupPage', icone: 'md-person-add' },
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },

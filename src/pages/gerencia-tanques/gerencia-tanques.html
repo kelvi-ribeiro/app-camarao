@@ -1,0 +1,66 @@
+<!--
+  Generated template for the GerenciaTanquesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Genrenciar Tanques</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="main-app-top">
+
+    <div class="top-header">
+      <i class="fa-1 fa fa-bars" aria-hidden="true"></i>
+
+      <i class="fa-2 fa fa-cog" aria-hidden="true"></i>
+    </div>
+
+    <ion-list no-lines>
+      <ion-item *ngFor="let tanque of tanques">
+        <img [src]="tanque?.imageUrl || 'assets/imgs/avatar-blank.png'">
+        <span *ngIf="admin" style="position: relative;left:60%;" (click)="alertApagarTanque(tanque.id)">
+          <ion-icon color="danger" name="trash"></ion-icon>
+        </span>
+        <ion-row>
+          <ion-col>
+          </ion-col>
+          <ion-col>
+          </ion-col>
+
+        </ion-row>
+        <div class="item-detail-container">
+          <div class="item-container">
+            <ion-row>
+              <h3>Tanque: {{tanque?.nome}}</h3>
+            </ion-row>
+            <h4>Criado Por {{tanque?.nomeUsuario}}</h4>
+            <p>Latitude: {{tanque?.latitude}}</p>
+            <p>Longitude: {{tanque?.longitude}}</p>
+            <p>
+              <strong>{{tanque?.horaRegistrado}} </strong>
+            </p>
+            <span>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star" aria-hidden="true"></i>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </ion-item>
+
+    </ion-list>
