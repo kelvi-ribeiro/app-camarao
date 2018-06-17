@@ -18,12 +18,18 @@
     </ion-buttons>
   </ion-navbar>
 
+  <ion-item>
+      <ion-label staked>Escolha um Tanque</ion-label>
+      <ion-select (ionChange)="escolherTanque($event)">
+        <ion-option *ngFor="let tanque of tanques;first as f" [selected]="f" [value]="tanque">{{tanque?.nome}}</ion-option>
+      </ion-select>
+    </ion-item>
 
 </ion-header>
 
-
 <ion-content padding>
-  <ion-list class="list-chats">
+
+  <ion-list *ngIf="!tanqueInexistente;" class="list-chats">
     <ion-row>
       <ion-grid>
         <ion-item [navPush]="'AmoniaPage'">
@@ -85,14 +91,5 @@
       </ion-grid>
     </ion-row>
   </ion-list>
-  <!-- <ion-item>Temperatura:{{temperatura?.temperatura | number : '1.2-2' }}°   <ion-icon ></ion-icon></ion-item>
-    <ion-item>Nível de PH:{{ph?.ph | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
-    <ion-item>Amonia Total:{{amoniaTotal?.amoniaTotal | number : '1.2-2'}} mg/L <ion-icon ></ion-icon> </ion-item>
-    <ion-item>Oxigênio Dissolvido:{{oxigenioDissolvido?.oxigenioDissolvido | number : '1.2-2'}} mg/L <ion-icon ></ion-icon> </ion-item>
-    <ion-item>Nitrato:{{nitrato?.nitrato | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
-    <ion-item>Nitrito:{{nitrito?.nitrito | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
-    <ion-item>Salinidade:{{salinidade?.salinidade | number : '1.2-2'}} <ion-icon ></ion-icon> </ion-item>
-    <ion-item>Transparencia:{{transparencia?.transparencia | number : '1.2-2'}} cms <ion-icon ></ion-icon> </ion-item>
-    <ion-item>Temperatura:{{temperatura.horaMarcada | date:"y-MM-dd HH:mm:ss"}} <ion-icon color="danger" name="flame"></ion-icon></ion-item> -->
-
+  <h1 *ngIf="tanqueInexistente">Não existe arduíno cadastrado para esse tanque, Selecione outro tanque</h1>
 </ion-content>

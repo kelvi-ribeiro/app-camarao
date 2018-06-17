@@ -1,3 +1,4 @@
+import { TanqueService } from './../../services/domain/tanque.service';
 import { TransparenciaService } from "./../../services/domain/transparencia.service";
 import { SalinidadeService } from "./../../services/domain/salinidade.service";
 import { OxigenioDissolvidoService } from "./../../services/domain/oxigenioDissolvido.service";
@@ -37,6 +38,7 @@ import { LoginPage } from "../login/login";
   templateUrl: "home.html"
 })
 export class HomePage {
+  tanques: any;
   error: boolean = false;
   usuario: UsuarioDTO;
   email;
@@ -51,6 +53,7 @@ export class HomePage {
   transparencia;
   loopRecursivas: boolean;
   tempo: number = 20000;
+  tanqueInexistente = false;
 
   constructor(
     public navCtrl: NavController,
@@ -70,13 +73,15 @@ export class HomePage {
     public globals: Globals,
     public storage: StorageService,
     public toastCtrl:ToastController,
-    public alertCtrl:AlertController
+    public alertCtrl:AlertController,
+    public tanqueService:TanqueService
   ) {
     this.loopRecursivas = true;
   }
 
   ionViewDidEnter() {
     this.usuarioService.preencherMenuDeAcordoComUsuario();
+    this.obterTanques();
     this.getUser();
     this.executaPrimeiraVez()
 
@@ -255,6 +260,18 @@ export class HomePage {
     setTimeout(() => {
       alert.dismiss()
     }, 5000);
+  }
+  obterTanques() {
+    this.tanqueService.findAll().subscribe(res => {
+      this.tanques = res;
+    });
+  }
+  escolherTanque(tanque){
+    if(tanque.nome!=='Macuxi'){
+      this.tanqueInexistente = true
+    }else{
+      this.tanqueInexistente = false
+    }
   }
 
 }
