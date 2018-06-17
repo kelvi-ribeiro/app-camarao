@@ -76,17 +76,15 @@
           <ion-input formControlName="logradouro" type="text"></ion-input>
         </ion-item>
         <p class="danger" *ngIf="formGroup.controls.logradouro.dirty && formGroup.controls.logradouro.errors" margin-left>Logradouro inválido</p>
-
-      <ion-item>
-        <ion-label floating>Estado*</ion-label>
-        <ion-select disabled formControlName="estadoId" (ionChange)="updateCidades()">
-          <ion-option *ngFor="let estado of estado" [value]="estado.id" >{{estado.nome}}</ion-option>
-        </ion-select>
-      </ion-item>
-
+        <ion-item>
+            <ion-label floating>Estado*</ion-label>
+            <ion-select  formControlName="estadoId" (ionChange)="updateCidades()">
+              <ion-option *ngFor="let estado of estados; first as f" [value]="estado.id" [selected]="f">{{estado.nome}}</ion-option>
+            </ion-select>
+          </ion-item>
       <ion-item>
         <ion-label floating>Cidade*</ion-label>
-        <ion-select disabled formControlName="cidadeId">
+        <ion-select  formControlName="cidadeId">
           <ion-option *ngFor="let cidade of cidades" [value]="cidade.id">{{cidade.nome}}</ion-option>
         </ion-select>
       </ion-item>
