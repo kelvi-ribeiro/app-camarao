@@ -4,85 +4,119 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{idiomaPortugues ? 'Ajuda':'Help'}}</ion-title>
-    <ion-buttons   end>
-        <button icon-only><img (click)="trocarIdioma()" src="assets/imgs/translate-icon.png"/></button>
-      </ion-buttons>
+    <ion-buttons end>
+      <button icon-only>
+        <img (click)="trocarIdioma()" src="assets/imgs/translate-icon.png" />
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding *ngIf="idiomaPortugues">
-    <p>
-      <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
-    <h2>1) Como posso adicionar um tanque novo?
-      <ion-icon color="danger" name="warning"></ion-icon>
-    </h2>
-    <p>Para criar um tanque, abra o menu clicando no canto superior esquerdo, com o menu aberto clique na opção
-      <strong>"
-        <ion-icon name="ios-water-outline"></ion-icon> Criar Tanque"</strong>, no formulário digite apenas o nome do Tanque e deixe o recurso de localização
-      do seu
-      <ion-icon name="phone-portrait"></ion-icon> celular/tablet habilitado, e clique no botão
-      <strong>"Criar Tanque"</strong>
-    </p>
-    <h2>2) Como consulto os tanques que criei?</h2>
-    <p>Para consultar seus tanques cadastrados, Bata clicar na opção do menu "
-      <strong>
-        <ion-icon name="hand"></ion-icon> Gerenciar Tanques</strong>", Para localizar os tanques, primeiramente ative o recurso de localização
-      do seu dispositivo, depois abra o menu clicando no canto superior esquerdo e clique na opção "
-      <strong>
-        <ion-icon name="pin"></ion-icon> Localizar tanques</strong>", será aberto um mapa com marcações das localizações dos seus tanques.</p>
-    <h2>3) Como cadastro um novo funcionário?
-      <ion-icon color="danger" name="warning"></ion-icon>
-    </h2>
-    <p>Para cadastrar um novo funcionário abra o menu clicando no canto superior esquerdo, com o menu aberto clique na opção
-      "
-      <strong>
-        <ion-icon name="md-person-add"></ion-icon>
-        Adicionar Funcionário</strong>", após isso preencha os dados do formulário. Note que, ao digitar o CEP, os dados
-      de endereço devem ser preenchidos automáticamente. Ao final do preenchimento basta clicar no botão "
-      <strong>Criar Funcionário</strong>". </p>
-    <h2>4) Como enviar avisos?</h2>
-    <p>Para enviar um aviso abra o menu clicando no canto superior esquerdo, e clique na opção "
-      <strong>
-        <ion-icon name="ios-mail-outline"></ion-icon> Enviar Aviso</strong>". No campo "Título", digitar o assunto do aviso, e no campo "Aviso" digitar a mensagem
-      que se deseja enviar e no botão "Mandar aviso".</p>
-      
-  </ion-content>
+  <p>
+    <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
+  <h2>1) Como posso adicionar um tanque novo?
+    <ion-icon color="danger" name="warning"></ion-icon>
+  </h2>
+  <p>Para criar um tanque, abra o menu clicando no canto superior esquerdo, com o menu aberto clique na opção
+    <strong>"
+      <ion-icon name="ios-water-outline"></ion-icon> Criar Tanque"</strong>, no formulário digite apenas o nome do Tanque e deixe o recurso de localização do
+    seu
+    <ion-icon name="phone-portrait"></ion-icon> celular/tablet habilitado, e clique no botão
+    <strong>"Criar Tanque"</strong>
+  </p>
+  <h2>2) Como consulto os tanques que criei?</h2>
+  <p>Para consultar seus tanques cadastrados, Bata clicar na opção do menu "
+    <strong>
+      <ion-icon name="hand"></ion-icon> Gerenciar Tanques</strong>", Para localizar os tanques, primeiramente ative o recurso de localização do
+    seu dispositivo, depois abra o menu clicando no canto superior esquerdo e clique na opção "
+    <strong>
+      <ion-icon name="pin"></ion-icon> Localizar tanques</strong>", será aberto um mapa com marcações das localizações dos seus tanques.</p>
+  <h2>3) Como cadastro um novo funcionário?
+    <ion-icon color="danger" name="warning"></ion-icon>
+  </h2>
+  <p>Para cadastrar um novo funcionário abra o menu clicando no canto superior esquerdo, com o menu aberto clique na opção "
+    <strong>
+      <ion-icon name="md-person-add"></ion-icon>
+      Adicionar Funcionário</strong>", após isso preencha os dados do formulário. Note que, ao digitar o CEP, os dados de
+    endereço devem ser preenchidos automáticamente. Ao final do preenchimento basta clicar no botão "
+    <strong>Criar Funcionário</strong>". </p>
+  <h2>4) Como enviar avisos?</h2>
+  <p>Para enviar um aviso abra o menu clicando no canto superior esquerdo, e clique na opção "
+    <strong>
+      <ion-icon name="ios-mail-outline"></ion-icon> Enviar Aviso</strong>". No campo "Título", digitar o assunto do aviso, e no campo "Aviso" digitar a mensagem
+    que se deseja enviar e no botão "Mandar aviso".</p>
+
+  <h2>5) Como posso trocar minha foto ?</h2>
+  <p>Para trocar a foto, abra o menu clicando no canto superior esquerdo, e clique na opção "
+    <strong>
+      <ion-icon name="ios-contact"></ion-icon> Meu Perfil</strong>". E então, aperte na imagem da Camera, para por por uma foto da galeria, aperte na
+    imagem da galeria
+  </p>
+  <h2>6) Como ter acesso aos Gráficos e Relatórios das propriedades ?</h2>
+  <p>Na tela principal (Home) Aperte na propriedade que você deseja ver com mais detalhes e exibirá um gráfico da respectiva
+    propriedade.
+  </p>
+
+  <p>Para que você consiga ver os dados das proprieade com mais detalhes, Aperto no canto superior esquerdo para abrir o menu,
+    e clique na opção "
+    <strong>
+    <ion-icon name="list-box"></ion-icon> Relatório Completo</strong>", escolha um tanque e a propriedade desejada.
+  </p>
 
 
-  <ion-content padding *ngIf="!idiomaPortugues">
-    
-      <p>
-        <ion-icon color="danger" name="warning"></ion-icon>Actions with this symbol can be performed by admin users</p>
-      <h2>1) How can I add a new tank?
-        <ion-icon color="danger" name="warning"></ion-icon>
-      </h2>
-      <p>To create a tank, open the menu by clicking the upper left corner, with the menu open, click on the option
-        <strong>"
-          <ion-icon name="ios-water-outline"></ion-icon> Criar Tanque"</strong>, in the form enter only the name of the Tank and leave the location resource
-        yours
-        <ion-icon name="phone-portrait"></ion-icon> phone / tablet enabled, and click the
-        <strong>"Create Tank"</strong>
-      </p>
-      <h2>2) How do I consult the tanks I have created?</h2>
-      <p>To check your registered tanks, click on the menu option "
-        <strong>
-          <ion-icon name="hand"></ion-icon> Gerenciar Tanques</strong>", To locate the tanks, first turn on the location feature of your device, then
-        open the the menu by clicking in the upper left corner and clicking the "
-        <strong>
-          <ion-icon name="pin"></ion-icon> Localizar tanques</strong>", a map with markings of the locations of your tanks will be opened.</p>
-      <h2>3) How to register a new employee?
-        <ion-icon color="danger" name="warning"></ion-icon>
-      </h2>
-      <p>To register a new employee open the menu by clicking in the upper left corner, with the menu open click the option
-        "
-        <strong>
-          <ion-icon name="md-person-add"></ion-icon>
-          Adicionar Funcionário</strong>", after that fill in the form data. Note that when entering the zip code, the         address
-        must be filled in automatically. At the end of the fill just click the "
-        <strong>Criar Funcionário</strong>". </p>
-      <h2>4) How to send notices?</h2>
-      <p>To send a warning open the menu by clicking the upper left corner and click the "
-        <strong>
-          <ion-icon name="ios-mail-outline"></ion-icon> Enviar Aviso</strong>". In the Field "Título", enter the subject of the warning, and in the "Warning"
-        field enter the  message that you want to send and the "Mandar aviso".</p>     
-    </ion-content>
+</ion-content>
+
+
+<ion-content padding *ngIf="!idiomaPortugues">
+
+  <p>
+    <ion-icon color="danger" name="warning"></ion-icon>Actions with this symbol can be performed by admin users</p>
+  <h2>1) How can I add a new tank?
+    <ion-icon color="danger" name="warning"></ion-icon>
+  </h2>
+  <p>To create a tank, open the menu by clicking the upper left corner, with the menu open, click on the option
+    <strong>"
+      <ion-icon name="ios-water-outline"></ion-icon> Criar Tanque"</strong>, in the form enter only the name of the Tank and leave the location resource yours
+    <ion-icon name="phone-portrait"></ion-icon> phone / tablet enabled, and click the
+    <strong>"Create Tank"</strong>
+  </p>
+  <h2>2) How do I consult the tanks I have created?</h2>
+  <p>To check your registered tanks, click on the menu option "
+    <strong>
+      <ion-icon name="hand"></ion-icon> Gerenciar Tanques</strong>", To locate the tanks, first turn on the location feature of your device, then
+    open the the menu by clicking in the upper left corner and clicking the "
+    <strong>
+      <ion-icon name="pin"></ion-icon> Localizar tanques</strong>", a map with markings of the locations of your tanks will be opened.</p>
+  <h2>3) How to register a new employee?
+    <ion-icon color="danger" name="warning"></ion-icon>
+  </h2>
+  <p>To register a new employee open the menu by clicking in the upper left corner, with the menu open click the option "
+    <strong>
+      <ion-icon name="md-person-add"></ion-icon>
+      Adicionar Funcionário</strong>", after that fill in the form data. Note that when entering the zip code, the address
+    must be filled in automatically. At the end of the fill just click the "
+    <strong>Criar Funcionário</strong>". </p>
+  <h2>4) How to send notices?</h2>
+  <p>To send a warning open the menu by clicking the upper left corner and click the "
+    <strong>
+      <ion-icon name="ios-mail-outline"></ion-icon> Enviar Aviso</strong>". In the Field "Título", enter the subject of the warning, and in the "Warning" field
+    enter the  message that you want to send and the "Mandar aviso".</p>
+  <h2>5) How can I exchange my photo?</h2>
+  <p>To change the photo, open the menu by clicking the upper left corner and click the "
+    <strong>
+      <ion-icon name="ios-contact"></ion-icon> Meu Perfil</strong>". And then, press the Camera image, to put a picture of the gallery, click on the gallery
+    image
+  </p>
+
+  <h2> 6) How do I access Graphs and Property Reports?</h2>
+  <p>From the home screen (Home) want to see more details and display a graph of the respective property.
+  </p>
+
+  <p>In order for you to be able to view property data in more detail,             Press in the upper left corner to open the
+    menu, and click the "
+    <strong>
+    <ion-icon name="list-box"></ion-icon> Relatório Completo</strong>", choose a tank and the desired property.
+  </p>
+
+</ion-content>
