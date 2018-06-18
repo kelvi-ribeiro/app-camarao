@@ -4,6 +4,9 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>{{idiomaPortugues ? 'Ajuda':'Help'}}</ion-title>
+    <ion-buttons   end>
+        <button icon-only><img (click)="trocarIdioma()" src="assets/imgs/translate-icon.png"/></button>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -42,8 +45,7 @@
       <strong>
         <ion-icon name="ios-mail-outline"></ion-icon> Enviar Aviso</strong>". No campo "Título", digitar o assunto do aviso, e no campo "Aviso" digitar a mensagem
       que se deseja enviar e no botão "Mandar aviso".</p>
-
-      <button full ion-button (click)="trocarIdioma()">Translate</button>
+      
   </ion-content>
 
 
@@ -56,7 +58,7 @@
       </h2>
       <p>To create a tank, open the menu by clicking the upper left corner, with the menu open, click on the option
         <strong>"
-          <ion-icon name="ios-water-outline"></ion-icon> Croar Tanque"</strong>, in the form enter only the name of the Tank and leave the location resource
+          <ion-icon name="ios-water-outline"></ion-icon> Criar Tanque"</strong>, in the form enter only the name of the Tank and leave the location resource
         yours
         <ion-icon name="phone-portrait"></ion-icon> phone / tablet enabled, and click the
         <strong>"Create Tank"</strong>
@@ -82,7 +84,5 @@
       <p>To send a warning open the menu by clicking the upper left corner and click the "
         <strong>
           <ion-icon name="ios-mail-outline"></ion-icon> Enviar Aviso</strong>". In the Field "Título", enter the subject of the warning, and in the "Warning"
-        field enter the  message that you want to send and the "Mandar aviso".</p>
-
-      <button full ion-button (click)="trocarIdioma()">Voltar para português</button>
+        field enter the  message that you want to send and the "Mandar aviso".</p>     
     </ion-content>

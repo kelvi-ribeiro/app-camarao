@@ -1,3 +1,6 @@
 page-ajuda {
-
+ion-buttons button, ion-buttons a, ion-buttons input, ion-buttons textarea, ion-buttons div {
+    pointer-events: auto;
+    background: #414345;
+    }
 }
