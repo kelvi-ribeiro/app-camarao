@@ -130,9 +130,9 @@ export class SignupPage {
 
   exibirToastEnderecoEncontrado() {
     let toast = this.toastCtrl.create({
-      message: 'Endereço Encontrado',      
+      message: 'Endereço Encontrado 😁',      
       duration: 3000,
-      position: 'middle'
+      position: 'bottom'
     });
 
     toast.present();
