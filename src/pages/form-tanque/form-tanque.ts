@@ -94,12 +94,12 @@ export class FormTanquePage {
   presentToast(message,css) {
     let toast = this.toastCtrl.create({
       message: message,
-      duration: 3500,
+      duration: 5000,
       position: 'bottom',
       cssClass:css
     });
 
     toast.present();
   }
- 
+
 }

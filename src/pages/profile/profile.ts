@@ -139,7 +139,7 @@ export class ProfilePage {
       .subscribe(response => {
           this.navCtrl.setRoot('HomePage')
           this.navCtrl.setRoot('ProfilePage')
-          this.presentToast('Foto Alterada',null)
+          this.presentToast('Foto Alterada 😀',null)
       },
       error => {
         this.presentToast('Ocorreu Algum erro na tentiva de envio da foto, Desculpe, tente novamente','toast-error')
