@@ -15,7 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AjudaPage {
   idiomaPortugues = true;
-  idiomaIngles = false
+  
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
@@ -24,7 +24,11 @@ export class AjudaPage {
 
   }
   trocarIdioma(){
-    this.idiomaIngles = true
+    if(this.idiomaPortugues){
+      this.idiomaPortugues = false
+    }else{
+      this.idiomaPortugues = true
+    }
   }
 
 }

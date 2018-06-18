@@ -90,7 +90,7 @@ export class UsuarioService {
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
                 { title: 'Relatório Completo', component: 'RelatorioCompletoPropriedadesPage', icone: 'list-box' },
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
-                { title: 'Ajuda', component: 'AjudaPage', icone: 'help-circle' },
+                { title: 'Ajuda / Help', component: 'AjudaPage', icone: 'help-circle' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ];
               this.storageService.setUserFunction('Administrador')
@@ -103,7 +103,7 @@ export class UsuarioService {
                 { title: 'Avisos', component: 'ListaMensagensPage', icone: 'md-chatbubbles' },
                 { title: 'Relatório Completo', component: 'RelatorioCompletoPropriedadesPage', icone: 'list-box' },
                 { title: 'Enviar Aviso', component: 'FormNotificacaoPage', icone: 'md-mail' },
-                { title: 'Ajuda', component: 'AjudaPage', icone: 'help-circle' },
+                { title: 'Ajuda / Help', component: 'AjudaPage', icone: 'help-circle' },
                 { title: 'Logout', component: '', icone: 'md-exit' }
               ]
               this.storageService.setUserFunction('Funcionário')
