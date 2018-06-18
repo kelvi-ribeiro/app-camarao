@@ -14,12 +14,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'ajuda.html',
 })
 export class AjudaPage {
+  idiomaPortugues = true;
+  idiomaIngles = false
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
 
+  }
+  trocarIdioma(){
+    this.idiomaIngles = true
   }
 
 }
