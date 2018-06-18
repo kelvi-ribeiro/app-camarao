@@ -89,10 +89,12 @@ export class ProfilePage {
     this.cameraOn = true;
     const options: CameraOptions = {
       quality: 65,
-      targetWidth: 800,
-      targetHeight: 600,
+      targetWidth: 720,
+      targetHeight: 720,
+      correctOrientation:true,
+      allowEdit: true,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG,
+      encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
 
@@ -109,8 +111,10 @@ export class ProfilePage {
     this.apertouOpcaoFoto = true; // Também servindo para foto
     const options: CameraOptions = {
       quality: 65,
-      targetWidth: 800,
-      targetHeight: 600,
+      targetWidth: 720,
+      targetHeight: 720,
+      allowEdit: true,
+      correctOrientation:true,
       sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.PNG,
