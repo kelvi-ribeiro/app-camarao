@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 
 /**
@@ -16,13 +16,14 @@ import { StorageService } from '../../services/storage.service';
 })
 export class AjudaPage {
   idiomaPortugues = true;
-  
-
-  constructor(
-              public navCtrl: NavController, 
+  idiomaIngles = false;
+  idiomaEspanhol = false;
+    constructor(
+              public navCtrl: NavController,
               public navParams: NavParams,
               public toastCtrl:ToastController,
-              public storageService:StorageService) {
+              public storageService:StorageService,
+              public alertCtrl:AlertController) {
   }
 
   ionViewDidLoad() {
@@ -44,6 +45,39 @@ export class AjudaPage {
     });
 
     toast.present();
+  }
+  presentAlert() {
+    let alert = this.alertCtrl.create({
+      title:'Escolha um idioma',
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: "Português",
+          handler: () => {
+            this.idiomaPortugues = true
+            this.idiomaEspanhol = false
+            this.idiomaIngles = false
+          }
+        },
+        {
+          text: "Inglês",
+          handler: () => {
+            this.idiomaIngles = true
+            this.idiomaEspanhol = false
+            this.idiomaPortugues = false
+          }
+        },
+        {
+          text: "Espanhol",
+          handler: () => {
+            this.idiomaEspanhol = true
+            this.idiomaIngles = false
+            this.idiomaPortugues = false
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
 

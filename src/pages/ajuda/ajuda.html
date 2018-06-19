@@ -3,18 +3,18 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{idiomaPortugues ? 'Ajuda':'Help'}}</ion-title>
+    <ion-title *ngIf="idiomaPortugues">Ajuda</ion-title>
+    <ion-title *ngIf="idiomaIngles">Help</ion-title>
+    <ion-title *ngIf="idiomaEspanhol">Ayuda</ion-title>
     <ion-buttons end>
       <button icon-only>
-        <img (click)="trocarIdioma()" src="assets/imgs/translate-icon.png" />
+        <img (click)="presentAlert()" src="assets/imgs/translate-icon.png" />
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding *ngIf="idiomaPortugues">
-  <p>
-    <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
   <h2>1) Como posso adicionar um tanque novo?
     <ion-icon color="danger" name="warning"></ion-icon>
   </h2>
@@ -61,17 +61,14 @@
   <p>Para que você consiga ver os dados das proprieade com mais detalhes, Aperto no canto superior esquerdo para abrir o menu,
     e clique na opção "
     <strong>
-    <ion-icon name="list-box"></ion-icon> Relatório Completo</strong>", escolha um tanque e a propriedade desejada.
+      <ion-icon name="list-box"></ion-icon> Relatório Completo</strong>", escolha um tanque e a propriedade desejada.
   </p>
 
-
+  <p>
+      <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
 </ion-content>
 
-
-<ion-content padding *ngIf="!idiomaPortugues">
-
-  <p>
-    <ion-icon color="danger" name="warning"></ion-icon>Actions with this symbol can be performed by admin users</p>
+<ion-content padding *ngIf="idiomaIngles">
   <h2>1) How can I add a new tank?
     <ion-icon color="danger" name="warning"></ion-icon>
   </h2>
@@ -116,7 +113,66 @@
   <p>In order for you to be able to view property data in more detail,             Press in the upper left corner to open the
     menu, and click the "
     <strong>
-    <ion-icon name="list-box"></ion-icon> Relatório Completo</strong>", choose a tank and the desired property.
+      <ion-icon name="list-box"></ion-icon> Relatório Completo</strong>", choose a tank and the desired property.
+  </p>
+  <p>
+      <ion-icon color="danger" name="warning"></ion-icon>Actions with this symbol can be performed by admin users</p>
+
+</ion-content>
+
+<ion-content padding *ngIf="idiomaEspanhol">
+  <h2>1) ¿Cómo puedo añadir un tanque nuevo?
+    <ion-icon color="danger" name="warning"></ion-icon>
+  </h2>
+  <p>Para crear un tanque, abra el menú haciendo clic en la esquina superior izquierda, con el menú abierto haga clic en la
+    opción
+    <strong>"
+      <ion-icon name="ios-water-outline"></ion-icon> Criar Tanque"</strong>, En el formulario sólo introduzca el nombre del tanque y deje el recurso de localización
+    su
+    <ion-icon name="phone-portrait"></ion-icon> teléfono celular / tableta habilitada, y haga clic en el botón
+    <strong>"Criar Tanque"</strong>
+  </p>
+  <h2>2) ¿Cómo se refiere a los tanques que he creado?</h2>
+  <p>Para consultar sus tanques registrados, Simplemente haga clic en la opción del menú "
+    <strong>
+      <ion-icon name="hand"></ion-icon> Gerenciar Tanques</strong>", Para localizar los tanques, primero active la función de localización de
+          su dispositivo, luego abra el menú haciendo clic en la esquina superior izquierda y haga clic en la opción "
+    <strong>
+      <ion-icon name="pin"></ion-icon> Localizar tanques</strong>",   se abrirá un mapa con marcas de las ubicaciones de sus tanques</p>
+  <h2>3) ¿Cómo registro un nuevo empleado?
+    <ion-icon color="danger" name="warning"></ion-icon>
+  </h2>
+  <p>Para registrar un nuevo empleado abra el menú haciendo clic en la esquina superior izquierda, con el menú abierto haga
+    clic en la opción "
+    <strong>
+      <ion-icon name="md-person-add"></ion-icon>
+      Adicionar Funcionário</strong>", después de completar los datos del formulario. Tenga en cuenta que al introducir el
+    código postal, los datos de       La dirección debe ser rellenada automáticamente. Al final del relleno basta con hacer
+    clic en el botón "
+    <strong>Criar Funcionário</strong>". </p>
+
+  <h2>4) ¿Cómo enviar avisos?</h2>
+  <p>Para enviar una advertencia, abra el menú haciendo clic en la esquina superior izquierda y haga clic en la opción "
+    <strong>
+      <ion-icon name="ios-mail-outline"></ion-icon> Enviar Aviso</strong>". En el campo "Título", introduzca el asunto de la advertencia, y en el campo "Advertencia",
+    introduzca el mensaje       que se desea enviar y en el botón "Mandar aviso".</p>
+
+  <h2>5) ¿Cómo puedo cambiar mi foto?</h2>
+  <p>Para cambiar la foto, abra el menú haciendo clic en la esquina superior izquierda y haga clic en la opción "
+    <strong>
+      <ion-icon name="ios-contact"></ion-icon> Meu Perfil</strong>". Y luego, apriete en la imagen de la cámara, para por una foto de la galería, apriete
+    en la imagen       imagen de la galería
+  </p>
+  <h2>6) Cómo acceder a los gráficos e informes de las propiedades? </h2>
+  <p> En la pantalla principal (Home) Apriete en la propiedad que desea ver con más detalle y mostrará un gráfico propiedad.
   </p>
 
+  <p>Para que pueda ver los datos de las propiedades con más detalles, Apriete en la esquina superior izquierda para abrir el
+    menú,       y haga clic en la opción "
+    <strong>
+      <ion-icon name="list-box"></ion-icon> Relatório Completo</strong>", escolha um tanque e a propriedade desejada.
+  </p>
+
+  <p>
+      <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
 </ion-content>
