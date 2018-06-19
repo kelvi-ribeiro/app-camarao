@@ -7,14 +7,16 @@
     <ion-title *ngIf="idiomaIngles">Help</ion-title>
     <ion-title *ngIf="idiomaEspanhol">Ayuda</ion-title>
     <ion-buttons end>
-      <button icon-only>
-        <img (click)="presentAlert()" src="assets/imgs/translate-icon.png" />
+      <button (click)="presentAlert()" icon-only>
+        <img  src="assets/imgs/translate-icon.png" />
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding *ngIf="idiomaPortugues">
+    <p>
+        <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
   <h2>1) Como posso adicionar um tanque novo?
     <ion-icon color="danger" name="warning"></ion-icon>
   </h2>
@@ -64,11 +66,11 @@
       <ion-icon name="list-box"></ion-icon> Relatório Completo</strong>", escolha um tanque e a propriedade desejada.
   </p>
 
-  <p>
-      <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
 </ion-content>
 
 <ion-content padding *ngIf="idiomaIngles">
+    <p>
+        <ion-icon color="danger" name="warning"></ion-icon>Actions with this symbol can be performed by admin users</p>
   <h2>1) How can I add a new tank?
     <ion-icon color="danger" name="warning"></ion-icon>
   </h2>
@@ -115,12 +117,13 @@
     <strong>
       <ion-icon name="list-box"></ion-icon> Relatório Completo</strong>", choose a tank and the desired property.
   </p>
-  <p>
-      <ion-icon color="danger" name="warning"></ion-icon>Actions with this symbol can be performed by admin users</p>
+
 
 </ion-content>
 
 <ion-content padding *ngIf="idiomaEspanhol">
+    <p>
+        <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
   <h2>1) ¿Cómo puedo añadir un tanque nuevo?
     <ion-icon color="danger" name="warning"></ion-icon>
   </h2>
@@ -173,6 +176,5 @@
       <ion-icon name="list-box"></ion-icon> Relatório Completo</strong>", escolha um tanque e a propriedade desejada.
   </p>
 
-  <p>
-      <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
+
 </ion-content>
