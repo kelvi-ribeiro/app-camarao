@@ -7,16 +7,16 @@
     <ion-title *ngIf="idiomaIngles">Help</ion-title>
     <ion-title *ngIf="idiomaEspanhol">Ayuda</ion-title>
     <ion-buttons end>
-      <button (click)="presentAlert()" icon-only>
-        <img  src="assets/imgs/translate-icon.png" />
+      <button icon-only>
+        <img (click)="presentAlert()" src="assets/imgs/translate-icon.png" />
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding *ngIf="idiomaPortugues">
-    <p>
-        <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
+  <p>
+    <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
   <h2>1) Como posso adicionar um tanque novo?
     <ion-icon color="danger" name="warning"></ion-icon>
   </h2>
@@ -69,8 +69,8 @@
 </ion-content>
 
 <ion-content padding *ngIf="idiomaIngles">
-    <p>
-        <ion-icon color="danger" name="warning"></ion-icon>Actions with this symbol can be performed by admin users</p>
+  <p>
+    <ion-icon color="danger" name="warning"></ion-icon>Actions with this symbol can be performed by admin users</p>
   <h2>1) How can I add a new tank?
     <ion-icon color="danger" name="warning"></ion-icon>
   </h2>
@@ -122,8 +122,8 @@
 </ion-content>
 
 <ion-content padding *ngIf="idiomaEspanhol">
-    <p>
-        <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
+  <p>
+    <ion-icon color="danger" name="warning"></ion-icon> As ações com este símbolo só podem ser executadas por usuários administradores</p>
   <h2>1) ¿Cómo puedo añadir un tanque nuevo?
     <ion-icon color="danger" name="warning"></ion-icon>
   </h2>
@@ -138,10 +138,10 @@
   <h2>2) ¿Cómo se refiere a los tanques que he creado?</h2>
   <p>Para consultar sus tanques registrados, Simplemente haga clic en la opción del menú "
     <strong>
-      <ion-icon name="hand"></ion-icon> Gerenciar Tanques</strong>", Para localizar los tanques, primero active la función de localización de
-          su dispositivo, luego abra el menú haciendo clic en la esquina superior izquierda y haga clic en la opción "
+      <ion-icon name="hand"></ion-icon> Gerenciar Tanques</strong>", Para localizar los tanques, primero active la función de localización de     su
+    dispositivo, luego abra el menú haciendo clic en la esquina superior izquierda y haga clic en la opción "
     <strong>
-      <ion-icon name="pin"></ion-icon> Localizar tanques</strong>",   se abrirá un mapa con marcas de las ubicaciones de sus tanques</p>
+      <ion-icon name="pin"></ion-icon> Localizar tanques</strong>", se abrirá un mapa con marcas de las ubicaciones de sus tanques</p>
   <h2>3) ¿Cómo registro un nuevo empleado?
     <ion-icon color="danger" name="warning"></ion-icon>
   </h2>

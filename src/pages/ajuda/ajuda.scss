@@ -1,8 +1,13 @@
 page-ajuda {
-ion-buttons button, ion-buttons a, ion-buttons input, ion-buttons textarea, ion-buttons div {
+  ion-buttons button,
+  ion-buttons a,
+  ion-buttons input,
+  ion-buttons textarea,
+  ion-buttons div {
     background: #414345;
-
-    }
-
-
+  }
+  button.disable-hover.button.button-md.button-default.button-default-md {
+    margin-left:78%;
+    background: #414345;
+  }
 }
