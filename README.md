@@ -1,6 +1,6 @@
 # app-camarao
 
-Um aplicativo que simula exibe as propriedades da água. EX: Temperatura, salinidade e etc...
+Um aplicativo que exibe as propriedades da água. EX: Temperatura, salinidade e etc...
 
 ### Primeiros Passos
 
