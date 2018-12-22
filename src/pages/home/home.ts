@@ -268,7 +268,7 @@ export class HomePage {
     });
   }
   escolherTanque(tanque){
-    if(tanque.nome!=='Macuxi'){
+    if(tanque && tanque.nome!=='Macuxi'){
       this.tanqueInexistente = true
     }else{
       this.tanqueInexistente = false
