@@ -19,7 +19,7 @@ Node e ionic CLI.
 
 
 <p>
- 1- Deve-se baixar a api desse projeto, que irá simular as propriedadades da água.
+ 1- Deve-se baixar a  [API](https://github.com/kelvi-ribeiro/api-camarao) desse projeto, que irá simular as propriedadades da água.
 </p>
 <p>
  2- Após ligar API. configurar o arquivo api.config(src/config/api.config.ts), deve-se apontar para a url com a porta que está rodando sua API.
