@@ -14,7 +14,6 @@ Aplicativo do camarão foi um desafio na disciplina de Tópicos de Programação
   - SGBD MySQL
 
 # Funcionalidades
-
   - Listagem em tempo real de todas as propriedades citadas
   - Gráficos ilustrativos  em tempo real de todas as propriedades citadas
   - Gerenciamento de tanques (CRUD)
@@ -26,7 +25,12 @@ Aplicativo do camarão foi um desafio na disciplina de Tópicos de Programação
   - Tela de Ajuda com tradução para mais dois idiomas, além do português
   - Possibilidade de envio de fotos do usuário, através da camera e galeria
 
-### Intalação
+### Link dos Projetos
+-[API REST JAVA](https://github.com/kelvi-ribeiro/api-camarao)
+-[Projeto Ionic](https://github.com/kelvi-ribeiro/app-camarao)
+-[Projeto Arduino](https://github.com/kelvi-ribeiro/prj-arduino-camarao)
+
+### Instalação
 
 É necessário ter instalado na máquina, Ionic 3, NPM e o Node, Java 1.8 e SGBD MySQL.
 
@@ -49,7 +53,7 @@ e clicar no ícone de celular. Lembrando que a funcionalidade de Localizar não 
 - Não foi possível criar o tutorial para a integração com arduino, pois no momento, estou sem os equipamentos necessário para isso, o [Projeto Arduino](https://github.com/kelvi-ribeiro/prj-arduino-camarao) já está configurado para isso,  basta você preparar o seu Arduino e os sensores e ligar a aplicação, única coisa que você deve se certificar, é se está apontando para o local correto no arquivo prj-arduino-camarao/src/Serial/SerialRxTx.java, configure a variável API_TEMPERATURA_URL para o endpoint correto da [API Java](https://github.com/kelvi-ribeiro/api-camarao) 
 - Futuramente, irei colocar uma melhor explicação, talvez até com um vídeo para facilitar na parte de configurar o Arduino
 
-## Imagens:
+## Imagens do aplicativo:
 
 ##### Tela de Login:
 
